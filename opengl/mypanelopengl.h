@@ -2,7 +2,7 @@
 #define MYPANELOPENGL_H
 
 #include <QGLWidget>
-#include <Qtimer>
+#include <QTimer>
 #include <QKeyEvent>
 #include <QResizeEvent>
 
