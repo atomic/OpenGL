@@ -1,8 +1,8 @@
 # Qt-es
 
-*.pro
-*.pro.user
-*.pro.user.*
+#*.pro
+#*.pro.user
+#*.pro.user.*
 moc_*.cpp
 qrc_*.cpp
 Makefile
