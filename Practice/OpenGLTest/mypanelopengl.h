@@ -2,6 +2,7 @@
 #define MYPANELOPENGL_H
 
 #include <QGLWidget>
+#include <GL/glu.h>
 
 class MyPanelOpenGL : public QGLWidget
 {

@@ -1,6 +1,8 @@
 #include "mypanelopengl.h"
 #include <cmath>
 #include <GL/glu.h>
+#include <GL/gl.h>
+
 
 
 
