@@ -1,13 +1,14 @@
 #include "mypanelopengl.h"
 #include <cmath>
+#include <GL/glu.h>
 
 
 
 MyPanelOpenGL::MyPanelOpenGL(QWidget *parent) :
     QGLWidget(parent)
 {
-    int sides = 3;
-    double radius = 1.0;
+    sides = 3;
+    radius = 1.0;
 }
 
 void MyPanelOpenGL::initializeGL()
@@ -45,7 +46,7 @@ void MyPanelOpenGL::paintGL()
 void MyPanelOpenGL::resizeGL(int x, int h)
 {
     double xMin = 0, xMax = 10,yMin = 0, yMax = 10;
-    glViewport( 0, 0, (GLint(width), GLint(height) );
+    glViewport( 0, 0, (GLint)x, (GLint)h );
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2d(-1,1,-1,1);
@@ -58,7 +59,7 @@ void MyPanelOpenGL::resizeGL(int x, int h)
     	xMax = 10 + difWidth / 2.0;
     } else {
     	width = width?width:1;
-    	double newHeigth = (yMax - yMin) * width / height;
+        double newHeigth = (yMax - yMin) * width / height;
     	double difHeigth = newHeigth - (xMax - xMin);
     	xMin = 0.0 + difHeigth / 2.0;
     	xMax = 10 + difHeigth / 2.0;
@@ -68,7 +69,9 @@ void MyPanelOpenGL::resizeGL(int x, int h)
     glLoadIdentity();
 }
 
-void MyPanelOpenGL::changeSides(int s){
-
+void MyPanelOpenGL::changeSides(int s) {
+    sides = s;
 }
-void MyPanelOpenGL::changeRadius(double r){}
+void MyPanelOpenGL::changeRadius(double r){
+    radius = r;
+}
