@@ -34,22 +34,15 @@ void MyPanelOpenGL::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    int set[Size];
-    setInt(set);
-    float length = 0.9/Size;
-    for(int i =0;i<Size;i++)
-    {
-        if(set[i]==1)
-            glColor3f(1.9f, 0.0f, 0.0f);
-        else
-            glColor3f(0.0f, 1.9f, 0.0f);
+    float length = 0.9/m;
+    for(int i =0;i<m;i++) {
+        for(int j=0;j<n;j++) {
+            glPointSize(10.0f);
+            glBegin(GL_POINTS);
+              glVertex2f(i,j);
+            glEnd();
+        }
 
-        glBegin(GL_QUADS);
-          glVertex2f(x+2*i*length,-0.9);
-          glVertex2f(x+(2*i+1)*length,-0.9);
-          glVertex2f(x+(2*i+1)*length,0.9);
-          glVertex2f(x+2*i*length,0.9);
-        glEnd();
     }
 }
 
@@ -88,9 +81,9 @@ void MyPanelOpenGL::stop()
 
 void MyPanelOpenGL::process()
 {
-    random_World(world);
-    generate_World(world);
-    mirror_edges(world);
+//    random_World(world);
+//    generate_World(world);
+//    mirror_edges(world);
     repaint(); //This is from GL library
     updateGL(); //This is from library too
 }

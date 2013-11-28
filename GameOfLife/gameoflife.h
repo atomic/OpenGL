@@ -14,18 +14,20 @@ const int m = 50;
 const int n = 50;
 
 
-void reset(int world[][n+2], int n);
-void load_World(int world[][n+2]); //loading world from text file to 2D array
-void generate_World(int world[][n+2]); //Process world for next generation
-void write_World(const int world[][n+2]); //writing down world from 2D arrays to text file
-void show_World(const int world[][n+2]); //show world in screen form
-void check_Edges(const int world[][n+2]); //check if edges are zeros (cout)
-void smoothen_Edges(int world[][n+2]); //assign zeros on edges of all newly created array
-void mirror_edges(int world[][n+2]);
-int life_Or_Death(int world[][n+2], int row, int col); //find out if a cell is dead or alive
-void random_World(int world[][n+2]);
-void load_template(int world[][n+2]);
 
+//void load_World(int world[][n+2]); //loading world from text file to 2D array
+
+//void write_World(const int world[][n+2]); //writing down world from 2D arrays to text file
+//void show_World(const int world[][n+2]); //show world in screen form
+//void check_Edges(const int world[][n+2]); //check if edges are zeros (cout)
+//void smoothen_Edges(int world[][n+2]); //assign zeros on edges of all newly created array
+//void load_template(int world[][n+2]);
+
+void mirror_edges(int world[][n+2]);
+int life_Or_Death(int world[][n+2], int row, int col);
+void random_World(int world[][n+2]);
+void reset(int world[][n+2], int n);
+void generate_World(int world[][n+2]);
 
 using namespace std;
 
@@ -53,17 +55,6 @@ void reset(int world[][n+2], int n)
                 world[i][j] = 0;
     }
 
-void generate_World(int world[][n+2])
-    {
-        int nextGen[m+2][n+2];
-        for (int i = 1; i < m + 1; ++i)
-            for (int j = 1; j < n + 1; ++j)
-                nextGen[i][j] = life_Or_Death(world, i, j);
-        for (int i = 1; i < m + 1; ++i)
-            for (int j = 1; j < n + 1; ++j)
-                world[i][j] = nextGen[i][j];
-    }
-
 int life_Or_Death(int world[][n+2], int row, int col)
     {
         int aliveN = 0;
@@ -81,13 +72,25 @@ int life_Or_Death(int world[][n+2], int row, int col)
             return 0;
     }
 
+void generate_World(int world[][n+2])
+    {
+        int nextGen[m+2][n+2];
+        for (int i = 1; i < m + 1; ++i)
+            for (int j = 1; j < n + 1; ++j)
+                nextGen[i][j] = life_Or_Death(world, i, j);
+        for (int i = 1; i < m + 1; ++i)
+            for (int j = 1; j < n + 1; ++j)
+                world[i][j] = nextGen[i][j];
+    }
+
+
+
 void random_World(int world[][n+2])
     {
         for (int i = 1; i < m+1; ++i)
             for (int j = 1; j < n+1 ; ++j)
                 world[i][j] = rand() % 2;
     }
-
 
 /*          DONT WORRY ABOUT THIS YET */
 // void load_World(int world[][n+2])

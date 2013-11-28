@@ -2,14 +2,18 @@
 
 #*.pro
 *.pro.user
+========
 *.pro.user.*
+*~
 moc_*.cpp
 qrc_*.cpp
 Makefile
 *-build-*
 *build*
 
-
+#Failed Patch
+*.orig
+*.rej
 
 #Sublime-Projects
 *.sublime-workspace

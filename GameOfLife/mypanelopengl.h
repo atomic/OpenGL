@@ -1,14 +1,10 @@
 #ifndef MYPANELOPENGL_H
 #define MYPANELOPENGL_H
 
-
-#include "gameoflife.h"
 #include <QGLWidget>
 #include <QTimer>
 #include <QKeyEvent>
 #include <QGLWidget>
-
-
 
 
 class MyPanelOpenGL : public QGLWidget
@@ -25,6 +21,16 @@ private slots:
 
 private:
     int world[50][50];
+    float r;
+    float x, y;
+    float glWidth;
+    float glHeight;
+    int   gridWidth;//size of array
+    int   gridHeight;//size of array
+    float boxHeight;
+    float boxWidth;
+//    int cell[size][size];
+    QTimer* timer;
 
 
 protected:
