@@ -8,6 +8,8 @@ QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+
+INCLUDEPATH += -L/usr/lib/
 TARGET = DrawTriangle
 TEMPLATE = app
 
@@ -20,3 +22,6 @@ HEADERS  += mainwindow.h \
     glwidget.h
 
 FORMS    += mainwindow.ui
+
+
+LIBS      += -lglut
