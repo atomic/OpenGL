@@ -33,19 +33,21 @@ void MyPanelOpenGL::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-
-    float length = 0.9/m;
+    random_World(world);
+    glPointSize((1.2));
     for(int i =0;i<m;i++) {
         for(int j=0;j<n;j++) {
-            glPointSize(10.0f);
-            glBegin(GL_POINTS);
-              glVertex2f(i,j);
+            if(world[i][j] == 1)
+                glColor3f(1.9f, 0.0f, 0.0f);
+            else
+                glColor3f(0.0f, 1.9f, 0.0f);
+             glBegin(GL_POINTS);
+              glVertex2f(i/100,j/100);
             glEnd();
         }
 
     }
 }
-
 void MyPanelOpenGL::keyPressEvent(QKeyEvent *e)
 {
     switch(e->key()) //

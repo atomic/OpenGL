@@ -16,7 +16,6 @@ const int n = 50;
 
 
 //void load_World(int world[][n+2]); //loading world from text file to 2D array
-
 //void write_World(const int world[][n+2]); //writing down world from 2D arrays to text file
 //void show_World(const int world[][n+2]); //show world in screen form
 //void check_Edges(const int world[][n+2]); //check if edges are zeros (cout)
@@ -30,7 +29,6 @@ void reset(int world[][n+2], int n);
 void generate_World(int world[][n+2]);
 
 using namespace std;
-
 
 void mirror_edges(int world[][n+2])
     {
@@ -91,6 +89,7 @@ void random_World(int world[][n+2])
             for (int j = 1; j < n+1 ; ++j)
                 world[i][j] = rand() % 2;
     }
+
 
 /*          DONT WORRY ABOUT THIS YET */
 // void load_World(int world[][n+2])

@@ -5,6 +5,9 @@
 ========
 *.pro.user.*
 *~
+*.cpp.autosave
+*.cpp.autosave*
+
 moc_*.cpp
 qrc_*.cpp
 Makefile
