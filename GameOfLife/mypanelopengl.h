@@ -23,9 +23,11 @@ private slots:
 
 public slots:
     void changePointSize(int pSize);
+    void changeSpeed(int v);
 
 private:
     int world[52][52];
+    float speed;
     float r;
     float pSize;
     float x, y;
@@ -35,12 +37,12 @@ private:
     int   gridHeight;//size of array
     float boxHeight;
     float boxWidth;
-//    int cell[size][size];
     QTimer* timer;
 
 
 protected:
     void initializeGL();
+    void convCoordinates(int i, int j);
     void paintGL();
     void keyPressEvent(QKeyEvent *e);
     void mousePressEvent(QMouseEvent *mouse);

@@ -17,7 +17,6 @@ public:
     
 private slots:
 
-
 private:
     Ui::MainWindow *ui;
     float colorslider;

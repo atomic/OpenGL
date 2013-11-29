@@ -4,6 +4,7 @@
 #include <cmath>
 #include <iostream>
 #include "gameoflife.h"
+#include <QtDebug>
 
 using namespace std;
 
@@ -13,15 +14,14 @@ MyPanelOpenGL::MyPanelOpenGL(QWidget *parent) :
 {
     setFocusPolicy(Qt::StrongFocus);
     timer=NULL;
-    r=0;
-    x=-0.9;
-    y=-0.9;
+    speed=100;
+    r=100;
 }
 
 void MyPanelOpenGL::initializeGL()
 {
     glShadeModel(GL_SMOOTH);
-    glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+    glClearColor(0.0f, 0.0f,0.0f, 0.0f);
     glClearDepth(1.0f);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
@@ -33,22 +33,39 @@ void MyPanelOpenGL::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    random_World(world);
-    float length = 1.0/m;
-    pSize = 0.9;
-    glPointSize((r));
-    for(int i = -m ;i < m;i++) {
-        for(int j= -n;j<n;j++) {
+    glPointSize((4*r/m));
+    glColor3f(0.0f,1.0f,0.5f);
+    for (int i = 0; i < n+2; ++i) {  
+        glBegin(GL_POINTS);
+            convCoordinates(i,0);
+            glVertex2f(x,y);
+           convCoordinates(i,n+1);
+            glVertex2f(x,y);;
+            convCoordinates(0,i);
+            glVertex2f(x,y);
+           convCoordinates(n+1,i);
+            glVertex2f(x,y);
+        glEnd();
+    }
+    for(int i = 1 ;i < m+1; i++) {
+        for(int j=  1 ; j < n+1; j++) {
+               convCoordinates(i,j);
             if(world[i][j] == 1)
                 glColor3f(1.9f, 0.0f, 0.0f);
             else
-                glColor3f(0.0f, 1.9f, 0.0f);
+                glColor3f(0.0f, 0.0f,0.0f);
              glBegin(GL_POINTS);
-              glVertex2f(i*length,j*length);
+             glVertex2f(x,y);
             glEnd();
         }
 
     }
+}
+
+void MyPanelOpenGL::convCoordinates(int i, int j)
+{
+    x = static_cast<float>(-1.0 + (2.0/n)*j); //Int times float? Float?
+    y = static_cast<float>(-1.0 + (2.0/m)*i);
 }
 
 void MyPanelOpenGL::mousePressEvent(QMouseEvent *mouse)
@@ -58,11 +75,16 @@ void MyPanelOpenGL::mousePressEvent(QMouseEvent *mouse)
     }
 }
 
-void MyPanelOpenGL::changePointSize(int pSize)
+void MyPanelOpenGL::changePointSize(int pSize)  //scroll bar is on ui
 {
-    r = static_cast<float>(pSize/10);
+    r = static_cast<float>(pSize);
 }
 
+void MyPanelOpenGL::changeSpeed(int v)
+{
+    speed = static_cast<float>(v) / 10.0;
+    qDebug() << " speed = " << speed;
+}
 
 
 void MyPanelOpenGL::keyPressEvent(QKeyEvent *e)
@@ -93,7 +115,7 @@ void MyPanelOpenGL::run()
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()),
                 this, SLOT(process()));
-        timer->start(100); //delay
+        timer->start(speed); //delay
     }
 }
 
@@ -117,7 +139,7 @@ void MyPanelOpenGL::process()
 
 void MyPanelOpenGL::resizeGL(int width, int height)
 {
-    glViewport( 0, 0, (GLint)width,(GLint) height );
+    glViewport( 0, 0, (GLint)width,(GLint)height);
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();   // Reset the camera
     gluPerspective( 45.0f,
