@@ -5,6 +5,8 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <QGLWidget>
+//#include "gameoflife.h" cannot do this,
+//    mypanelopengl.cpp include both m and n from .h already.
 
 
 class MyPanelOpenGL : public QGLWidget
@@ -20,7 +22,7 @@ private slots:
     void process();
 
 private:
-    int world[50][50];
+    int world[52][52];
     float r;
     float x, y;
     float glWidth;
