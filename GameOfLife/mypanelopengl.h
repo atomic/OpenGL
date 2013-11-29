@@ -21,9 +21,13 @@ signals:
 private slots:
     void process();
 
+public slots:
+    void changePointSize(int pSize);
+
 private:
     int world[52][52];
     float r;
+    float pSize;
     float x, y;
     float glWidth;
     float glHeight;
@@ -39,6 +43,7 @@ protected:
     void initializeGL();
     void paintGL();
     void keyPressEvent(QKeyEvent *e);
+    void mousePressEvent(QMouseEvent *mouse);
     void run();
     void stop();
     void resizeGL(int w, int h);
