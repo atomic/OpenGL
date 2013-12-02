@@ -26,6 +26,9 @@ public slots:
     void changeSpeed(int v);
     void clickToRandomize();
     void clickToGenerate();
+    void clickToLoadInput();
+    void clickToReset();
+
 private:
     int world[52][52];
     float speed;

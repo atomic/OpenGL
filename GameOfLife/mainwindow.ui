@@ -6,27 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>599</width>
-    <height>574</height>
+    <width>619</width>
+    <height>566</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="quitButton">
-    <property name="geometry">
-     <rect>
-      <x>521</x>
-      <y>95</y>
-      <width>80</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Quit</string>
-    </property>
-   </widget>
    <widget class="MyPanelOpenGL" name="widget" native="true">
     <property name="geometry">
      <rect>
@@ -43,36 +30,10 @@
      </sizepolicy>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>521</x>
-      <y>161</y>
-      <width>80</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>NextGen</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>521</x>
-      <y>128</y>
-      <width>80</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Randomize</string>
-    </property>
-   </widget>
    <widget class="QSlider" name="verticalSlider">
     <property name="geometry">
      <rect>
-      <x>550</x>
+      <x>580</x>
       <y>230</y>
       <width>16</width>
       <height>160</height>
@@ -100,7 +61,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>560</x>
       <y>300</y>
       <width>16</width>
       <height>16</height>
@@ -113,8 +74,8 @@
    <widget class="QSlider" name="verticalSlider_2">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>409</y>
+      <x>580</x>
+      <y>400</y>
       <width>20</width>
       <height>141</height>
      </rect>
@@ -150,8 +111,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>460</y>
+      <x>550</x>
+      <y>450</y>
       <width>21</width>
       <height>21</height>
      </rect>
@@ -159,6 +120,71 @@
     <property name="text">
      <string>v</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>10</y>
+      <width>104</width>
+      <height>229</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="quitButton">
+         <property name="text">
+          <string>Quit</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="text">
+          <string>Randomize</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>NextGen</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Load Input</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="text">
+        <string>Save World</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>Reset World</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>
@@ -175,6 +201,8 @@
     <slot>changeSpeed(int)</slot>
     <slot>clickToRandomize()</slot>
     <slot>clickToGenerate()</slot>
+    <slot>clickToLoadInput()</slot>
+    <slot>clickToReset()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -187,8 +215,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>586</x>
-     <y>108</y>
+     <x>576</x>
+     <y>24</y>
     </hint>
     <hint type="destinationlabel">
      <x>433</x>
@@ -203,7 +231,7 @@
    <slot>changePointSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>558</x>
+     <x>588</x>
      <y>360</y>
     </hint>
     <hint type="destinationlabel">
@@ -219,11 +247,11 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>557</x>
+     <x>587</x>
      <y>368</y>
     </hint>
     <hint type="destinationlabel">
-     <x>535</x>
+     <x>565</x>
      <y>315</y>
     </hint>
    </hints>
@@ -235,8 +263,8 @@
    <slot>changeSpeed(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>560</x>
-     <y>468</y>
+     <x>590</x>
+     <y>459</y>
     </hint>
     <hint type="destinationlabel">
      <x>472</x>
@@ -251,12 +279,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>560</x>
-     <y>473</y>
+     <x>590</x>
+     <y>464</y>
     </hint>
     <hint type="destinationlabel">
-     <x>537</x>
-     <y>473</y>
+     <x>557</x>
+     <y>463</y>
     </hint>
    </hints>
   </connection>
@@ -267,8 +295,8 @@
    <slot>clickToRandomize()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>539</x>
-     <y>142</y>
+     <x>529</x>
+     <y>58</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -283,12 +311,44 @@
    <slot>clickToGenerate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>565</x>
-     <y>175</y>
+     <x>555</x>
+     <y>91</y>
     </hint>
     <hint type="destinationlabel">
      <x>484</x>
      <y>179</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>clickToLoadInput()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>562</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>212</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>clickToReset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>562</x>
+     <y>196</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>488</x>
+     <y>199</y>
     </hint>
    </hints>
   </connection>
