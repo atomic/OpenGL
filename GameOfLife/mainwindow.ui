@@ -30,157 +30,168 @@
      </sizepolicy>
     </property>
    </widget>
-   <widget class="QSlider" name="verticalSlider">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>230</y>
-      <width>16</width>
-      <height>160</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="minimum">
-     <number>30</number>
-    </property>
-    <property name="maximum">
-     <number>120</number>
-    </property>
-    <property name="value">
-     <number>50</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>300</y>
-      <width>16</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>P</string>
-    </property>
-   </widget>
-   <widget class="QSlider" name="verticalSlider_2">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>400</y>
-      <width>20</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <number>0</number>
-    </property>
-    <property name="maximum">
-     <number>200</number>
-    </property>
-    <property name="singleStep">
-     <number>1</number>
-    </property>
-    <property name="pageStep">
-     <number>50</number>
-    </property>
-    <property name="value">
-     <number>100</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-    <property name="invertedAppearance">
-     <bool>false</bool>
-    </property>
-    <property name="tickPosition">
-     <enum>QSlider::TicksAbove</enum>
-    </property>
-    <property name="tickInterval">
-     <number>10</number>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>450</y>
-      <width>21</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>v</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>510</x>
       <y>10</y>
-      <width>104</width>
-      <height>229</height>
+      <width>106</width>
+      <height>264</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QPushButton" name="quitButton">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QPushButton" name="quitButton">
+           <property name="text">
+            <string>Quit</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="text">
+            <string>Randomize</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>NextGen</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
          <property name="text">
-          <string>Quit</string>
+          <string>Load Input</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="pushButton_5">
          <property name="text">
-          <string>Randomize</string>
+          <string>Save World</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="pushButton_4">
          <property name="text">
-          <string>NextGen</string>
+          <string>Reset World</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_6">
+         <property name="text">
+          <string>Run</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pushButton_7">
        <property name="text">
-        <string>Load Input</string>
+        <string>Stop</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>361</y>
+      <width>71</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QSlider" name="verticalSlider_2">
+       <property name="minimum">
+        <number>0</number>
+       </property>
+       <property name="maximum">
+        <number>200</number>
+       </property>
+       <property name="singleStep">
+        <number>1</number>
+       </property>
+       <property name="pageStep">
+        <number>50</number>
+       </property>
+       <property name="value">
+        <number>100</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="invertedAppearance">
+        <bool>false</bool>
+       </property>
+       <property name="tickPosition">
+        <enum>QSlider::TicksAbove</enum>
+       </property>
+       <property name="tickInterval">
+        <number>10</number>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_5">
+      <widget class="QSlider" name="verticalSlider">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimum">
+        <number>50</number>
+       </property>
+       <property name="maximum">
+        <number>120</number>
+       </property>
+       <property name="value">
+        <number>50</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>510</y>
+      <width>61</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Save World</string>
+        <string>v</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>Reset World</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_6">
-       <property name="text">
-        <string>PushButton</string>
+        <string>P</string>
        </property>
       </widget>
      </item>
@@ -203,6 +214,8 @@
     <slot>clickToGenerate()</slot>
     <slot>clickToLoadInput()</slot>
     <slot>clickToReset()</slot>
+    <slot>clickToRun()</slot>
+    <slot>clickToStop()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -231,8 +244,8 @@
    <slot>changePointSize(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>588</x>
-     <y>360</y>
+     <x>568</x>
+     <y>498</y>
     </hint>
     <hint type="destinationlabel">
      <x>364</x>
@@ -247,12 +260,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>587</x>
-     <y>368</y>
+     <x>567</x>
+     <y>498</y>
     </hint>
     <hint type="destinationlabel">
-     <x>565</x>
-     <y>315</y>
+     <x>536</x>
+     <y>526</y>
     </hint>
    </hints>
   </connection>
@@ -263,8 +276,8 @@
    <slot>changeSpeed(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>590</x>
-     <y>459</y>
+     <x>530</x>
+     <y>429</y>
     </hint>
     <hint type="destinationlabel">
      <x>472</x>
@@ -279,12 +292,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>590</x>
-     <y>464</y>
+     <x>530</x>
+     <y>434</y>
     </hint>
     <hint type="destinationlabel">
-     <x>557</x>
-     <y>463</y>
+     <x>571</x>
+     <y>524</y>
     </hint>
    </hints>
   </connection>
@@ -349,6 +362,38 @@
     <hint type="destinationlabel">
      <x>488</x>
      <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>clickToRun()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>572</x>
+     <y>233</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>421</x>
+     <y>235</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>clickToStop()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>590</x>
+     <y>257</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>419</x>
+     <y>276</y>
     </hint>
    </hints>
   </connection>

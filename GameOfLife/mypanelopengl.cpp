@@ -81,6 +81,15 @@ void MyPanelOpenGL::clickToRandomize() {
     updateGL();
 }
 
+void MyPanelOpenGL::clickToRun() {
+    run();
+}
+
+void MyPanelOpenGL::clickToStop() {
+    stop();
+}
+
+
 void MyPanelOpenGL::convCoordinates(int i, int j) {
     x = static_cast<float>(-1.0 + (2.0/n)*j); //Int times float? Float?
     y = static_cast<float>(-1.0 + (2.0/m)*i);

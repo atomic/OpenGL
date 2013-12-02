@@ -28,6 +28,8 @@ public slots:
     void clickToGenerate();
     void clickToLoadInput();
     void clickToReset();
+    void clickToRun();
+    void clickToStop();
 
 private:
     int world[52][52];
