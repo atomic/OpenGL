@@ -24,7 +24,8 @@ private slots:
 public slots:
     void changePointSize(int pSize);
     void changeSpeed(int v);
-
+    void clickToRandomize();
+    void clickToGenerate();
 private:
     int world[52][52];
     float speed;

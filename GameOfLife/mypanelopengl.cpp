@@ -1,9 +1,9 @@
 #include "mypanelopengl.h"
-#include <QDebug>
 #include "GL/glu.h"
 #include <cmath>
 #include <iostream>
 #include "gameoflife.h"
+#include <QDebug>
 #include <QtDebug>
 
 using namespace std;
@@ -62,6 +62,18 @@ void MyPanelOpenGL::paintGL()
     }
 }
 
+void MyPanelOpenGL::clickToGenerate()
+{
+    process();
+}
+
+void MyPanelOpenGL::clickToRandomize()
+{
+    random_World(world);
+    repaint(); //This is from GL library
+    updateGL();
+}
+
 void MyPanelOpenGL::convCoordinates(int i, int j)
 {
     x = static_cast<float>(-1.0 + (2.0/n)*j); //Int times float? Float?
@@ -82,8 +94,10 @@ void MyPanelOpenGL::changePointSize(int pSize)  //scroll bar is on ui
 
 void MyPanelOpenGL::changeSpeed(int v)
 {
-    speed = static_cast<float>(v) / 10.0;
+    speed = static_cast<float>(v);
     qDebug() << " speed = " << speed;
+    stop();
+    run();
 }
 
 

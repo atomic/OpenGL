@@ -20,7 +20,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     float colorslider;
-
 };
 
 #endif // MAINWINDOW_H

@@ -123,7 +123,7 @@
      <number>0</number>
     </property>
     <property name="maximum">
-     <number>500</number>
+     <number>200</number>
     </property>
     <property name="singleStep">
      <number>1</number>
@@ -136,6 +136,15 @@
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
+    </property>
+    <property name="invertedAppearance">
+     <bool>false</bool>
+    </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksAbove</enum>
+    </property>
+    <property name="tickInterval">
+     <number>10</number>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -164,6 +173,8 @@
     <slot>changeColor(int)</slot>
     <slot>changePointSize(int)</slot>
     <slot>changeSpeed(int)</slot>
+    <slot>clickToRandomize()</slot>
+    <slot>clickToGenerate()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -246,6 +257,38 @@
     <hint type="destinationlabel">
      <x>537</x>
      <y>473</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>clickToRandomize()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>142</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>454</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>clickToGenerate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>565</x>
+     <y>175</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>484</x>
+     <y>179</y>
     </hint>
    </hints>
   </connection>
