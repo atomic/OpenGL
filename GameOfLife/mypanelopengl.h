@@ -8,6 +8,8 @@
 //#include "gameoflife.h" cannot do this,
 //    mypanelopengl.cpp include both m and n from .h already.
 
+const int m = 100;
+const int n = 100;
 
 class MyPanelOpenGL : public QGLWidget
 {
@@ -32,7 +34,7 @@ public slots:
     void clickToStop();
 
 private:
-    int world[52][52];
+    int world[m+2][n+2];
     float speed;
     float r;
     float pSize;

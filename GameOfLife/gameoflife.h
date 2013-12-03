@@ -6,11 +6,11 @@
 #include <unistd.h> 	//for windows use "Windows.h" /unix use : #include <unistd.h>
 #include <ctime>
 #include <cstdlib>
+#include "mypanelopengl.h"
 // #include <time.h> //Alternative to "ctime"
 
 
-const int m = 50;
-const int n = 50;
+
 
 void mirror_edges(int world[][n+2]);
 void random_World(int world[][n+2]);
