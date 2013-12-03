@@ -24,7 +24,6 @@ private slots:
     void process();
 
 public slots:
-    void changePointSize(int pSize);
     void changeSpeed(int v);
     void clickToRandomize();
     void clickToGenerate();
@@ -36,7 +35,6 @@ public slots:
 private:
     int world[m+2][n+2];
     float speed;
-    float r;
     float pSize;
     float x, y;
     float glWidth;

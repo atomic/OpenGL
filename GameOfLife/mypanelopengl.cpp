@@ -14,7 +14,6 @@ MyPanelOpenGL::MyPanelOpenGL(QWidget *parent) :
     setFocusPolicy(Qt::StrongFocus);
     timer=NULL;
     speed=100;
-    r=92;
 }
 
 void MyPanelOpenGL::initializeGL() {
@@ -30,53 +29,72 @@ void MyPanelOpenGL::initializeGL() {
 void MyPanelOpenGL::paintGL() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    glPointSize((4*r/m));
-    glColor3f(0.0f,1.0f,0.5f);
+    float h_box_length = 1.0/n;
+    float v_box_length = 1.0/m;
+    glColor3f(0.0f,1.0f,0.5f); //default
     //The IF statements is to print different color for the wall that is mirrored
+    //BUGS : Top, Right Wall not displaying
     //Printing Top and Bot wall
-    for (int i = 0; i < n+2; ++i) {
-        if (world[0][i] == 1)
+    for (int j = 0; j < n+2; ++j) {
+        if (world[0][j] == 1)
             glColor3f(0.7f,0.3f,0.5f);
-        glBegin(GL_POINTS);
-            convCoordinates(0,i);
-            glVertex2f(x,y);
+        convCoordinates(0,j);
+        qDebug() << x << "," << y;
+        glBegin(GL_QUADS);
+            glVertex2f(x-h_box_length,y+v_box_length);
+            glVertex2f(x-h_box_length,y-v_box_length);
+            glVertex2f(x+h_box_length,y-v_box_length);
+            glVertex2f(x+h_box_length,y+v_box_length);
         glEnd();
-        glColor3f(0.0f,1.0f,0.5f);
-        if (world[n+1][i] == 1)
+        glColor3f(0.0f,1.0f,0.5f); //default
+        if (world[m+1][j] == 1)
             glColor3f(0.7f,0.3f,0.5f);
-        glBegin(GL_POINTS);
-            convCoordinates(n+1,i);
-            glVertex2f(x,y);
+        convCoordinates(m+1,j);
+        glBegin(GL_QUADS);
+            glVertex2f(x-h_box_length,y+v_box_length);
+            glVertex2f(x-h_box_length,y-v_box_length);
+            glVertex2f(x+h_box_length,y-v_box_length);
+            glVertex2f(x+h_box_length,y+v_box_length);
         glEnd();
-        //reset default color
-        glColor3f(0.0f,1.0f,0.5f);
+        glColor3f(0.0f,1.0f,0.5f); //default
     }
-    //Printing left and right wall
+    //---------------Printing left and right wall-----
     for (int i = 0; i < m+2; ++i) {
         if (world[i][0] == 1)
             glColor3f(0.7f,0.3f,0.5f);
-        glBegin(GL_POINTS);
-            convCoordinates(i,0);
-            glVertex2f(x,y);
+        convCoordinates(i,0);
+        glBegin(GL_QUADS);
+            glVertex2f(x-h_box_length,y+v_box_length);
+            glVertex2f(x-h_box_length,y-v_box_length);
+            glVertex2f(x+h_box_length,y-v_box_length);
+            glVertex2f(x+h_box_length,y+v_box_length);
         glEnd();
-        glColor3f(0.0f,1.0f,0.5f);
+        glColor3f(0.0f,1.0f,0.5f); //default
         if (world[i][n+1] == 1)
             glColor3f(0.7f,0.3f,0.5f);
-        glBegin(GL_POINTS);
-            convCoordinates(i,n+1);
-            glVertex2f(x,y);;
+        convCoordinates(i,n+1);
+        glBegin(GL_QUADS);
+            glVertex2f(x-h_box_length,y+v_box_length);
+            glVertex2f(x-h_box_length,y-v_box_length);
+            glVertex2f(x+h_box_length,y-v_box_length);
+            glVertex2f(x+h_box_length,y+v_box_length);
         glEnd();
-        glColor3f(0.0f,1.0f,0.5f);
+        glColor3f(0.0f,1.0f,0.5f); //default
     }
+
+    //--------------PRINTING WORLDS------------------
     for(int i = 1 ;i < m+1; i++) {
         for(int j=  1 ; j < n+1; j++) {
-               convCoordinates(i,j);
             if(world[i][j] == 1)
                 glColor3f(1.9f, 0.0f, 0.0f);
             else
                 glColor3f(0.0f, 0.0f,0.0f);
-             glBegin(GL_POINTS);
-             glVertex2f(x,y);
+            convCoordinates(i,j);
+            glBegin(GL_QUADS);
+                glVertex2f(x-h_box_length,y+v_box_length);
+                glVertex2f(x-h_box_length,y-v_box_length);
+                glVertex2f(x+h_box_length,y-v_box_length);
+                glVertex2f(x+h_box_length,y+v_box_length);
             glEnd();
         }
 
@@ -114,6 +132,7 @@ void MyPanelOpenGL::clickToStop() {
 
 
 void MyPanelOpenGL::convCoordinates(int i, int j) {
+
     x = static_cast<float>(-1.0 + (2.0/n)*j); //Int times float? Float?
     y = static_cast<float>(-1.0 + (2.0/m)*i);
 }
@@ -122,11 +141,6 @@ void MyPanelOpenGL::mousePressEvent(QMouseEvent *mouse) {
     switch(mouse->button() == Qt::LeftButton) {
        //later on for clicking screen
     }
-}
-
-void MyPanelOpenGL::changePointSize(int pSize)  //scroll bar is on ui
-{
-    r = static_cast<float>(pSize);
 }
 
 void MyPanelOpenGL::changeSpeed(int v) {
