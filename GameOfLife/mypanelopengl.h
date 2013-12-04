@@ -24,6 +24,7 @@ private slots:
     void process();
 
 public slots:
+    void clickToSave();
     void changePointSize(int pSize);
     void changeSpeed(int v);
     void clickToRandomize();
@@ -32,8 +33,12 @@ public slots:
     void clickToReset();
     void clickToRun();
     void clickToStop();
+    void i_input(int i);
+    void j_input(int j);
+    void clickToLoadTemplate();
 
 private:
+    int global_i, global_j;
     int world[m+2][n+2];
     float speed;
     float r;
