@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <QGLWidget>
+
 //#include "gameoflife.h" cannot do this,
 //    mypanelopengl.cpp include both m and n from .h already.
 
@@ -24,6 +25,7 @@ private slots:
     void process();
 
 public slots:
+
     void changePointSize(int pSize);
     void changeSpeed(int v);
     void clickToRandomize();
@@ -32,6 +34,7 @@ public slots:
     void clickToReset();
     void clickToRun();
     void clickToStop();
+    void loadPulsarText();
 
 private:
     int world[m+2][n+2];

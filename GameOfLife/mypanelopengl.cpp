@@ -192,3 +192,7 @@ void MyPanelOpenGL::resizeGL(int width, int height) {
                     1.0f,
                     100.0f );
 }
+
+void MyPanelOpenGL::loadPulsarText() {
+    qDebug() << "Test, this works";
+}

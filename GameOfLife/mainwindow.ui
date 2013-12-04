@@ -14,22 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="MyPanelOpenGL" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>511</width>
-      <height>531</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
@@ -200,25 +184,6 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>MyPanelOpenGL</class>
-   <extends>QWidget</extends>
-   <header location="global">mypanelopengl.h</header>
-   <container>1</container>
-   <slots>
-    <slot>changeColor(int)</slot>
-    <slot>changePointSize(int)</slot>
-    <slot>changeSpeed(int)</slot>
-    <slot>clickToRandomize()</slot>
-    <slot>clickToGenerate()</slot>
-    <slot>clickToLoadInput()</slot>
-    <slot>clickToReset()</slot>
-    <slot>clickToRun()</slot>
-    <slot>clickToStop()</slot>
-   </slots>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -234,22 +199,6 @@
     <hint type="destinationlabel">
      <x>433</x>
      <y>35</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>verticalSlider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>widget</receiver>
-   <slot>changePointSize(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>568</x>
-     <y>498</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>364</x>
-     <y>347</y>
     </hint>
    </hints>
   </connection>
@@ -272,22 +221,6 @@
   <connection>
    <sender>verticalSlider_2</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>widget</receiver>
-   <slot>changeSpeed(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>530</x>
-     <y>429</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>472</x>
-     <y>523</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>verticalSlider_2</sender>
-   <signal>valueChanged(int)</signal>
    <receiver>label_2</receiver>
    <slot>setNum(int)</slot>
    <hints>
@@ -298,102 +231,6 @@
     <hint type="destinationlabel">
      <x>571</x>
      <y>524</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_3</sender>
-   <signal>clicked()</signal>
-   <receiver>widget</receiver>
-   <slot>clickToRandomize()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>529</x>
-     <y>58</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>454</x>
-     <y>150</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_2</sender>
-   <signal>clicked()</signal>
-   <receiver>widget</receiver>
-   <slot>clickToGenerate()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>555</x>
-     <y>91</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>484</x>
-     <y>179</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>widget</receiver>
-   <slot>clickToLoadInput()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>562</x>
-     <y>129</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>499</x>
-     <y>212</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_4</sender>
-   <signal>clicked()</signal>
-   <receiver>widget</receiver>
-   <slot>clickToReset()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>562</x>
-     <y>196</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>488</x>
-     <y>199</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_6</sender>
-   <signal>clicked()</signal>
-   <receiver>widget</receiver>
-   <slot>clickToRun()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>572</x>
-     <y>233</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>421</x>
-     <y>235</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_7</sender>
-   <signal>clicked()</signal>
-   <receiver>widget</receiver>
-   <slot>clickToStop()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>590</x>
-     <y>257</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>419</x>
-     <y>276</y>
     </hint>
    </hints>
   </connection>
