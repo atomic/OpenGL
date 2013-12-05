@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>619</width>
+    <width>730</width>
     <height>566</height>
    </rect>
   </property>
@@ -35,8 +35,8 @@
      <rect>
       <x>510</x>
       <y>10</y>
-      <width>106</width>
-      <height>264</height>
+      <width>125</width>
+      <height>330</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -48,6 +48,27 @@
           <widget class="QPushButton" name="quitButton">
            <property name="text">
             <string>Quit</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>Load Input</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_9">
+           <property name="text">
+            <string>Load Template</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_8">
+           <property name="text">
+            <string>Save World</string>
            </property>
           </widget>
          </item>
@@ -66,13 +87,6 @@
           </widget>
          </item>
         </layout>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton">
-         <property name="text">
-          <string>Load Input</string>
-         </property>
-        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_5">
@@ -197,6 +211,34 @@
      <string>P</string>
     </property>
    </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>70</y>
+      <width>130</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QSpinBox" name="i_box"/>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="j_box"/>
+     </item>
+    </layout>
+   </widget>
+   <zorder>widget</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>label_2</zorder>
+   <zorder>label</zorder>
+   <zorder>i_box</zorder>
+   <zorder>j_box</zorder>
+   <zorder>i_box</zorder>
+   <zorder>j_box</zorder>
+   <zorder></zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -216,6 +258,10 @@
     <slot>clickToReset()</slot>
     <slot>clickToRun()</slot>
     <slot>clickToStop()</slot>
+    <slot>clickToSave()</slot>
+    <slot>i_input(int)</slot>
+    <slot>j_input(int)</slot>
+    <slot>clickToLoadTemplate()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -308,8 +354,8 @@
    <slot>clickToRandomize()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>529</x>
-     <y>58</y>
+     <x>532</x>
+     <y>171</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -324,8 +370,8 @@
    <slot>clickToGenerate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>555</x>
-     <y>91</y>
+     <x>558</x>
+     <y>204</y>
     </hint>
     <hint type="destinationlabel">
      <x>484</x>
@@ -340,8 +386,8 @@
    <slot>clickToLoadInput()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>562</x>
-     <y>129</y>
+     <x>565</x>
+     <y>72</y>
     </hint>
     <hint type="destinationlabel">
      <x>499</x>
@@ -356,8 +402,8 @@
    <slot>clickToReset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>562</x>
-     <y>196</y>
+     <x>564</x>
+     <y>271</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -372,8 +418,8 @@
    <slot>clickToRun()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>572</x>
-     <y>233</y>
+     <x>574</x>
+     <y>304</y>
     </hint>
     <hint type="destinationlabel">
      <x>421</x>
@@ -388,12 +434,60 @@
    <slot>clickToStop()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>590</x>
-     <y>257</y>
+     <x>591</x>
+     <y>338</y>
     </hint>
     <hint type="destinationlabel">
      <x>419</x>
      <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_8</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>clickToSave()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>582</x>
+     <y>133</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>i_box</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>widget</receiver>
+   <slot>i_input(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>640</x>
+     <y>84</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>437</x>
+     <y>322</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_9</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>clickToLoadTemplate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>579</x>
+     <y>86</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>458</x>
+     <y>74</y>
     </hint>
    </hints>
   </connection>

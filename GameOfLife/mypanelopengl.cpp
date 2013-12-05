@@ -17,6 +17,14 @@ MyPanelOpenGL::MyPanelOpenGL(QWidget *parent) :
     r=92;
 }
 
+void MyPanelOpenGL::i_input(int i) {
+    global_i = i;
+}
+
+void MyPanelOpenGL::j_input(int j) {
+    global_j = j;
+}
+
 void MyPanelOpenGL::initializeGL() {
     glShadeModel(GL_SMOOTH);
     glClearColor(0.0f, 0.0f,0.0f, 0.0f);
@@ -86,6 +94,14 @@ void MyPanelOpenGL::clickToLoadInput() {
     load_World(world);
     repaint();
     updateGL();
+}
+
+void MyPanelOpenGL::clickToLoadTemplate() {
+
+}
+
+void MyPanelOpenGL::clickToSave() {
+    write_World(world);
 }
 
 void MyPanelOpenGL::clickToReset() {
