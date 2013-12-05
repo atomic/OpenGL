@@ -6,23 +6,24 @@
 #include <unistd.h> 	//for windows use "Windows.h" /unix use : #include <unistd.h>
 #include <ctime>
 #include <cstdlib>
+#include "mypanelopengl.h"
 // #include <time.h> //Alternative to "ctime"
 
 
-const int m = 50;
-const int n = 50;
+
 
 void mirror_edges(int world[][n+2]);
-int life_Or_Death(int world[][n+2], int row, int col);
 void random_World(int world[][n+2]);
-void reset(int world[][n+2], int n);
+void reset(int world[][n+2]);
 void generate_World(int world[][n+2]);
+void load_World(int world[][n+2]);
+void write_World(const int world[][n+2]);
+int life_Or_Death(int world[][n+2], int row, int col);
 
 using namespace std;
 
 
-void mirror_edges(int world[][n+2])
-    {
+void mirror_edges(int world[][n+2]) {
         for (int i = 1; i < m+1; ++i)
             world[i][n+1] = world[i][1];
         for (int i = 1; i < m+1; ++i)
@@ -37,15 +38,26 @@ void mirror_edges(int world[][n+2])
         world[m+1][n+1] = world[1][1];
     }
 
-void reset(int world[][n+2], int n)
-    {
+void reset(int world[][n+2]) {
         for (int i = 1; i < m+1; ++i)
             for (int j = 1; j < n+1; ++j)
                 world[i][j] = 0;
     }
 
-int life_Or_Death(int world[][n+2], int row, int col)
-    {
+void write_World(const int world[][n+2]) {
+        ofstream fout;
+        fout.open("input.txt");
+        for (int i = 1; i < m + 1; ++i) {
+            for (int j = 1; j < n + 1; ++j)
+                fout << world[i][j] << " ";
+            fout << endl;
+        }
+
+        fout.close();
+    }
+
+
+int life_Or_Death(int world[][n+2], int row, int col) {
         int aliveN = 0;
         int state = world[row][col];
         for (int i = row - 1; i < row + 2; ++i)
@@ -61,8 +73,7 @@ int life_Or_Death(int world[][n+2], int row, int col)
             return 0;
     }
 
-void generate_World(int world[][n+2])
-    {
+void generate_World(int world[][n+2]) {
         int nextGen[m+2][n+2];
         for (int i = 1; i < m + 1; ++i)
             for (int j = 1; j < n + 1; ++j)
@@ -73,12 +84,21 @@ void generate_World(int world[][n+2])
     }
 
 
-void random_World(int world[][n+2])
-    {
+void random_World(int world[][n+2]) {
         for (int i = 1; i < m+1; ++i)
             for (int j = 1; j < n+1 ; ++j)
                 world[i][j] = rand() % 2;
     }
+
+void load_World(int world[][n+2]) {
+        ifstream fin;
+        fin.open("input.txt");
+        for (int i = 1; i < m + 1; ++i)
+            for (int j = 1; j < n + 1; ++j)
+                fin >> world[i][j];
+        fin.close();
+    }
+
 
 
 
