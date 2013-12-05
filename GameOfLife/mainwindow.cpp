@@ -7,6 +7,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle(tr("Game Of Life"));
+    ui->comboBox->addItem("Glider");
+    ui->comboBox->addItem("Pentomino");
+    ui->comboBox->addItem("Pulsar");
+    ui->comboBox->addItem("Exploder");
+    ui->comboBox->addItem("Ten");
+    ui->comboBox->addItem("Spaceship");
+    ui->comboBox->addItem("Glidergun");
 }
 
 MainWindow::~MainWindow()

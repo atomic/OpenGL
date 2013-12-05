@@ -35,9 +35,11 @@ public slots:
     void clickToStop();
     void i_input(int i);
     void j_input(int j);
+    void clickToChooseIndex(int index);
     void clickToLoadTemplate();
 
 private:
+    int template_index;
     int global_i, global_j;
     int world[m+2][n+2];
     float speed;

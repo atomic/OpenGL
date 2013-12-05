@@ -1,7 +1,6 @@
 #ifndef GAMEOFLIFE_H
 #define GAMEOFLIFE_H
 
-#include <iostream>
 #include <fstream>
 #include <unistd.h> 	//for windows use "Windows.h" /unix use : #include <unistd.h>
 #include <ctime>
@@ -20,8 +19,8 @@ void load_World(int world[][n+2]);
 void write_World(const int world[][n+2]);
 int life_Or_Death(int world[][n+2], int row, int col);
 
-using namespace std;
 
+using namespace std;
 
 void mirror_edges(int world[][n+2]) {
         for (int i = 1; i < m+1; ++i)

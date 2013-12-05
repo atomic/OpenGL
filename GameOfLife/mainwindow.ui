@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
+    <width>627</width>
     <height>566</height>
    </rect>
   </property>
@@ -29,96 +29,6 @@
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>10</y>
-      <width>125</width>
-      <height>330</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_3">
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QPushButton" name="quitButton">
-           <property name="text">
-            <string>Quit</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton">
-           <property name="text">
-            <string>Load Input</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_9">
-           <property name="text">
-            <string>Load Template</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_8">
-           <property name="text">
-            <string>Save World</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_3">
-           <property name="text">
-            <string>Randomize</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_2">
-           <property name="text">
-            <string>NextGen</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_5">
-         <property name="text">
-          <string>Save World</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_4">
-         <property name="text">
-          <string>Reset World</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_6">
-         <property name="text">
-          <string>Run</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_7">
-       <property name="text">
-        <string>Stop</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
@@ -214,31 +124,132 @@
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>630</x>
-      <y>70</y>
-      <width>130</width>
-      <height>31</height>
+      <x>520</x>
+      <y>180</y>
+      <width>91</width>
+      <height>201</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QSpinBox" name="i_box"/>
+      <widget class="QPushButton" name="pushButton_8">
+       <property name="text">
+        <string>Save World</string>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="j_box"/>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>Randomize</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>NextGen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="text">
+        <string>Save World</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>Reset World</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="text">
+        <string>Run</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_7">
+       <property name="text">
+        <string>Stop</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
-   <zorder>widget</zorder>
-   <zorder>layoutWidget</zorder>
-   <zorder>layoutWidget</zorder>
-   <zorder>label_2</zorder>
-   <zorder>label</zorder>
-   <zorder>i_box</zorder>
-   <zorder>j_box</zorder>
-   <zorder>i_box</zorder>
-   <zorder>j_box</zorder>
-   <zorder></zorder>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>521</x>
+      <y>41</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load Input</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="quitButton">
+    <property name="geometry">
+     <rect>
+      <x>521</x>
+      <y>12</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Quit</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>90</y>
+      <width>82</width>
+      <height>54</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QComboBox" name="comboBox"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_9">
+       <property name="text">
+        <string>Summon</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QSpinBox" name="j_box">
+    <property name="geometry">
+     <rect>
+      <x>573</x>
+      <y>150</y>
+      <width>36</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="i_box">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>150</y>
+      <width>37</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -261,6 +272,8 @@
     <slot>clickToSave()</slot>
     <slot>i_input(int)</slot>
     <slot>j_input(int)</slot>
+    <slot>clickToLoadTemplate(int)</slot>
+    <slot>clickToChooseIndex(int)</slot>
     <slot>clickToLoadTemplate()</slot>
    </slots>
   </customwidget>
@@ -355,7 +368,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>532</x>
-     <y>171</y>
+     <y>221</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -371,7 +384,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>558</x>
-     <y>204</y>
+     <y>254</y>
     </hint>
     <hint type="destinationlabel">
      <x>484</x>
@@ -386,8 +399,8 @@
    <slot>clickToLoadInput()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>565</x>
-     <y>72</y>
+     <x>566</x>
+     <y>63</y>
     </hint>
     <hint type="destinationlabel">
      <x>499</x>
@@ -402,8 +415,8 @@
    <slot>clickToReset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>564</x>
-     <y>271</y>
+     <x>573</x>
+     <y>311</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -418,8 +431,8 @@
    <slot>clickToRun()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>574</x>
-     <y>304</y>
+     <x>583</x>
+     <y>344</y>
     </hint>
     <hint type="destinationlabel">
      <x>421</x>
@@ -434,8 +447,8 @@
    <slot>clickToStop()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>591</x>
-     <y>338</y>
+     <x>601</x>
+     <y>377</y>
     </hint>
     <hint type="destinationlabel">
      <x>419</x>
@@ -451,7 +464,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>582</x>
-     <y>133</y>
+     <y>183</y>
     </hint>
     <hint type="destinationlabel">
      <x>373</x>
@@ -466,12 +479,60 @@
    <slot>i_input(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>640</x>
-     <y>84</y>
+     <x>539</x>
+     <y>161</y>
     </hint>
     <hint type="destinationlabel">
      <x>437</x>
      <y>322</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>clickToSave()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>608</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>406</x>
+     <y>255</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>j_box</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>widget</receiver>
+   <slot>j_input(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>602</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>469</x>
+     <y>136</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>widget</receiver>
+   <slot>clickToChooseIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>580</x>
+     <y>104</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>476</x>
+     <y>71</y>
     </hint>
    </hints>
   </connection>
@@ -482,12 +543,12 @@
    <slot>clickToLoadTemplate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>579</x>
-     <y>86</y>
+     <x>598</x>
+     <y>130</y>
     </hint>
     <hint type="destinationlabel">
-     <x>458</x>
-     <y>74</y>
+     <x>437</x>
+     <y>122</y>
     </hint>
    </hints>
   </connection>

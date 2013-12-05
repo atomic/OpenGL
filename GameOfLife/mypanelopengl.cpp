@@ -1,6 +1,5 @@
 #include "GL/glu.h"
 #include <cmath>
-#include <iostream>
 #include "gameoflife.h"
 #include <QDebug>
 #include <QtDebug>
@@ -13,6 +12,7 @@ MyPanelOpenGL::MyPanelOpenGL(QWidget *parent) :
 {
     setFocusPolicy(Qt::StrongFocus);
     timer=NULL;
+//    clickToLoadInput();
     speed=100;
     r=92;
 }
@@ -23,6 +23,11 @@ void MyPanelOpenGL::i_input(int i) {
 
 void MyPanelOpenGL::j_input(int j) {
     global_j = j;
+}
+
+void MyPanelOpenGL::clickToChooseIndex(int index) {
+    template_index = index + 1;
+    qDebug() << template_index;
 }
 
 void MyPanelOpenGL::initializeGL() {
@@ -91,20 +96,49 @@ void MyPanelOpenGL::paintGL() {
     }
 }
 void MyPanelOpenGL::clickToLoadInput() {
+    stop();
     load_World(world);
     repaint();
     updateGL();
 }
 
 void MyPanelOpenGL::clickToLoadTemplate() {
-
+    int in_m, in_n;
+    in_m = global_i; qDebug() << in_m;
+    in_n = global_j; qDebug() << in_n;
+    int row, col;
+    ifstream fin;
+    if (template_index == 1)
+        fin.open("glider.txt");
+    else if (template_index == 2)
+        fin.open("pentomino.txt");
+    else if (template_index == 3)
+        fin.open("pulsar.txt");
+    else if (template_index == 4)
+        fin.open("exploder.txt");
+    else if (template_index == 5)
+        fin.open("ten.txt");
+    else if (template_index == 6)
+        fin.open("spaceship.txt");
+    else if (template_index == 7)
+        fin.open("glidergun.txt");
+    fin >> row;
+    fin >> col;
+    for (int i = in_m; i < in_m + row; ++i)
+        for (int j = in_n; j < in_n + col; ++j)
+            fin >> world[i][j];
+    fin.close();
+    repaint();
+    updateGL();
 }
-
+#include <iostream>
 void MyPanelOpenGL::clickToSave() {
+    stop();
     write_World(world);
 }
 
 void MyPanelOpenGL::clickToReset() {
+    stop();
     reset(world);
     repaint();
     updateGL();
