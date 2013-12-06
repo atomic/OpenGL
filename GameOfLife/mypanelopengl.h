@@ -5,6 +5,12 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <QGLWidget>
+
+#include <QDebug>
+#include <QMouseEvent>
+#include <QPoint>
+#include <QEvent>
+
 //#include "gameoflife.h" cannot do this,
 //    mypanelopengl.cpp include both m and n from .h already.
 
@@ -39,6 +45,7 @@ public slots:
     void clickToLoadTemplate();
 
 private:
+    float mouse_x, mouse_y;
     int template_index;
     int global_i, global_j;
     int world[m+2][n+2];
@@ -58,9 +65,15 @@ private:
 protected:
     void initializeGL();
     void convCoordinates(int i, int j);
+    int conv_x_j(float x);
+    int conv_y_i(float y);
     void paintGL();
     void keyPressEvent(QKeyEvent *e);
-    void mousePressEvent(QMouseEvent *mouse);
+
+
+    void mouseMoveEvent(QMouseEvent *ev);
+    void mousePressEvent(QMouseEvent *ev);
+
     void run();
     void stop();
     void resizeGL(int w, int h);

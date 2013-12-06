@@ -1,8 +1,7 @@
 #include "GL/glu.h"
 #include <cmath>
 #include "gameoflife.h"
-#include <QDebug>
-#include <QtDebug>
+
 
 using namespace std;
 
@@ -168,11 +167,45 @@ void MyPanelOpenGL::convCoordinates(int i, int j) {
     y = static_cast<float>(1.0 - (2.0/m)*i);
 }
 
-void MyPanelOpenGL::mousePressEvent(QMouseEvent *mouse) {
-    switch(mouse->button() == Qt::LeftButton) {
-       //later on for clicking screen
-    }
+int MyPanelOpenGL::conv_x_j(float x) {
+    return (x + 1.0)*n/2;
 }
+
+int MyPanelOpenGL::conv_y_i(float y) {
+    return m - (y + 1.0)*m/2;
+}
+
+
+void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *ev) {
+    this->mouse_x = ev->screenPos().x();
+    this->mouse_y = ev->screenPos().y();
+    qDebug() << mouse_x << mouse_y;
+
+}
+//void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *ev)
+//{
+//    QPoint point = ev->screenPos();
+//    qDebug() << point.x();
+//}
+
+
+void MyPanelOpenGL::mousePressEvent(QMouseEvent *ev) {
+    switch(ev->button() == Qt::LeftButton) {
+        int j = conv_x_j(mouse_x);
+        int i = conv_y_i(mouse_y);
+        qDebug() << i << j;
+        if(world[i][j] == 0)
+            world[i][j] = 1;
+        else
+            world[i][j] = 0;
+    }
+    repaint();
+    updateGL();
+}
+
+
+
+
 
 void MyPanelOpenGL::changePointSize(int pSize)  //scroll bar is on ui
 {
@@ -206,6 +239,8 @@ void MyPanelOpenGL::keyPressEvent(QKeyEvent *e) {
     }
 
 }
+
+
 
 void MyPanelOpenGL::run()
 {
