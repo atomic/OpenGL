@@ -65,14 +65,12 @@ private:
 protected:
     void initializeGL();
     void convCoordinates(int i, int j);
-    int conv_x_j(float x);
-    int conv_y_i(float y);
+    int conv_x_j(int x);
+    int conv_y_i(int y);
     void paintGL();
     void keyPressEvent(QKeyEvent *e);
-
-
-    void mouseMoveEvent(QMouseEvent *ev);
-    void mousePressEvent(QMouseEvent *ev);
+    void mouseMoveEvent(QMouseEvent *e);
+    void mousePressEvent(QMouseEvent *e);
 
     void run();
     void stop();

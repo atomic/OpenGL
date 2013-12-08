@@ -103,8 +103,8 @@ void MyPanelOpenGL::clickToLoadInput() {
 
 void MyPanelOpenGL::clickToLoadTemplate() {
     int in_m, in_n;
-    in_m = global_i; qDebug() << in_m;
-    in_n = global_j; qDebug() << in_n;
+    in_m = global_i; //qDebug() << in_m;
+    in_n = global_j; //qDebug() << in_n;
     int row, col;
     ifstream fin;
     if (template_index == 1)
@@ -130,7 +130,7 @@ void MyPanelOpenGL::clickToLoadTemplate() {
     repaint();
     updateGL();
 }
-#include <iostream>
+
 void MyPanelOpenGL::clickToSave() {
     stop();
     write_World(world);
@@ -167,30 +167,18 @@ void MyPanelOpenGL::convCoordinates(int i, int j) {
     y = static_cast<float>(1.0 - (2.0/(m+1))*i);
 }
 
-int MyPanelOpenGL::conv_x_j(float x) {
-    return (x + 1.0)*n/2;
+//because the size of widget is set to 500x500
+//following conversion works
+//consider the extra wall
+int MyPanelOpenGL::conv_x_j(int x) {
+    return x/(500/n);
+}
+int MyPanelOpenGL::conv_y_i(int y) {
+    return y/(500/m);
 }
 
-int MyPanelOpenGL::conv_y_i(float y) {
-    return m - (y + 1.0)*m/2;
-}
-
-
-void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *ev) {
-    this->mouse_x = ev->screenPos().x();
-    this->mouse_y = ev->screenPos().y();
-    qDebug() << mouse_x << mouse_y;
-
-}
-//void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *ev)
-//{
-//    QPoint point = ev->screenPos();
-//    qDebug() << point.x();
-//}
-
-
-void MyPanelOpenGL::mousePressEvent(QMouseEvent *ev) {
-    switch(ev->button() == Qt::LeftButton) {
+void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
+    if (e->button() == Qt::LeftButton) {
         int j = conv_x_j(mouse_x);
         int i = conv_y_i(mouse_y);
         qDebug() << i << j;
@@ -203,9 +191,11 @@ void MyPanelOpenGL::mousePressEvent(QMouseEvent *ev) {
     updateGL();
 }
 
-
-
-
+void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *e) {
+      this->mouse_x = e->x();
+      this->mouse_y = e->y();
+      qDebug() << mouse_x << mouse_y;
+}
 
 void MyPanelOpenGL::changePointSize(int pSize)  //scroll bar is on ui
 {
@@ -214,7 +204,6 @@ void MyPanelOpenGL::changePointSize(int pSize)  //scroll bar is on ui
 
 void MyPanelOpenGL::changeSpeed(int v) {
     speed = static_cast<float>(v);
-//    qDebug() << " speed = " << speed;
     stop();
     run();
 }
