@@ -53,12 +53,7 @@ private:
     float r;
     float pSize;
     float x, y;
-    float glWidth;
-    float glHeight;
-    int   gridWidth;//size of array
-    int   gridHeight;//size of array
-    float boxHeight;
-    float boxWidth;
+    int global_gen;
     QTimer* timer;
 
 

@@ -38,8 +38,8 @@ void mirror_edges(int world[][n+2]) {
     }
 
 void reset(int world[][n+2]) {
-        for (int i = 1; i < m+1; ++i)
-            for (int j = 1; j < n+1; ++j)
+        for (int i = 0; i < m+2; ++i)
+            for (int j = 0; j < n+2; ++j)
                 world[i][j] = 0;
     }
 

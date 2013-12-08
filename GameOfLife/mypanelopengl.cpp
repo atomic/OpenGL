@@ -12,21 +12,9 @@ MyPanelOpenGL::MyPanelOpenGL(QWidget *parent) :
     setFocusPolicy(Qt::StrongFocus);
     timer=NULL;
 //    clickToLoadInput();
+    global_gen = 0;
     speed=100;
     r=92;
-}
-
-void MyPanelOpenGL::i_input(int i) {
-    global_i = i;
-}
-
-void MyPanelOpenGL::j_input(int j) {
-    global_j = j;
-}
-
-void MyPanelOpenGL::clickToChooseIndex(int index) {
-    template_index = index + 1;
-    qDebug() << template_index;
 }
 
 void MyPanelOpenGL::initializeGL() {
@@ -94,6 +82,92 @@ void MyPanelOpenGL::paintGL() {
 
     }
 }
+
+void MyPanelOpenGL::run()
+{
+    if(!timer)
+    {
+        timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()),
+                this, SLOT(process()));
+        timer->start(speed); //delay
+    }
+}
+
+void MyPanelOpenGL::stop() {
+    if(timer) {
+        delete timer;
+        timer = NULL;
+    }
+}
+
+void MyPanelOpenGL::process() {
+    global_gen++;
+    generate_World(world);
+    mirror_edges(world);
+    repaint(); //This is from GL library
+    updateGL(); //This is from library too
+}
+
+void MyPanelOpenGL::resizeGL(int width, int height) {
+    glViewport( 0, 0, (GLint)width,(GLint)height);
+    glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();   // Reset the camera
+    gluPerspective( 45.0f,
+                    (GLfloat)width/(GLfloat)height,
+                    1.0f,
+                    100.0f );
+}
+
+/* -------------- CONVERSION FUNCTIONS -------------- */
+
+void MyPanelOpenGL::convCoordinates(int i, int j) {
+    x = static_cast<float>(-1.0 + (2.0/(n+1))*j); //Int times float? Float?
+    y = static_cast<float>(1.0 - (2.0/(m+1))*i);
+}
+int MyPanelOpenGL::conv_x_j(int x) {
+    return x/( (this->geometry().bottomRight().x()) /n + 1) + 1;
+}
+int MyPanelOpenGL::conv_y_i(int y) {
+    return y/( (this->geometry().bottomRight().y()) / m + 1) + 1;
+}
+
+/* ------------------BELOW ARE ALL OF THE SLOTS INPUT---- */
+
+void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
+    if (e->button() == Qt::LeftButton) {
+        int j = conv_x_j(mouse_x);
+        int i = conv_y_i(mouse_y);
+        if(world[i][j] == 0)
+            world[i][j] = 1;
+        else
+            world[i][j] = 0;
+    }
+    repaint();
+    updateGL();
+}
+
+void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *e) {
+      this->mouse_x = e->x();
+      this->mouse_y = e->y();
+}
+
+void MyPanelOpenGL::i_input(int i) {
+    global_i = i;
+}
+
+void MyPanelOpenGL::j_input(int j) {
+    global_j = j;
+}
+
+void MyPanelOpenGL::clickToChooseIndex(int index) {
+    template_index = index + 1;
+//    qDebug() << template_index;
+}
+
+
+
+
 void MyPanelOpenGL::clickToLoadInput() {
     stop();
     load_World(world);
@@ -139,6 +213,7 @@ void MyPanelOpenGL::clickToSave() {
 void MyPanelOpenGL::clickToReset() {
     stop();
     reset(world);
+    global_gen = 0;
     repaint();
     updateGL();
 }
@@ -162,40 +237,6 @@ void MyPanelOpenGL::clickToStop() {
 }
 
 
-void MyPanelOpenGL::convCoordinates(int i, int j) {
-    x = static_cast<float>(-1.0 + (2.0/(n+1))*j); //Int times float? Float?
-    y = static_cast<float>(1.0 - (2.0/(m+1))*i);
-}
-
-//because the size of widget is set to 500x500
-//following conversion works
-//consider the extra wall
-int MyPanelOpenGL::conv_x_j(int x) {
-    return x/(500/n);
-}
-int MyPanelOpenGL::conv_y_i(int y) {
-    return y/(500/m);
-}
-
-void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
-    if (e->button() == Qt::LeftButton) {
-        int j = conv_x_j(mouse_x);
-        int i = conv_y_i(mouse_y);
-        qDebug() << i << j;
-        if(world[i][j] == 0)
-            world[i][j] = 1;
-        else
-            world[i][j] = 0;
-    }
-    repaint();
-    updateGL();
-}
-
-void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *e) {
-      this->mouse_x = e->x();
-      this->mouse_y = e->y();
-      qDebug() << mouse_x << mouse_y;
-}
 
 void MyPanelOpenGL::changePointSize(int pSize)  //scroll bar is on ui
 {
@@ -229,40 +270,3 @@ void MyPanelOpenGL::keyPressEvent(QKeyEvent *e) {
 
 }
 
-
-
-void MyPanelOpenGL::run()
-{
-    if(!timer)
-    {
-        timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()),
-                this, SLOT(process()));
-        timer->start(speed); //delay
-    }
-}
-
-void MyPanelOpenGL::stop() {
-    if(timer) {
-        delete timer;
-        timer = NULL;
-    }
-}
-
-void MyPanelOpenGL::process() {
-    generate_World(world);
-    mirror_edges(world);
-    repaint(); //This is from GL library
-    updateGL(); //This is from library too
-}
-
-
-void MyPanelOpenGL::resizeGL(int width, int height) {
-    glViewport( 0, 0, (GLint)width,(GLint)height);
-    glMatrixMode( GL_PROJECTION );
-    glLoadIdentity();   // Reset the camera
-    gluPerspective( 45.0f,
-                    (GLfloat)width/(GLfloat)height,
-                    1.0f,
-                    100.0f );
-}

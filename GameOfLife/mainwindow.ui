@@ -253,6 +253,16 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLCDNumber" name="lcdNumber">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>530</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -263,6 +273,7 @@
    <header location="global">mypanelopengl.h</header>
    <container>1</container>
    <slots>
+    <signal>countGeneration(int)</signal>
     <slot>changeColor(int)</slot>
     <slot>changePointSize(int)</slot>
     <slot>changeSpeed(int)</slot>
@@ -418,8 +429,8 @@
    <slot>clickToReset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>573</x>
-     <y>311</y>
+     <x>574</x>
+     <y>339</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -434,8 +445,8 @@
    <slot>clickToRun()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>583</x>
-     <y>344</y>
+     <x>584</x>
+     <y>372</y>
     </hint>
     <hint type="destinationlabel">
      <x>421</x>
@@ -450,8 +461,8 @@
    <slot>clickToStop()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>601</x>
-     <y>377</y>
+     <x>602</x>
+     <y>405</y>
     </hint>
     <hint type="destinationlabel">
      <x>419</x>
@@ -552,6 +563,22 @@
     <hint type="destinationlabel">
      <x>437</x>
      <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>countGeneration(int)</signal>
+   <receiver>lcdNumber</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>460</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>35</x>
+     <y>538</y>
     </hint>
    </hints>
   </connection>
