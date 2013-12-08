@@ -163,8 +163,8 @@ void MyPanelOpenGL::clickToStop() {
 
 
 void MyPanelOpenGL::convCoordinates(int i, int j) {
-    x = static_cast<float>(-1.0 + (2.0/n)*j); //Int times float? Float?
-    y = static_cast<float>(1.0 - (2.0/m)*i);
+    x = static_cast<float>(-1.0 + (2.0/(n+1))*j); //Int times float? Float?
+    y = static_cast<float>(1.0 - (2.0/(m+1))*i);
 }
 
 int MyPanelOpenGL::conv_x_j(float x) {
