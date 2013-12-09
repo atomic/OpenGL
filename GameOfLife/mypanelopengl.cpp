@@ -14,6 +14,7 @@ MyPanelOpenGL::MyPanelOpenGL(QWidget *parent) :
     timer=NULL;
 //    clickToLoadInput();
     global_gen = 0;
+    scribbling = false;
     SAVE_MAP_DISPLAY = false;
     SAVE_READY = false;
     dragSAVE = false;
@@ -154,6 +155,7 @@ int MyPanelOpenGL::conv_y_i(int y) {
 /* ------------------BELOW ARE ALL OF THE SLOTS INPUT---- */
 
 void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
+    scribbling = true;
     int j = conv_x_j(mouse_x);
     int i = conv_y_i(mouse_y);
     if (e->button() == Qt::LeftButton && e->modifiers() == Qt::ControlModifier) {
@@ -173,6 +175,7 @@ void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
     else if (e->button() == Qt::LeftButton && e->modifiers() == Qt::ShiftModifier) {
         template_i = i;
         template_j = j;
+        clickToLoadTemplate();
     }
     else if (e->button() == Qt::LeftButton) {
         if(world[i][j] == 0)
@@ -180,9 +183,8 @@ void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
         else
             world[i][j] = 0;
     }
-
-    qDebug() << savePos1_i << savePos1_j << savePos2_i << savePos2_j;
-    qDebug() << dragSAVE << SAVE_MAP_DISPLAY << "\n";
+//    qDebug() << savePos1_i << savePos1_j << savePos2_i << savePos2_j;
+//    qDebug() << dragSAVE << SAVE_MAP_DISPLAY << "\n";
     repaint();
     updateGL();
     SAVE_MAP_DISPLAY = false;
@@ -191,6 +193,29 @@ void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
 void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *e) {
       this->mouse_x = e->x();
       this->mouse_y = e->y();
+
+    if ((e->buttons() & Qt::LeftButton) && scribbling) {
+        int j = conv_x_j(mouse_x);
+        int i = conv_y_i(mouse_y);
+        if(temp_i != i || temp_j != j) {
+            if(world[i][j] == 0)
+                world[i][j] = 1;
+            else
+                world[i][j] = 0;
+            repaint();
+            updateGL();
+            temp_i = i;
+            temp_j = j;
+        }
+
+    }
+}
+
+void MyPanelOpenGL::mouseReleaseEvent(QMouseEvent *e)
+{
+    if (e->button() == Qt::LeftButton && scribbling) {
+        scribbling = false;
+    }
 }
 
 void MyPanelOpenGL::i_input(int i) {
@@ -324,3 +349,13 @@ void MyPanelOpenGL::keyPressEvent(QKeyEvent *e) {
 
 }
 
+/* KEYS
+ * Right : Next Gen
+ * Left : Random
+ * Down : Run
+ * Up : Stop
+ *
+ * HOLD CONTROL + CLICK : Pattern Mapping
+ * HOLD Shift + Click : Set Coordinate for Next Spawn
+ *
+ */

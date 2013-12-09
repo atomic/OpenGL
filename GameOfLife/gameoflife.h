@@ -57,13 +57,13 @@ void write_World(const int world[][n+2]) {
     }
 
 int save_pattern(int world[][n+2], int first_i, int first_j, int second_i, int second_j) {
-    int n = second_j - first_j;
-    int m = second_i - first_i;
+    int n = second_j - first_j + 1;
+    int m = second_i - first_i + 1;
     ofstream fout;
     fout.open("saved_pattern.txt");
     fout << m << " " << n << " \n";
-    for (int i = first_i; i < second_i; ++i) {
-        for (int j = first_j; j < second_j; ++j)
+    for (int i = first_i; i < second_i + 1; ++i) {
+        for (int j = first_j; j < second_j + 1; ++j)
             fout << world[i][j] << " ";
         fout << endl;
     }

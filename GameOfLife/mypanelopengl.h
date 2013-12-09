@@ -54,14 +54,15 @@ private:
     bool SAVE_READY;
     bool SAVE_MAP_DISPLAY;
     bool dragSAVE;
+    bool scribbling;
     int savePos1_i, savePos1_j,savePos2_i, savePos2_j;
     float mouse_x, mouse_y;
     int template_index;
     int template_i, template_j;
     int world[m+2][n+2];
     float speed;
+    int temp_i, temp_j;
     float r;
-    float pSize;
     float x, y;
     int global_gen;
     QTimer* timer;
@@ -76,6 +77,7 @@ protected:
     void keyPressEvent(QKeyEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
     void mousePressEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
 
     void run();
     void stop();
