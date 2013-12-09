@@ -18,7 +18,7 @@ void generate_World(int world[][n+2]);
 void load_World(int world[][n+2]);
 void write_World(const int world[][n+2]);
 int life_Or_Death(int world[][n+2], int row, int col);
-int save_pattern(int world[][n+2], int first_i, int first_j, int second_i, int second_j);
+void save_pattern(int world[][n+2], int first_i, int first_j, int second_i, int second_j);
 
 
 using namespace std;
@@ -56,7 +56,7 @@ void write_World(const int world[][n+2]) {
         fout.close();
     }
 
-int save_pattern(int world[][n+2], int first_i, int first_j, int second_i, int second_j) {
+void save_pattern(int world[][n+2], int first_i, int first_j, int second_i, int second_j) {
     int n = second_j - first_j + 1;
     int m = second_i - first_i + 1;
     ofstream fout;

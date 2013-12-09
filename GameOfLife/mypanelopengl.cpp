@@ -123,6 +123,7 @@ void MyPanelOpenGL::stop() {
 
 void MyPanelOpenGL::process() {
     global_gen++;
+    SAVE_READY = false;
     generate_World(world);
     mirror_edges(world);
     repaint(); //This is from GL library
@@ -176,12 +177,14 @@ void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
         template_i = i;
         template_j = j;
         clickToLoadTemplate();
+        SAVE_READY = false;
     }
     else if (e->button() == Qt::LeftButton) {
         if(world[i][j] == 0)
             world[i][j] = 1;
         else
             world[i][j] = 0;
+        SAVE_READY = false;
     }
 //    qDebug() << savePos1_i << savePos1_j << savePos2_i << savePos2_j;
 //    qDebug() << dragSAVE << SAVE_MAP_DISPLAY << "\n";
