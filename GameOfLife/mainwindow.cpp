@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox->addItem("Ten");
     ui->comboBox->addItem("Spaceship");
     ui->comboBox->addItem("Glidergun");
+    ui->comboBox->addItem("Saved Pattern");
 }
 
 MainWindow::~MainWindow()

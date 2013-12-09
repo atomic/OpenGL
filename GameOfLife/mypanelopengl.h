@@ -10,6 +10,7 @@
 #include <QMouseEvent>
 #include <QPoint>
 #include <QEvent>
+#include <QMessageBox>
 
 //#include "gameoflife.h" cannot do this,
 //    mypanelopengl.cpp include both m and n from .h already.
@@ -25,7 +26,10 @@ public:
     explicit MyPanelOpenGL(QWidget *parent = 0);
     
 signals:
-    
+    void countGeneration(int c);
+    void template_display_i(int i);
+    void template_display_j(int j);
+
 private slots:
     void process();
 
@@ -43,11 +47,17 @@ public slots:
     void j_input(int j);
     void clickToChooseIndex(int index);
     void clickToLoadTemplate();
+    void clickToSavePattern();
 
 private:
+    QMessageBox messageBox;
+    bool SAVE_READY;
+    bool SAVE_MAP_DISPLAY;
+    bool dragSAVE;
+    int savePos1_i, savePos1_j,savePos2_i, savePos2_j;
     float mouse_x, mouse_y;
     int template_index;
-    int global_i, global_j;
+    int template_i, template_j;
     int world[m+2][n+2];
     float speed;
     float r;

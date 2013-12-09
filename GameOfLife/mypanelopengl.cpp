@@ -3,6 +3,7 @@
 #include "gameoflife.h"
 
 
+
 using namespace std;
 
 
@@ -13,6 +14,9 @@ MyPanelOpenGL::MyPanelOpenGL(QWidget *parent) :
     timer=NULL;
 //    clickToLoadInput();
     global_gen = 0;
+    SAVE_MAP_DISPLAY = false;
+    SAVE_READY = false;
+    dragSAVE = false;
     speed=100;
     r=92;
 }
@@ -81,6 +85,21 @@ void MyPanelOpenGL::paintGL() {
         }
 
     }
+    if(SAVE_MAP_DISPLAY) {
+        for (int i = savePos1_i; i < savePos2_i + 1; ++i) {
+            for (int j = savePos1_j; j < savePos2_j + 1; ++j) {
+                convCoordinates(i,j);
+                if (world[i][j] == 1)
+                    glColor3f(0.0f, 1.0f, 0.5f);
+                else
+                    glColor3f(0.824f, 0.412f, 0.118f);
+                glBegin(GL_POINTS);
+                    glVertex2f(x,y);
+                glEnd();
+            }
+        }
+    }
+                
 }
 
 void MyPanelOpenGL::run()
@@ -135,16 +154,38 @@ int MyPanelOpenGL::conv_y_i(int y) {
 /* ------------------BELOW ARE ALL OF THE SLOTS INPUT---- */
 
 void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
-    if (e->button() == Qt::LeftButton) {
-        int j = conv_x_j(mouse_x);
-        int i = conv_y_i(mouse_y);
+    int j = conv_x_j(mouse_x);
+    int i = conv_y_i(mouse_y);
+    if (e->button() == Qt::LeftButton && e->modifiers() == Qt::ControlModifier) {
+        if (!dragSAVE) {
+            savePos1_i = i;
+            savePos1_j = j;
+            dragSAVE = true;
+        }
+        else {
+            savePos2_i = i;
+            savePos2_j = j;
+            dragSAVE = false;
+            SAVE_MAP_DISPLAY = true;
+            SAVE_READY = true;
+        }
+    }
+    else if (e->button() == Qt::LeftButton && e->modifiers() == Qt::ShiftModifier) {
+        template_i = i;
+        template_j = j;
+    }
+    else if (e->button() == Qt::LeftButton) {
         if(world[i][j] == 0)
             world[i][j] = 1;
         else
             world[i][j] = 0;
     }
+
+    qDebug() << savePos1_i << savePos1_j << savePos2_i << savePos2_j;
+    qDebug() << dragSAVE << SAVE_MAP_DISPLAY << "\n";
     repaint();
     updateGL();
+    SAVE_MAP_DISPLAY = false;
 }
 
 void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *e) {
@@ -153,11 +194,11 @@ void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *e) {
 }
 
 void MyPanelOpenGL::i_input(int i) {
-    global_i = i;
+    template_i = i;
 }
 
 void MyPanelOpenGL::j_input(int j) {
-    global_j = j;
+    template_j = j;
 }
 
 void MyPanelOpenGL::clickToChooseIndex(int index) {
@@ -177,8 +218,8 @@ void MyPanelOpenGL::clickToLoadInput() {
 
 void MyPanelOpenGL::clickToLoadTemplate() {
     int in_m, in_n;
-    in_m = global_i; //qDebug() << in_m;
-    in_n = global_j; //qDebug() << in_n;
+    in_m = template_i; //qDebug() << in_m;
+    in_n = template_j; //qDebug() << in_n;
     int row, col;
     ifstream fin;
     if (template_index == 1)
@@ -195,6 +236,8 @@ void MyPanelOpenGL::clickToLoadTemplate() {
         fin.open("spaceship.txt");
     else if (template_index == 7)
         fin.open("glidergun.txt");
+    else if (template_index == 8)
+        fin.open("saved_pattern.txt");
     fin >> row;
     fin >> col;
     for (int i = in_m; i < in_m + row; ++i)
@@ -203,6 +246,17 @@ void MyPanelOpenGL::clickToLoadTemplate() {
     fin.close();
     repaint();
     updateGL();
+}
+
+void MyPanelOpenGL::clickToSavePattern()
+{
+    if(SAVE_READY)
+        save_pattern(world,savePos1_i, savePos1_j,savePos2_i, savePos2_j);
+    else {
+        messageBox.critical(0,"Pattern","Please select area to save.");
+        messageBox.setFixedSize(500,200);
+    }
+    SAVE_READY = false;
 }
 
 void MyPanelOpenGL::clickToSave() {
