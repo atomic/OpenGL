@@ -19,6 +19,7 @@ void load_World(int world[][n+2]);
 void write_World(const int world[][n+2]);
 int life_Or_Death(int world[][n+2], int row, int col);
 void save_pattern(int world[][n+2], int first_i, int first_j, int second_i, int second_j);
+void smoothen_Edges(int world[][n+2]);
 
 
 using namespace std;
@@ -36,6 +37,18 @@ void mirror_edges(int world[][n+2]) {
         world[0][n+1] = world[m][1];
         world[m+1][0] = world[1][n];
         world[m+1][n+1] = world[1][1];
+    }
+
+void smoothen_Edges(int world[][n+2])
+    {
+        for (int j = 0; j < n + 2; ++j)
+            world[0][j] = 0;
+        for (int j = 0; j < n + 2; ++j)
+            world[m+1][j] = 0;
+        for (int i = 0; i < m + 2; ++i)
+            world[i][0] = 0;
+        for (int i = 0; i < m + 2; ++i)
+            world[i][n+1] = 0;
     }
 
 void reset(int world[][n+2]) {

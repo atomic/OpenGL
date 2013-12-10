@@ -13,9 +13,11 @@ MyPanelOpenGL::MyPanelOpenGL(QWidget *parent) :
     setFocusPolicy(Qt::StrongFocus);
     timer=NULL;
 //    clickToLoadInput();
+    isRUN = false;
     global_gen = 0;
     scribbling = false;
     SAVE_MAP_DISPLAY = false;
+    CIRCULAR = true;
     SAVE_READY = false;
     dragSAVE = false;
     speed=100;
@@ -125,7 +127,10 @@ void MyPanelOpenGL::process() {
     global_gen++;
     SAVE_READY = false;
     generate_World(world);
-    mirror_edges(world);
+    if(CIRCULAR == true)
+        mirror_edges(world);
+    else
+        smoothen_Edges(world);
     repaint(); //This is from GL library
     updateGL(); //This is from library too
 }
@@ -161,6 +166,7 @@ void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
     int i = conv_y_i(mouse_y);
     if (e->button() == Qt::LeftButton && e->modifiers() == Qt::ControlModifier) {
         if (!dragSAVE) {
+            stop();
             savePos1_i = i;
             savePos1_j = j;
             dragSAVE = true;
@@ -266,30 +272,41 @@ void MyPanelOpenGL::clickToLoadTemplate() {
         fin.open("glidergun.txt");
     else if (template_index == 8)
         fin.open("saved_pattern.txt");
-    fin >> row;
-    fin >> col;
-    for (int i = in_m; i < in_m + row; ++i)
-        for (int j = in_n; j < in_n + col; ++j)
-            fin >> world[i][j];
-    fin.close();
-    repaint();
-    updateGL();
+    if (!fin.is_open())
+        messageBox.critical(0,"Warning,","File does not exist.");
+    else {
+        fin >> row;
+        fin >> col;
+        for (int i = in_m; i < in_m + row; ++i)
+            for (int j = in_n; j < in_n + col; ++j)
+                fin >> world[i][j];
+        fin.close();
+        repaint();
+        updateGL();
+    }
 }
 
 void MyPanelOpenGL::clickToSavePattern()
 {
-    if(SAVE_READY)
+    if(SAVE_READY) {
         save_pattern(world,savePos1_i, savePos1_j,savePos2_i, savePos2_j);
+        messageBox.about(0,"Success","Pattern saved to \"saved_pattern.txt\"");
+    }
     else {
-        messageBox.critical(0,"Pattern","Please select area to save.");
-        messageBox.setFixedSize(500,200);
+        messageBox.critical(0,"Notification","Please select area to save.");
     }
     SAVE_READY = false;
+}
+
+void MyPanelOpenGL::checkCircular(bool circular)
+{
+    CIRCULAR = circular;
 }
 
 void MyPanelOpenGL::clickToSave() {
     stop();
     write_World(world);
+    messageBox.about(0,"Success","The world is saved on \"input.txt\"");
 }
 
 void MyPanelOpenGL::clickToReset() {
@@ -342,11 +359,39 @@ void MyPanelOpenGL::keyPressEvent(QKeyEvent *e) {
         random_World(world);
         process();
         break;
-    case Qt::Key_Down: //run when its pressed
-        run();
+    case Qt::Key_Up: //run when its pressed
+        if(speed > 0) {
+            speed -= 2;
+            changeSpeed(speed);
+        }
         break;
-    case Qt::Key_Up: //stops when released
-        stop();
+    case Qt::Key_Down: //stops when released
+        if(speed < 200) {
+            speed += 2;
+            changeSpeed(speed);
+        }
+        break;
+    case Qt::Key_Space:
+        if(!isRUN) {
+            run();
+            isRUN = true;
+        }
+        else {
+            stop();
+            isRUN = false;
+        }
+        break;
+    case Qt::Key_Escape:
+        clickToReset();
+        break;
+    case Qt::Key_S:
+        if(e->modifiers() == Qt::ControlModifier)
+            clickToSave();
+        else
+            clickToSavePattern();
+        break;
+    case Qt::Key_L:
+        clickToLoadInput();
         break;
     }
 
@@ -357,7 +402,7 @@ void MyPanelOpenGL::keyPressEvent(QKeyEvent *e) {
  * Left : Random
  * Down : Run
  * Up : Stop
- *
+ * Space : Run/Stop
  * HOLD CONTROL + CLICK : Pattern Mapping
  * HOLD Shift + Click : Set Coordinate for Next Spawn
  *

@@ -48,13 +48,16 @@ public slots:
     void clickToChooseIndex(int index);
     void clickToLoadTemplate();
     void clickToSavePattern();
+    void checkCircular(bool circular);
 
 private:
     QMessageBox messageBox;
+    bool isRUN;
     bool SAVE_READY;
     bool SAVE_MAP_DISPLAY;
     bool dragSAVE;
     bool scribbling;
+    bool CIRCULAR;
     int savePos1_i, savePos1_j,savePos2_i, savePos2_j;
     float mouse_x, mouse_y;
     int template_index;

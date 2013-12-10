@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>627</width>
+    <width>666</width>
     <height>566</height>
    </rect>
   </property>
@@ -32,250 +32,14 @@
     <property name="mouseTracking">
      <bool>true</bool>
     </property>
-    <zorder></zorder>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>410</y>
-      <width>71</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QSlider" name="verticalSlider_2">
-       <property name="minimum">
-        <number>0</number>
-       </property>
-       <property name="maximum">
-        <number>200</number>
-       </property>
-       <property name="singleStep">
-        <number>1</number>
-       </property>
-       <property name="pageStep">
-        <number>50</number>
-       </property>
-       <property name="value">
-        <number>100</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TicksAbove</enum>
-       </property>
-       <property name="tickInterval">
-        <number>10</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSlider" name="verticalSlider">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimum">
-        <number>50</number>
-       </property>
-       <property name="maximum">
-        <number>120</number>
-       </property>
-       <property name="value">
-        <number>50</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>530</y>
-      <width>16</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>v</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>569</x>
-      <y>530</y>
-      <width>20</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>P</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>180</y>
-      <width>104</width>
-      <height>228</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QPushButton" name="pushButton_10">
-       <property name="text">
-        <string>Save Pattern</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_8">
-       <property name="text">
-        <string>Save World</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_3">
-       <property name="text">
-        <string>Randomize</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>NextGen</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_5">
-       <property name="text">
-        <string>Save World</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_4">
-       <property name="text">
-        <string>Reset World</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_6">
-       <property name="text">
-        <string>Run</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_7">
-       <property name="text">
-        <string>Stop</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>80</y>
-      <width>101</width>
-      <height>62</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QComboBox" name="comboBox"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_9">
-       <property name="text">
-        <string>Summon</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>521</y>
-      <width>51</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>150</y>
-      <width>102</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QSpinBox" name="i_box"/>
-     </item>
-     <item>
-      <widget class="QSpinBox" name="j_box"/>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>10</y>
-      <width>91</width>
-      <height>54</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_6">
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>Load Input</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="quitButton">
-       <property name="text">
-        <string>Quit</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
+      <x>15</x>
       <y>510</y>
-      <width>451</width>
-      <height>42</height>
+      <width>501</width>
+      <height>46</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -286,14 +50,14 @@
          <item>
           <widget class="QLabel" name="label_4">
            <property name="text">
-            <string>Up: Stop</string>
+            <string>Space: Run/Stop</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>Down: Run  </string>
+            <string>Up/Down: Speed</string>
            </property>
           </widget>
          </item>
@@ -356,6 +120,209 @@
      </item>
     </layout>
    </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>467</y>
+      <width>151</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>           Sliders</string>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>v</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="verticalSlider_2">
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="maximum">
+          <number>200</number>
+         </property>
+         <property name="singleStep">
+          <number>1</number>
+         </property>
+         <property name="pageStep">
+          <number>50</number>
+         </property>
+         <property name="value">
+          <number>100</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="invertedAppearance">
+          <bool>false</bool>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksAbove</enum>
+         </property>
+         <property name="tickInterval">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>P</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="verticalSlider">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimum">
+          <number>50</number>
+         </property>
+         <property name="maximum">
+          <number>120</number>
+         </property>
+         <property name="value">
+          <number>50</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>502</x>
+      <y>2</y>
+      <width>141</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="quitButton">
+       <property name="text">
+        <string>Quit</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>(L)oad Input</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox">
+       <property name="text">
+        <string>Circular</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>501</x>
+      <y>137</y>
+      <width>148</width>
+      <height>328</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QSpinBox" name="j_box"/>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="i_box"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_9">
+       <property name="text">
+        <string>Summon</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="text">
+        <string>(Space)Run</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_10">
+       <property name="text">
+        <string>(S)ave Pattern</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_7">
+       <property name="text">
+        <string>(Space)Stop</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>(&lt;--)Randomize</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>(--&gt;)NextGen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>(Esc)Reset World</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_8">
+       <property name="text">
+        <string>(Ctrl+S)ave World</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -385,6 +352,7 @@
     <slot>clickToChooseIndex(int)</slot>
     <slot>clickToLoadTemplate()</slot>
     <slot>clickToSavePattern()</slot>
+    <slot>checkCircular(bool)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -397,8 +365,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>576</x>
-     <y>24</y>
+     <x>577</x>
+     <y>40</y>
     </hint>
     <hint type="destinationlabel">
      <x>433</x>
@@ -429,12 +397,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>587</x>
-     <y>538</y>
+     <x>616</x>
+     <y>555</y>
     </hint>
     <hint type="destinationlabel">
-     <x>536</x>
-     <y>526</y>
+     <x>581</x>
+     <y>552</y>
     </hint>
    </hints>
   </connection>
@@ -446,7 +414,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>550</x>
-     <y>469</y>
+     <y>486</y>
     </hint>
     <hint type="destinationlabel">
      <x>472</x>
@@ -462,11 +430,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>550</x>
-     <y>474</y>
+     <y>491</y>
     </hint>
     <hint type="destinationlabel">
-     <x>571</x>
-     <y>524</y>
+     <x>525</x>
+     <y>550</y>
     </hint>
    </hints>
   </connection>
@@ -477,8 +445,8 @@
    <slot>clickToRandomize()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>532</x>
-     <y>244</y>
+     <x>511</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -493,8 +461,8 @@
    <slot>clickToGenerate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>558</x>
-     <y>274</y>
+     <x>537</x>
+     <y>273</y>
     </hint>
     <hint type="destinationlabel">
      <x>484</x>
@@ -509,8 +477,8 @@
    <slot>clickToLoadInput()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>566</x>
-     <y>63</y>
+     <x>567</x>
+     <y>19</y>
     </hint>
     <hint type="destinationlabel">
      <x>499</x>
@@ -525,8 +493,8 @@
    <slot>clickToReset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>575</x>
-     <y>334</y>
+     <x>556</x>
+     <y>329</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -541,8 +509,8 @@
    <slot>clickToRun()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>585</x>
-     <y>366</y>
+     <x>566</x>
+     <y>362</y>
     </hint>
     <hint type="destinationlabel">
      <x>421</x>
@@ -557,8 +525,8 @@
    <slot>clickToStop()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>603</x>
-     <y>398</y>
+     <x>584</x>
+     <y>395</y>
     </hint>
     <hint type="destinationlabel">
      <x>419</x>
@@ -573,8 +541,8 @@
    <slot>clickToSave()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>583</x>
-     <y>213</y>
+     <x>562</x>
+     <y>205</y>
     </hint>
     <hint type="destinationlabel">
      <x>373</x>
@@ -589,28 +557,12 @@
    <slot>i_input(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>539</x>
-     <y>161</y>
+     <x>593</x>
+     <y>162</y>
     </hint>
     <hint type="destinationlabel">
      <x>437</x>
      <y>322</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_5</sender>
-   <signal>clicked()</signal>
-   <receiver>widget</receiver>
-   <slot>clickToSave()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>608</x>
-     <y>307</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>406</x>
-     <y>255</y>
     </hint>
    </hints>
   </connection>
@@ -621,8 +573,8 @@
    <slot>j_input(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>602</x>
-     <y>163</y>
+     <x>547</x>
+     <y>154</y>
     </hint>
     <hint type="destinationlabel">
      <x>469</x>
@@ -637,8 +589,8 @@
    <slot>clickToChooseIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>580</x>
-     <y>104</y>
+     <x>560</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>476</x>
@@ -653,28 +605,12 @@
    <slot>clickToLoadTemplate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>598</x>
+     <x>578</x>
      <y>130</y>
     </hint>
     <hint type="destinationlabel">
      <x>437</x>
      <y>122</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>widget</sender>
-   <signal>countGeneration(int)</signal>
-   <receiver>lcdNumber</receiver>
-   <slot>display(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>92</x>
-     <y>460</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>35</x>
-     <y>538</y>
     </hint>
    </hints>
   </connection>
@@ -689,8 +625,8 @@
      <y>165</y>
     </hint>
     <hint type="destinationlabel">
-     <x>533</x>
-     <y>158</y>
+     <x>587</x>
+     <y>159</y>
     </hint>
    </hints>
   </connection>
@@ -705,8 +641,8 @@
      <y>178</y>
     </hint>
     <hint type="destinationlabel">
-     <x>619</x>
-     <y>163</y>
+     <x>547</x>
+     <y>154</y>
     </hint>
    </hints>
   </connection>
@@ -718,11 +654,27 @@
    <hints>
     <hint type="sourcelabel">
      <x>528</x>
-     <y>189</y>
+     <y>188</y>
     </hint>
     <hint type="destinationlabel">
      <x>310</x>
      <y>365</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>widget</receiver>
+   <slot>checkCircular(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>543</x>
+     <y>71</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>479</x>
+     <y>50</y>
     </hint>
    </hints>
   </connection>
