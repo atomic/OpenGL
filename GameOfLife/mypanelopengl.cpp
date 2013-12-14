@@ -88,6 +88,21 @@ void MyPanelOpenGL::paintGL() {
         }
 
     }
+    if(dragSAVE) {
+        convCoordinates(savePos1_i,savePos1_j);
+        glColor3f(0.000f, 0.749f, 1.00f);
+        glBegin(GL_POINTS);
+            convCoordinates(savePos1_i+1,savePos1_j);
+            glVertex2f(x,y);
+            convCoordinates(savePos1_i-1,savePos1_j);
+            glVertex2f(x,y);
+            convCoordinates(savePos1_i,savePos1_j+1);
+            glVertex2f(x,y);
+            convCoordinates(savePos1_i,savePos1_j-1);
+            glVertex2f(x,y);
+        glEnd();
+
+    }
     if(SAVE_MAP_DISPLAY) {
         for (int i = savePos1_i; i < savePos2_i + 1; ++i) {
             for (int j = savePos1_j; j < savePos2_j + 1; ++j) {
@@ -125,7 +140,6 @@ void MyPanelOpenGL::stop() {
 
 void MyPanelOpenGL::process() {
     global_gen++;
-    SAVE_READY = false;
     generate_World(world);
     if(CIRCULAR == true)
         mirror_edges(world);
@@ -192,11 +206,15 @@ void MyPanelOpenGL::mousePressEvent(QMouseEvent *e) {
             world[i][j] = 0;
         SAVE_READY = false;
     }
+    else if (e->button() == Qt::RightButton) {
+        SAVE_MAP_DISPLAY = false;
+        dragSAVE = false;
+        SAVE_READY = false;
+    }
 //    qDebug() << savePos1_i << savePos1_j << savePos2_i << savePos2_j;
 //    qDebug() << dragSAVE << SAVE_MAP_DISPLAY << "\n";
     repaint();
     updateGL();
-    SAVE_MAP_DISPLAY = false;
 }
 
 void MyPanelOpenGL::mouseMoveEvent(QMouseEvent *e) {
@@ -296,6 +314,7 @@ void MyPanelOpenGL::clickToSavePattern()
         messageBox.critical(0,"Notification","Please select area to save.");
     }
     SAVE_READY = false;
+    SAVE_MAP_DISPLAY = false;
 }
 
 void MyPanelOpenGL::checkCircular(bool circular)

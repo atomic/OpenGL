@@ -54,7 +54,7 @@ private:
     QMessageBox messageBox;
     bool isRUN;
     bool SAVE_READY;
-    bool SAVE_MAP_DISPLAY;
+    bool SAVE_MAP_DISPLAY;      //whether MAP is ready to save
     bool dragSAVE;
     bool scribbling;
     bool CIRCULAR;
