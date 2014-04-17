@@ -6,12 +6,11 @@ MyWindow::MyWindow()
     saveButton = new QPushButton("save");
     loadButton = new QPushButton("load");
 
-
     QHBoxLayout *buttonLayout = new QHBoxLayout;
     buttonLayout->addWidget(exitButton);
     buttonLayout->addWidget(saveButton);
     buttonLayout->addWidget(loadButton);
-
+    buttonLayout->addWidget(canvas);
 
     setLayout(buttonLayout);
 

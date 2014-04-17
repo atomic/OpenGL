@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <iostream>
+#include "glwidget.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ private:
     QPushButton *exitButton;
     QPushButton *saveButton;
     QPushButton *loadButton;
+    glWidget *canvas;
+
 
 };
 
