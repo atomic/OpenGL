@@ -6,16 +6,15 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    //I . Making window
     QApplication app(argc,argv);
     MyWindow window;
     window.show();
 
-//    II. Drawing
 //    glWidget canvas;
 //    canvas.show();
 
 
 
     return app.exec();
+    return 0;
 }

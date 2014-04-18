@@ -6,12 +6,16 @@ TEMPLATE = app
 #CONFIG -= app_bundle
 #CONFIG -= qt
 
-SOURCES += main.cpp \
-    glwidget.cpp \
-    mywindow.cpp
-
 HEADERS += \
     mywindow.h \
-    glwidget.h
+    glwidget.h \
+    polygon.h \
+    coordinate.h \
+    vertices.h
+
+SOURCES += main.cpp \
+    mywindow.cpp \
+    glwidget.cpp \
+    polygon.cpp \
 
 

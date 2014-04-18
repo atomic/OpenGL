@@ -1,12 +1,14 @@
 #ifndef MYWINDOW_H
 #define MYWINDOW_H
+
 #include <QtWidgets>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <iostream>
+using namespace std;
+
 #include "glwidget.h"
 
-using namespace std;
 
 class MyWindow : public QWidget
 {
@@ -14,9 +16,14 @@ class MyWindow : public QWidget
 public:
     MyWindow();
 signals:
-    void saveSignal();
+    void saveSignal(); //function without codes
+    void actionSignal();
+    void loadSignal();
+
 public slots:
     void Save();
+    void Load();
+    void Action();
 private:
     QPushButton *exitButton;
     QPushButton *saveButton;
