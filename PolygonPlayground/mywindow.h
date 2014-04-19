@@ -25,6 +25,8 @@ public slots:
     void Load();
     void Action();
 private:
+    QSlider *radiusSlider;
+    QPushButton *colorButton;
     QPushButton *exitButton;
     QPushButton *saveButton;
     QPushButton *loadButton;
