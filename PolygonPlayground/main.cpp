@@ -2,7 +2,6 @@
 using namespace std;
 #include  <QApplication>
 #include  "mywindow.h"
-//#include "glwidget.h"
 
 int main(int argc, char **argv)
 {

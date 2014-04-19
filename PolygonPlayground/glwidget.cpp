@@ -6,21 +6,16 @@ glWidget::glWidget()
 
 void glWidget::paintGL()
 {
-    //using QList to store polygon objects
-    vertices boxCorner(4);
-    boxCorner[0] = coor2(-7.5,-7.5);
-    boxCorner[1] = coor2(-7.5, 7.5);
-    boxCorner[2] = coor2( 7.5, 7.5);
-    boxCorner[3] = coor2( 7.5,-7.5);
-    PolygonObjects.append(Polygon(boxCorner));
-
+    PolyBots << QPolygonF(); //this add new QPolygonF , dynamic?
+    PolyBots[0] << QPointF(-0.5,-0.5)
+                << QPointF(-0.7,0.5)
+                << QPointF(0.5,0.5)
+                << QPointF(0.5,-0.5);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(0.3,0.1,0.4);
     glBegin(GL_QUADS);
-        glVertex3f(boxCorner[0].x,boxCorner[0].y,0);
-        glVertex3f(boxCorner[1].x,boxCorner[1].y,0);
-        glVertex3f(boxCorner[2].x,boxCorner[2].y,0);
-        glVertex3f(boxCorner[3].x,boxCorner[3].y,0);
+       for (int i = 0; i < 4; ++i)
+            glVertex3f(PolyBots[0][i].x(),PolyBots[0][i].y(),0);
     glEnd();
 }
 

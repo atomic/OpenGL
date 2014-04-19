@@ -1,12 +1,12 @@
 #ifndef MYWINDOW_H
 #define MYWINDOW_H
 
-#include <QtWidgets>
-#include <QPushButton>
-#include <QHBoxLayout>
 #include <iostream>
 using namespace std;
 
+#include <QtWidgets>
+#include <QPushButton>
+#include <QHBoxLayout>
 #include "glwidget.h"
 
 

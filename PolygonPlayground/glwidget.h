@@ -5,14 +5,15 @@ using namespace std;
 
 #include <QGLWidget>
 #include <QList>
-#include "polygon.h"
+#include <QPolygonF>
 
 class glWidget : public QGLWidget
 {
     Q_OBJECT
 public:
     glWidget();
-    QList<Polygon> PolygonObjects;
+private:
+    QList<QPolygonF> PolyBots;
 
 public slots:
     void paintGL();
