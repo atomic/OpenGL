@@ -22,11 +22,13 @@ class glWidget : public QGLWidget
     Q_OBJECT
 public:
     explicit glWidget(QWidget *parent = 0);
+
 private:
     QList<Polygon> PolyBots; // polygon is inherited from QPolygonF
     QVector<float> colorComb;
     QTimer* timer;
     QPointF ScreenPos;
+    bool isRotate;
 
 protected:
     void paintGL();
@@ -35,6 +37,7 @@ protected:
 
 public slots:
     void addPolygon();
+    void changeRotate();
     void changeAllColor();
     void next();
     void Run();

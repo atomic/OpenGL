@@ -9,6 +9,7 @@ MyWindow::MyWindow()
     addButton = new QPushButton("Summon");
     polygonCount = new QLabel("0");
     radiusSlider = new QSlider(Qt::Horizontal);
+    checkRotate = new QCheckBox("Rotate");
 
     canvas = new glWidget;
 
@@ -20,6 +21,8 @@ MyWindow::MyWindow()
     buttonLayout->addWidget(colorButton);
     buttonLayout->addWidget(radiusSlider);
     buttonLayout->addWidget(polygonCount);
+    buttonLayout->addWidget(checkRotate);
+
 
     QVBoxLayout* overall = new QVBoxLayout;
     overall->addWidget(canvas);
@@ -28,6 +31,8 @@ MyWindow::MyWindow()
     setLayout(overall);
 //    connect(radiusSlider, SIGNAL(valueChanged(int)),
 //                                 this, SLOT(canvas->PolyBots))
+    connect(checkRotate, SIGNAL(clicked(bool)),
+            canvas, SLOT(changeRotate()) );
     connect(addButton, SIGNAL(clicked()),
             canvas, SLOT(addPolygon()));
     connect(addButton, SIGNAL(clicked()),

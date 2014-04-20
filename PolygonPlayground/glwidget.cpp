@@ -3,6 +3,7 @@
 glWidget::glWidget(QWidget *parent) :
     QGLWidget(parent)
 {
+    isRotate = false;
     timer=NULL;
 }
 
@@ -32,7 +33,7 @@ void glWidget::paintGL()
         glColor3f(PolyBots[n].color[0],PolyBots[n].color[1],PolyBots[n].color[2]);
         glBegin(GL_POLYGON);
         for (int i = 0; i < PolyBots[n].size(); ++i)
-            glVertex3f(PolyBots[n][i].x(),PolyBots[n][i].y(),n);
+            glVertex3f(PolyBots[n][i].x(),PolyBots[n][i].y(),0);
         glEnd();
     }
 }
@@ -52,13 +53,19 @@ void glWidget::resizeGL(int width, int height)
 void glWidget::addPolygon()
 {
     PolyBots << Polygon(); //this add new QPolygonF , dynamic?
+    qDebug() << "Polybots size : " << PolyBots.size();
     Run();
+}
+
+void glWidget::changeRotate()
+{
+    isRotate = (isRotate ? false : true);
 }
 
 void glWidget::next()
 {
     for (int i = 0; i < PolyBots.size(); ++i)
-        PolyBots[i].move();
+        PolyBots[i].move(isRotate);
     updateGL();
 }
 

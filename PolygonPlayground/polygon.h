@@ -7,6 +7,7 @@
 #include <cmath>
 #include <math.h>
 #include <QDebug>
+#include <QMatrix>
 
 /**
  * @brief The Polygon class
@@ -19,16 +20,24 @@ public:
     Polygon();
     Polygon(const QPointF &);
     QVector<float> color;
-    void move();
+    void move(bool isRotate = false);
     void changeColor();
     int sides;
     float radius;
+    float rand_FloatRange(float a, float b)
+    {
+        return ((b-a)*((float)rand()/RAND_MAX))+a;
+    }
 
 private:
+    void updateCentroid();
+    void rotatePolygon();
     bool horizontalCollide () const;
     bool verticalCollide () const;
+    float angular_v_f;
+    QMatrix matrix;
+    QPointF centroid; //centroid
     QPointF velocity;
-    QPointF center;
 };
 
 #endif // POLYGON_H
