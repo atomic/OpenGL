@@ -3,19 +3,23 @@
 MyWindow::MyWindow()
 {
     exitButton = new QPushButton("exit");
-    saveButton = new QPushButton("save");
-    loadButton = new QPushButton("load");
+    runButton = new QPushButton("Run");
+    stopButton = new QPushButton("Stop");
     colorButton = new QPushButton("Color");
+    addButton = new QPushButton("Summon");
+    polygonCount = new QLabel("0");
     radiusSlider = new QSlider(Qt::Horizontal);
 
     canvas = new glWidget;
 
     QHBoxLayout *buttonLayout = new QHBoxLayout;
     buttonLayout->addWidget(exitButton);
-    buttonLayout->addWidget(saveButton);
-    buttonLayout->addWidget(loadButton);
+    buttonLayout->addWidget(addButton);
+    buttonLayout->addWidget(runButton);
+    buttonLayout->addWidget(stopButton);
     buttonLayout->addWidget(colorButton);
     buttonLayout->addWidget(radiusSlider);
+    buttonLayout->addWidget(polygonCount);
 
     QVBoxLayout* overall = new QVBoxLayout;
     overall->addWidget(canvas);
@@ -24,14 +28,19 @@ MyWindow::MyWindow()
     setLayout(overall);
 //    connect(radiusSlider, SIGNAL(valueChanged(int)),
 //                                 this, SLOT(canvas->PolyBots))
+    connect(addButton, SIGNAL(clicked()),
+            canvas, SLOT(addPolygon()));
+    connect(addButton, SIGNAL(clicked()),
+            polygonCount, SLOT(setText(canvas->PolyBots.size())));
     connect(colorButton, SIGNAL(clicked()),
-            canvas, SLOT(changeColor()));
+            canvas, SLOT(changeAllColor()));
     connect(exitButton, SIGNAL(clicked()),
             this, SLOT(close()));
-    connect(loadButton, SIGNAL(clicked()),
-            this, SLOT(Load()));
-    connect(saveButton, SIGNAL(clicked()),
-            this, SLOT(Save()));
+    connect(runButton, SIGNAL(clicked()),
+            canvas, SLOT(Run()));
+    connect(stopButton, SIGNAL(clicked()),
+            canvas, SLOT(Stop()));
+
     connect(this, SIGNAL(actionSignal()),
             this, SLOT(Action()));
     canvas->setMinimumSize(640, 480);

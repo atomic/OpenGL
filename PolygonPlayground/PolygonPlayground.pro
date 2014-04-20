@@ -8,10 +8,12 @@ TEMPLATE = app
 
 HEADERS += \
     mywindow.h \
-    glwidget.h
+    glwidget.h \
+    polygon.h
 
 SOURCES += main.cpp \
     mywindow.cpp \
     glwidget.cpp \
+    polygon.cpp
 
 

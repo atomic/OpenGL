@@ -7,6 +7,8 @@ using namespace std;
 #include <QtWidgets>
 #include <QPushButton>
 #include <QHBoxLayout>
+#include <QLabel>
+
 #include "glwidget.h"
 
 
@@ -26,9 +28,12 @@ public slots:
     void Action();
 private:
     QSlider *radiusSlider;
+    QPushButton *addButton;
+    QLabel *polygonCount;
     QPushButton *colorButton;
     QPushButton *exitButton;
-    QPushButton *saveButton;
+    QPushButton *runButton;
+    QPushButton *stopButton;
     QPushButton *loadButton;
     glWidget *canvas;
 
