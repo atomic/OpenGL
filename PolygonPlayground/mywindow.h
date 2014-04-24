@@ -29,6 +29,7 @@ public slots:
 private:
     QSlider *radiusSlider;
     QCheckBox *checkRotate;
+    QCheckBox *checkTranslate;
     QPushButton *addButton;
     QLabel *polygonCount;
     QPushButton *colorButton;

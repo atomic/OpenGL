@@ -7,6 +7,7 @@ Polygon::Polygon() : QPolygonF() , color(3)
     changeColor();
 //    angular_vf = rand_FloatRange(4.0,10.0);
     angular_vf = rand_FloatRange(M_PI/30,M_PI/20);
+//    angular_vf = 0.001; //debug
     velocity.rx() = rand_FloatRange(-0.05,0.05);
     velocity.ry() = rand_FloatRange(-0.05,0.05);
     centroid = QPointF(0.0,0.0);
@@ -14,7 +15,6 @@ Polygon::Polygon() : QPolygonF() , color(3)
     radius = static_cast <float> (rand() % RAND_MAX/6) / static_cast <float> (RAND_MAX);
     for (int i = 0; i < sides; ++i)
         append(QPointF(radius*cos(i*2*M_PI/sides),radius*sin(i*2*M_PI/sides)));
-    updateCentroid();
 }
 
 Polygon::Polygon(const QPointF &c) : Polygon() //Delegating cons C++11 only
@@ -23,14 +23,16 @@ Polygon::Polygon(const QPointF &c) : Polygon() //Delegating cons C++11 only
     centroid.setY(c.y());
 }
 
-void Polygon::move(bool isRotate)
+void Polygon::move(bool isTranslate, bool isRotate)
 {
-    if(isRotate) {
-        rotatePolygon();
+    if(isTranslate) {
+        translate(velocity); //add velocity to every QPointF in vector
+        centroid.rx() += velocity.x();
+        centroid.ry() += velocity.y();
     }
-    translate(velocity); //add velocity to every QPointF in vector
-    centroid.rx() += velocity.x();
-    centroid.ry() += velocity.y();
+    if(isRotate)
+        rotatePolygon();
+
     if(horizontalCollide())
         velocity.rx() *= -1;
     if(verticalCollide())
@@ -45,9 +47,11 @@ void Polygon::rotatePolygon() //not working
      */
     for (int n = 0; n < size(); ++n) {
         temp.rx() = ((*this)[n].x() - centroid.x() )*cos(angular_vf) -
-                    ((*this)[n].y() - centroid.y() )*sin(angular_vf);
+                    ((*this)[n].y() - centroid.y() )*sin(angular_vf) +
+                    centroid.x();
         temp.ry() = ((*this)[n].x() - centroid.x() )*sin(angular_vf) +
-                    ((*this)[n].y() - centroid.y() )*cos(angular_vf);
+                    ((*this)[n].y() - centroid.y() )*cos(angular_vf) +
+                    centroid.y();
         //TODO : Fix polygon here, rotation about origin already working
         (*this)[n].rx() = temp.rx();
         (*this)[n].ry() = temp.ry();

@@ -29,6 +29,7 @@ private:
     QTimer* timer;
     QPointF ScreenPos;
     bool isRotate;
+    bool isTranslate;
 
 protected:
     void paintGL();
@@ -39,6 +40,7 @@ public slots:
     int getPolygonCount() const;
     void addPolygon();
     void changeRotate();
+    void changeTranslate();
     void changeAllColor();
     void next();
     void Run();

@@ -10,6 +10,7 @@ MyWindow::MyWindow()
     polygonCount = new QLabel("0");
     radiusSlider = new QSlider(Qt::Horizontal);
     checkRotate = new QCheckBox("Rotate");
+    checkTranslate = new QCheckBox("Translate");
 
     canvas = new glWidget;
 
@@ -22,6 +23,7 @@ MyWindow::MyWindow()
     buttonLayout->addWidget(radiusSlider);
     buttonLayout->addWidget(polygonCount);
     buttonLayout->addWidget(checkRotate);
+    buttonLayout->addWidget(checkTranslate);
 
 
     QVBoxLayout* overall = new QVBoxLayout;
@@ -33,6 +35,8 @@ MyWindow::MyWindow()
 //                                 this, SLOT(canvas->PolyBots))
     connect(checkRotate, SIGNAL(clicked(bool)),
             canvas, SLOT(changeRotate()) );
+    connect(checkTranslate, SIGNAL(clicked(bool)),
+            canvas, SLOT(changeTranslate()) );
     connect(addButton, SIGNAL(clicked()),
             canvas, SLOT(addPolygon()));
     connect(addButton, SIGNAL(clicked()),

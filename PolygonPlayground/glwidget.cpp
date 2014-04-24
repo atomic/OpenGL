@@ -69,10 +69,15 @@ void glWidget::changeRotate()
     isRotate = (isRotate ? false : true);
 }
 
+void glWidget::changeTranslate()
+{
+    isTranslate = (isTranslate ? false : true);
+}
+
 void glWidget::next()
 {
     for (int i = 0; i < PolyBots.size(); ++i)
-        PolyBots[i].move(isRotate);
+        PolyBots[i].move(isTranslate,isRotate);
     updateGL(); // this calls paintGL();
 }
 void glWidget::changeAllColor()
