@@ -30,6 +30,8 @@ void glWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     for (int n = 0; n < PolyBots.size(); ++n) {
+//        glTranslatef(P);
+//        glRotatef(PolyBots[n].angular_v_f, 0.0f, 0.0f, 0.0f);
         glColor3f(PolyBots[n].color[0],PolyBots[n].color[1],PolyBots[n].color[2]);
         glBegin(GL_POLYGON);
         for (int i = 0; i < PolyBots[n].size(); ++i)
@@ -50,6 +52,11 @@ void glWidget::resizeGL(int width, int height)
     glLoadIdentity();   // Reset the camera
 }
 
+int glWidget::getPolygonCount() const
+{
+    return PolyBots.size();
+}
+
 void glWidget::addPolygon()
 {
     PolyBots << Polygon(); //this add new QPolygonF , dynamic?
@@ -66,9 +73,8 @@ void glWidget::next()
 {
     for (int i = 0; i < PolyBots.size(); ++i)
         PolyBots[i].move(isRotate);
-    updateGL();
+    updateGL(); // this calls paintGL();
 }
-
 void glWidget::changeAllColor()
 {
     for (int n = 0; n < PolyBots.size(); ++n)

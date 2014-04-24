@@ -5,9 +5,11 @@ Polygon::Polygon() : QPolygonF() , color(3)
 {
     srand(time(NULL));
     changeColor();
-    angular_v_f = rand_FloatRange(0.1,M_PI/2);
+//    angular_vf = rand_FloatRange(4.0,10.0);
+    angular_vf = rand_FloatRange(M_PI/30,M_PI/20);
     velocity.rx() = rand_FloatRange(-0.05,0.05);
     velocity.ry() = rand_FloatRange(-0.05,0.05);
+    centroid = QPointF(0.0,0.0);
     sides = rand() % 4 + 3;
     radius = static_cast <float> (rand() % RAND_MAX/6) / static_cast <float> (RAND_MAX);
     for (int i = 0; i < sides; ++i)
@@ -23,11 +25,10 @@ Polygon::Polygon(const QPointF &c) : Polygon() //Delegating cons C++11 only
 
 void Polygon::move(bool isRotate)
 {
-//    updateCentroid();
     if(isRotate) {
         rotatePolygon();
     }
-    translate(velocity);
+    translate(velocity); //add velocity to every QPointF in vector
     centroid.rx() += velocity.x();
     centroid.ry() += velocity.y();
     if(horizontalCollide())
@@ -38,9 +39,18 @@ void Polygon::move(bool isRotate)
 
 void Polygon::rotatePolygon() //not working
 {
+    /*
+     * Formula : x : x*cos(angle) - y*sin(angle)
+     *           y : x*sin(angle) + y*cos(angle)
+     */
     for (int n = 0; n < size(); ++n) {
-        (*this)[n].rx() = cos(angular_v_f) * ( (*this)[n].rx() - centroid.x() ) - sin(angular_v_f) * ((*this)[n].ry()-centroid.y()) + centroid.x();
-        (*this)[n].ry() = sin(angular_v_f) * ( (*this)[n].rx() - centroid.x() ) + cos(angular_v_f) * ((*this)[n].ry()-centroid.y()) + centroid.y();
+        temp.rx() = ((*this)[n].x() - centroid.x() )*cos(angular_vf) -
+                    ((*this)[n].y() - centroid.y() )*sin(angular_vf);
+        temp.ry() = ((*this)[n].x() - centroid.x() )*sin(angular_vf) +
+                    ((*this)[n].y() - centroid.y() )*cos(angular_vf);
+        //TODO : Fix polygon here, rotation about origin already working
+        (*this)[n].rx() = temp.rx();
+        (*this)[n].ry() = temp.ry();
     }
 }
 
@@ -48,17 +58,6 @@ void Polygon::changeColor()
 {
     for (int i = 0; i < 3; ++i)
         color[i] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-}
-
-void Polygon::updateCentroid()
-{
-    float xtot(0), ytot(0);
-    for (int i = 0; i < size(); ++i) {
-        xtot += (*this)[i].x();
-        ytot += (*this)[i].y();
-    }
-    centroid.setX(xtot/size());
-    centroid.setY(ytot/size());
 }
 
 

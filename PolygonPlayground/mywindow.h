@@ -24,9 +24,8 @@ signals:
     void loadSignal();
 
 public slots:
-    void Save();
-    void Load();
-    void Action();
+    void updateCount();
+
 private:
     QSlider *radiusSlider;
     QCheckBox *checkRotate;

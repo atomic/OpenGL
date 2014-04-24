@@ -36,7 +36,7 @@ MyWindow::MyWindow()
     connect(addButton, SIGNAL(clicked()),
             canvas, SLOT(addPolygon()));
     connect(addButton, SIGNAL(clicked()),
-            polygonCount, SLOT(setText(canvas->PolyBots.size())));
+            this, SLOT(updateCount()));
     connect(colorButton, SIGNAL(clicked()),
             canvas, SLOT(changeAllColor()));
     connect(exitButton, SIGNAL(clicked()),
@@ -51,20 +51,7 @@ MyWindow::MyWindow()
     canvas->setMinimumSize(640, 480);
 }
 
-void MyWindow::Load()
+void MyWindow::updateCount()
 {
-    cout << "\n\nLOADING...\n\n";
-    emit actionSignal();
+    polygonCount->setText(QString(char(canvas->getPolygonCount())));
 }
-
-void MyWindow::Action()
-{
-    cout << "\n\nTAKING ACTION...\n\n";
-}
-
-void MyWindow::Save()
-{
-    emit saveSignal();
-    cout << "I'm saving" << endl;
-}
-

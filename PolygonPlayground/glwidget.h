@@ -36,6 +36,7 @@ protected:
     void resizeGL(int width,int height);
 
 public slots:
+    int getPolygonCount() const;
     void addPolygon();
     void changeRotate();
     void changeAllColor();

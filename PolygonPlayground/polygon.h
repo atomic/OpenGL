@@ -12,7 +12,7 @@
 /**
  * @brief The Polygon class
  * Polygon is inherited from QVector<QPoint>
- * so, it has feature vector has
+ * Also, all of the points in the polygon is stored in parent class as vector<QPointF>
  */
 class Polygon : public QPolygonF
 {
@@ -30,14 +30,26 @@ public:
     }
 
 private:
-    void updateCentroid();
     void rotatePolygon();
     bool horizontalCollide () const;
     bool verticalCollide () const;
-    float angular_v_f;
-    QMatrix matrix;
+    float angular_vf;
+    QPointF temp; //store temporary points
     QPointF centroid; //centroid
     QPointF velocity;
 };
 
 #endif // POLYGON_H
+
+
+/* NOTE: LIST of BUGS:
+ * - When translating, or rotating, you need a temp variable to hold your new values
+ *    Wrong example:
+ *
+ *       (*this)[n].rx() = (cos(angular_vf) * ( (*this)[n].rx() - centroid.x() )) -
+ *                         (sin(angular_vf) * ( (*this)[n].ry() - centroid.y() )) ;
+ *       (*this)[n].ry() = (sin(angular_vf) * ( (*this)[n].rx() - centroid.x() )) +
+ *                         (cos(angular_vf) * ( (*this)[n].ry() - centroid.y() ));
+ *      Correct example: see rotatePolygon()
+ *
+ */
