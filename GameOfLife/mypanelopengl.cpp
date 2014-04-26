@@ -275,21 +275,21 @@ void MyPanelOpenGL::clickToLoadTemplate() {
     int row, col;
     ifstream fin;
     if (template_index == 1)
-        fin.open("glider.txt");
+        fin.open("../GameOfLife/glider.txt");
     else if (template_index == 2)
-        fin.open("pentomino.txt");
+        fin.open("../GameOfLife/pentomino.txt");
     else if (template_index == 3)
-        fin.open("pulsar.txt");
+        fin.open("../GameOfLife/pulsar.txt");
     else if (template_index == 4)
-        fin.open("exploder.txt");
+        fin.open("../GameOfLife/exploder.txt");
     else if (template_index == 5)
-        fin.open("ten.txt");
+        fin.open("../GameOfLife/ten.txt");
     else if (template_index == 6)
-        fin.open("spaceship.txt");
+        fin.open("../GameOfLife/spaceship.txt");
     else if (template_index == 7)
-        fin.open("glidergun.txt");
+        fin.open("../GameOfLife/glidergun.txt");
     else if (template_index == 8)
-        fin.open("saved_pattern.txt");
+        fin.open("../GameOfLife/saved_pattern.txt");
     if (!fin.is_open())
         messageBox.critical(0,"Warning,","File does not exist.");
     else {

@@ -12,7 +12,7 @@
 #include <QEvent>
 #include <QMessageBox>
 
-//#include "gameoflife.h" cannot do this,
+//#include "gameoflife.h" cannot do this
 //    mypanelopengl.cpp include both m and n from .h already.
 
 const int m = 100;
