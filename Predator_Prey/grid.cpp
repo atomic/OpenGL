@@ -51,9 +51,16 @@ void grid::print()
     cout << endl;
 }
 
-const char &grid::operator *()
+grid grid::operator<<(grid &from)
 {
-    return creature->Genotype;
+    from.creature->move(this->creature); //move pointer memory from "from" to "this"
+                                        //this-> creature memory will get deleted
+    from.creature = NULL;
+}
+
+const Organism &grid::operator *()
+{
+    return *creature;
 }
 
 grid::~grid()

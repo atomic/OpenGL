@@ -9,9 +9,14 @@ private:
 
 public:
     Predator();
-//    virtual void breed();
-//    virtual void move();
-    virtual void print();
+    /*
+     * Before calling these virtual, target has to be already defined */
+    virtual void breed(Organism* &target);
+    virtual void move(Organism* &target);
+    virtual ~Predator();
+
+    //Debug
+    void print();
 };
 
 #endif // PREDATOR_H

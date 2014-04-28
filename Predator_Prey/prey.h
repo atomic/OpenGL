@@ -7,9 +7,11 @@ class Prey : public Organism
 
 public:
     Prey();
-//    virtual void breed();
-//    virtual void move();
-    virtual void print();
+
+    virtual void breed(Organism* &target);
+    virtual void move(Organism* &target);
+    void print();
+    virtual ~Prey();
 };
 
 #endif // PREY_H

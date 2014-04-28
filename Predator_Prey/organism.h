@@ -9,15 +9,16 @@ using namespace std;
 class Organism
 {
 protected:
-    int steps; //breed if 3 for prey, 8 for predator
+    int breedCount; //breed if 3 for prey, 8 for predator
 
 public:
     Organism();
     char Genotype;
-//    virtual void breed();
-//    virtual void move();
+    virtual void breed(Organism* &target);
+    virtual void move(Organism* &target);
 
     virtual void print();
+    virtual ~Organism();
 };
 
 #endif // ORGANISM_H

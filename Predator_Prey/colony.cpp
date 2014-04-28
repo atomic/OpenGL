@@ -13,7 +13,7 @@ void Colony::print()
     for (int i = 0; i < v_grids; ++i) {
         for (int j = 0; j < h_grids; ++j) {
             if(universe[i][j].isOccupied())
-                cout << *(universe[i][j]) << " ";
+                cout << (*(universe[i][j])).Genotype << " ";
             cout << "- ";
         }
         cout << endl;

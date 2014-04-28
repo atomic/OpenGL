@@ -11,20 +11,22 @@ class grid
 {
     Organism* creature;
 public:
-    grid                    ();
-    grid                    (Organism* newCreature);
+    grid                        ();
+    grid                        (Organism* newCreature);
 
-    void RandomBreed        ();
-    void PreyBreed          ();
-    void PredatorBreed      ();
-    void kill               ();
-    bool isOccupied         () const;
+    void RandomBreed            ();
+    void PreyBreed              ();
+    void PredatorBreed          ();
+    void kill                   ();
+    bool isOccupied             () const;
 
-    void print              ();
+    void print                  (); //DEBUG function
 
-    const char& operator *  ();
+    grid  operator<<            (grid &from);
+    const Organism& operator *  (); // later can be used to pass something
+    //  functions like moves are called by Organism
     //debug
-    ~grid                   ();
+    ~grid                       ();
 };
 
 #endif // GRID_H
