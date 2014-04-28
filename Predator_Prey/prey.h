@@ -7,9 +7,9 @@ class Prey : public Organism
 
 public:
     Prey();
-    virtual breed();
-    virtual move();
-    virtual ~Organism();
+//    virtual void breed();
+//    virtual void move();
+    virtual void print();
 };
 
 #endif // PREY_H

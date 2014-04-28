@@ -1,5 +1,11 @@
 #include "prey.h"
 
-Prey::Prey() : Organism() , isPredator(0)
+Prey::Prey() : Organism()
 {
+    Genotype = 'O';
+}
+
+void Prey::print()
+{
+    cout << "Prey(" << steps << ")";
 }

@@ -13,6 +13,8 @@ private:
     int h_grids;
 public:
     Colony(int v = 5, int h = 5);
+    void print();
+    void randomize();
 };
 
 #endif // COLONY_H

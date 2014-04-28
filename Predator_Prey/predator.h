@@ -5,13 +5,13 @@
 class Predator : public Organism
 {
 private:
-    int startcount;
+    int starvation;
 
 public:
     Predator();
-    virtual breed();
-    virtual move();
-    virtual ~Organism();
+//    virtual void breed();
+//    virtual void move();
+    virtual void print();
 };
 
 #endif // PREDATOR_H

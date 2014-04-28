@@ -1,17 +1,23 @@
 #ifndef ORGANISM_H
 #define ORGANISM_H
 
+#include "iostream"
+using namespace std;
+
+#include <QDebug>
+
 class Organism
 {
-private:
+protected:
     int steps; //breed if 3 for prey, 8 for predator
-    bool isPredator;
 
 public:
     Organism();
-    virtual breed();
-    virtual move();
-    virtual ~Organism();
+    char Genotype;
+//    virtual void breed();
+//    virtual void move();
+
+    virtual void print();
 };
 
 #endif // ORGANISM_H
