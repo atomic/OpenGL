@@ -18,7 +18,7 @@ class Polygon : public QPolygonF
 {
 public:
     Polygon();
-    Polygon(const QPointF &);
+//    Polygon(const QPointF &);
     QVector<float> color;
     void move(bool isTranslate = true, bool isRotate = false);
     void changeColor();

@@ -17,11 +17,11 @@ Polygon::Polygon() : QPolygonF() , color(3)
         append(QPointF(radius*cos(i*2*M_PI/sides),radius*sin(i*2*M_PI/sides)));
 }
 
-Polygon::Polygon(const QPointF &c) : Polygon() //Delegating cons C++11 only
-{
-    centroid.setX(c.x());
-    centroid.setY(c.y());
-}
+//Polygon::Polygon(const QPointF &c) : Polygon() //Delegating cons C++11 only
+//{
+//    centroid.setX(c.x());
+//    centroid.setY(c.y());
+//}
 
 void Polygon::move(bool isTranslate, bool isRotate)
 {
