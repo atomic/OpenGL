@@ -14,8 +14,9 @@ void Colony::print()
     for (int i = 0; i < v_grids; ++i) {
         for (int j = 0; j < h_grids; ++j) {
             if(universe[i][j].Status())
-                cout << (*(universe[i][j])).Genotype << " ";
-            cout << "- ";
+                cout << " " << (*(universe[i][j])).Genotype << " ";
+            else
+                cout << "   ";
         }
         cout << endl;
     }
@@ -29,28 +30,28 @@ void Colony::randomize()
             universe[i][j].RandomBreed();
 }
 
-bool Colony::upEmpty(int i, int j)
+bool Colony::upEmpty(const int i, const int j)
 {
     if(universe[i-1][j].Status() == 0)
         return true;
     return false;
 }
 
-bool Colony::downEmpty(int i, int j)
+bool Colony::downEmpty(const int i, const int j)
 {
     if(universe[i+1][j].Status() == 0)
         return true;
     return false;
 }
 
-bool Colony::leftEmpty(int i, int j)
+bool Colony::leftEmpty(const int i, const int j)
 {
     if(universe[i][j-1].Status() == 0)
         return true;
     return false;
 }
 
-bool Colony::rightEmpty(int i, int j)
+bool Colony::rightEmpty(const int i, const int j)
 {
     if(universe[i][j+1].Status() == 0)
         return true;
@@ -66,7 +67,7 @@ bool Colony::isCorner(const int i, const int j)
     return false;
 }
 
-Dir Colony::scanSpace(int i, int j)
+Dir Colony::scanSpace(const int i, const int j)
 {
     /* For My Type: Creatures have 4 types of movement orientation(genetic)
      *              These 4 types of movement are predefined.
@@ -95,7 +96,6 @@ Dir Colony::scanSpace(int i, int j)
     //If the position is somewhere else beside wall, scan according to genetic
     if(!isCorner(i,j)) {
         int DirGeneType = (*(universe[i][j])).DirGene;
-
         for (int n = 0; n < 4; ++n) {
             //rotation of direction is executed depending on their type
             switch (OrientationSet[DirGeneType][n]){
@@ -124,7 +124,7 @@ Dir Colony::scanSpace(int i, int j)
     return NONE;
 }
 
-Dir Colony::scanPreys(int i, int j)
+Dir Colony::scanPreys(const int i, const int j)
 {
     //NOTE: Scans order are not random
                     /* Scan Vertical Corners (UP,DOWN)*/
@@ -186,27 +186,55 @@ void Colony::PredatorPhase()
 
 void Colony::Advance(int i, int j, Dir Orient)
 {
-    qDebug() << "In Advance(" << i << j << ")";
+    //BUG: Grid destructor kept getting called, WHY?
+    //NOTE: [SOLVED], your << operator is passed by value, instead of reference
+
+//    qDebug() << "In Advance(" << i << j << ") , Orient : " << Orient;
+    i_dest = i;
+    j_dest = j;
     switch (Orient){
     case UP:
-        universe[i-1][j] << universe[i][j];
+        i_dest--;
         break;
     case DOWN:
-        universe[i+1][j] << universe[i][j];
+        i_dest++;
         break;
     case LEFT:
-        universe[i][j-1] << universe[i][j];
+        j_dest--;
         break;
     case RIGHT:
-        universe[i][j+1] << universe[i][j];
+        j_dest++;
         break;
     default:
         break;
     }
+    universe[i][j] >> universe[i_dest][j_dest];
 
+    //breeding time
+    breedDir = scanSpace(i_dest,j_dest);
+    if( (*(universe[i_dest][j_dest])).breedReady() )
+        breedHere(i_dest,j_dest,breedDir);
 }
 
-
-
-
-
+void Colony::breedHere(int i, int j, Dir Orient)
+{
+    i_dest = i;
+    j_dest = j;
+    switch (Orient){
+    case UP:
+        i_dest--;
+        break;
+    case DOWN:
+        i_dest++;
+        break;
+    case LEFT:
+        j_dest--;
+        break;
+    case RIGHT:
+        j_dest++;
+        break;
+    default:
+        break;
+    }
+    universe[i][j] >= universe[i_dest][j_dest]; // breeding? yes
+}

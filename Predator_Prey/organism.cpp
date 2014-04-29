@@ -6,8 +6,10 @@ Organism::Organism() : breedCount(0), Genotype(0)
 }
 
 void Organism::advance(){}
-void Organism::breed(Organism* &target){}
+void Organism::breed(Organism* &target) const{}
 void Organism::move(Organism* &target){}
+
+bool Organism::breedReady() const{}
 void Organism::print(){}
 
 Organism::~Organism(){}

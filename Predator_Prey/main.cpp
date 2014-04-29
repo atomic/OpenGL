@@ -9,9 +9,13 @@ int main()
     Exodus.randomize();
     Exodus.print();
     cout << "GO PREDATOR ....";
-    Exodus.PredatorPhase();
-    Exodus.print();
 
+    bool done = false;
+    while(!done) {
+        Exodus.PredatorPhase();
+        Exodus.print();
+        cin.get();
+    }
     return 0;
 }
 

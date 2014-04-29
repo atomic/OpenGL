@@ -11,6 +11,7 @@ public:
     virtual void advance();
     virtual void breed(Organism* &target);
     virtual void move(Organism* &target);
+    virtual bool breedReady() const;
     void print();
     virtual ~Prey();
 };

@@ -16,8 +16,9 @@ public:
     char Genotype;
     int DirGene;
     virtual void advance();
-    virtual void breed(Organism* &target);
+    virtual void breed(Organism* &target) const;
     virtual void move(Organism* &target);
+    virtual bool breedReady() const;
 
     virtual void print();
     virtual ~Organism();

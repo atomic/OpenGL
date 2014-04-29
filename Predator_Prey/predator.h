@@ -4,8 +4,6 @@
 
 class Predator : public Organism
 {
-private:
-    int starvation;
 
 public:
     Predator();
@@ -14,8 +12,10 @@ public:
     virtual void advance();
     virtual void breed(Organism* &target);
     virtual void move(Organism* &target);
+    virtual bool breedReady() const;
     virtual ~Predator();
 
+    int starvation;
     //Debug
     void print();
 };

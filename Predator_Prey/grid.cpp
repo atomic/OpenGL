@@ -53,8 +53,7 @@ int grid::Status() const {
         return 1;
     else if(creature->Genotype == 'X')
         return 2;
-
-    qDebug() << "Status() grid.cpp no Status returned";
+    qDebug() << "ERROR: Status() grid.cpp no Status returned";
     return 0;
 }
 void grid::print()
@@ -66,16 +65,17 @@ void grid::print()
     cout << endl;
 }
 
-grid grid::operator<<(grid &from)
+grid& grid::operator >>(grid &to)
 {
-    from.creature->move(this->creature); //move pointer memory from "from" to "this"
-                                        //this-> creature memory will get deleted
-    from.creature = NULL;
+    creature->move(to.creature); //this handle memory allocation
+    creature = NULL;
+    return to;
 }
 
-const Organism& grid::operator ++()
+grid grid::operator >=(grid &to)
 {
-    (*creature).advance();
+    creature->breed(to.creature);
+    return to;
 }
 
 const Organism &grid::operator *()
@@ -85,7 +85,5 @@ const Organism &grid::operator *()
 
 grid::~grid()
 {
-    cout << "Deleting ...";
-    print();
     delete creature;
 }
