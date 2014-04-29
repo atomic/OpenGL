@@ -5,9 +5,13 @@ Prey::Prey() : Organism()
     Genotype = 'O';
 }
 
+void Prey::advance()
+{
+    breedCount++;
+}
+
 void Prey::breed(Organism *&target)
 {
-
 }
 
 void Prey::move(Organism *&target)

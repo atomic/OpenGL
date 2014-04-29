@@ -8,6 +8,7 @@ class Prey : public Organism
 public:
     Prey();
 
+    virtual void advance();
     virtual void breed(Organism* &target);
     virtual void move(Organism* &target);
     void print();

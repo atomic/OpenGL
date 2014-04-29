@@ -41,7 +41,17 @@ void grid::kill()
     }
 }
 
-bool grid::isOccupied() const { return creature ? true : false;}
+int grid::Status() const {
+    /* If not occupied, return 0, if Prey is there return 1,
+     *                            if Predator is there return 2.
+     */
+    if(!creature)
+        return 0;
+    if(creature->Genotype == 'O')
+        return 1;
+    else if(creature->Genotype == 'X')
+        return 2;
+}
 void grid::print()
 {
     if(creature)
@@ -56,6 +66,11 @@ grid grid::operator<<(grid &from)
     from.creature->move(this->creature); //move pointer memory from "from" to "this"
                                         //this-> creature memory will get deleted
     from.creature = NULL;
+}
+
+const Organism& grid::operator ++()
+{
+    (*creature).advance();
 }
 
 const Organism &grid::operator *()

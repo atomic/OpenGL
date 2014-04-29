@@ -11,6 +11,7 @@ public:
     Predator();
     /*
      * Before calling these virtual, target has to be already defined */
+    virtual void advance();
     virtual void breed(Organism* &target);
     virtual void move(Organism* &target);
     virtual ~Predator();

@@ -5,6 +5,12 @@ Predator::Predator() : Organism(), starvation(0)
     Genotype = 'X';
 }
 
+void Predator::advance()
+{
+    breedCount++;
+    starvation++;
+}
+
 void Predator::breed(Organism *&target)
 {
 
