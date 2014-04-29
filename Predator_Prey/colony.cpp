@@ -6,6 +6,7 @@ Colony::Colony(int v, int h) : v_grids(v), h_grids(h)
     universe = new grid*[v];
     for (int i = 0; i < v; ++i)
         universe[i] = new grid[h];
+    //all creature are automatically set to NULL
 }
 
 void Colony::print()
@@ -22,6 +23,7 @@ void Colony::print()
 
 void Colony::randomize()
 {
+    // in normal scenario, this should only be called once
     for (int i = 0; i < v_grids; ++i)
         for (int j = 0; j < h_grids; ++j)
             universe[i][j].RandomBreed();
@@ -71,19 +73,24 @@ Dir Colony::scanSpace(int i, int j)
      * When they breed, they pass on the movement orientation.
      */
     /* Scan Vertical Corners (UP,DOWN)*/
-    if(i == 0)
+    if(i == 0) {
         if(universe[1][j].Status() == 0)
             return DOWN;
-    else if(i == (v_grids - 1))
+    }
+    else if(i == (v_grids - 1)) {
         if(universe[v_grids - 2][j].Status() == 0)
             return UP;
+    }
+
     /* Scan Horizontal Corners (LEFT, RIGHT)*/
-    if(j == 0)
+    if(j == 0) {
         if(universe[i][1].Status() == 0)
             return RIGHT;
-    else if(j == (h_grids - 1))
+    }
+    else if(j == (h_grids - 1)) {
         if(universe[i][h_grids - 2].Status() == 0)
             return LEFT;
+    }
 
     //If the position is somewhere else beside wall, scan according to genetic
     if(!isCorner(i,j)) {
@@ -97,15 +104,15 @@ Dir Colony::scanSpace(int i, int j)
                     return UP;
                 break;
             case DOWN:
-                if(downEmpty(i,j));
+                if(downEmpty(i,j))
                     return DOWN;
                 break;
             case LEFT:
-                if(leftEmpty(i,j));
+                if(leftEmpty(i,j))
                     return LEFT;
                 break;
             case RIGHT:
-                if(rightEmpty(i,j));
+                if(rightEmpty(i,j))
                     return RIGHT;
                 break;
             default:
@@ -113,26 +120,32 @@ Dir Colony::scanSpace(int i, int j)
             }
         }
     }
-
+    qDebug() << "WARNING : " <<i<<","<<j<<" can't move";
+    return NONE;
 }
 
 Dir Colony::scanPreys(int i, int j)
 {
     //NOTE: Scans order are not random
                     /* Scan Vertical Corners (UP,DOWN)*/
-    if(i == 0)
+    if(i == 0) {
         if(universe[1][j].Status() == 1)
             return DOWN;
-    else if(i == v_grids - 1)
+    }
+    else if(i == v_grids - 1){
         if(universe[v_grids - 2][j].Status() == 1)
             return UP;
+    }
+
                    /* Scan Horizontal Corners (LEFT, RIGHT)*/
-    if(j == 0)
+    if(j == 0) {
         if(universe[i][1].Status() == 1)
             return RIGHT;
-    else if(j == h_grids - 1)
+    }
+    else if(j == h_grids - 1) {
         if(universe[i][h_grids - 2].Status() == 1)
             return LEFT;
+    }
 
                  /* Scan vertical, Above, Bottom*/
     if(!isCorner(i,j)) {
@@ -173,6 +186,7 @@ void Colony::PredatorPhase()
 
 void Colony::Advance(int i, int j, Dir Orient)
 {
+    qDebug() << "In Advance(" << i << j << ")";
     switch (Orient){
     case UP:
         universe[i-1][j] << universe[i][j];

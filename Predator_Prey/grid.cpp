@@ -11,10 +11,12 @@ grid::grid(Organism *newCreature) : creature(newCreature)
 
 void grid::RandomBreed()
 {
-    if(rand() % 2 == 0) // 0 for Prey, 1 for Predator
+    int breed = rand() % 3;
+    if(breed == 0) // 0 for Prey, 1 for Predator
         PreyBreed();
-    else
+    else if (breed == 1)
         PredatorBreed();
+    //if breed == 2, do nothing, the tile will be NULL
 }
 
 void grid::PreyBreed()
@@ -51,6 +53,9 @@ int grid::Status() const {
         return 1;
     else if(creature->Genotype == 'X')
         return 2;
+
+    qDebug() << "Status() grid.cpp no Status returned";
+    return 0;
 }
 void grid::print()
 {
@@ -80,5 +85,7 @@ const Organism &grid::operator *()
 
 grid::~grid()
 {
+    cout << "Deleting ...";
+    print();
     delete creature;
 }
