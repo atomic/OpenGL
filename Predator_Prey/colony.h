@@ -11,7 +11,7 @@ private:
     grid** universe;
     int v_grids;
     int h_grids;
-    Dir OrientationSet[4][4] = {
+    const Dir OrientationSet[4][4] = {
         {LEFT, DOWN, RIGHT, UP},
         {RIGHT, DOWN, LEFT, UP},
         {UP, DOWN, RIGHT, LEFT},
@@ -26,6 +26,7 @@ public:
     bool downEmpty                  (int i, int j);
     bool leftEmpty                  (int i, int j);
     bool rightEmpty                 (int i, int j);
+    bool isCorner                   (const int i, const int j);
 
     Dir scanPreys                   (int i, int j);
     Dir scanSpace                   (int i, int j);

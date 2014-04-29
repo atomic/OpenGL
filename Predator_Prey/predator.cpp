@@ -25,7 +25,7 @@ void Predator::move(Organism *&target)
 
 void Predator::print()
 {
-    cout << "Predator(" << steps << "," << starvation << ")";
+    cout << "Predator(" << breedCount << "," << starvation << ")";
 }
 
 Predator::~Predator(){}

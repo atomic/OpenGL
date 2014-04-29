@@ -23,7 +23,7 @@ void Prey::move(Organism *&target)
 
 void Prey::print()
 {
-    cout << "Prey(" << steps << ")";
+    cout << "Prey(" << breedCount << ")";
 }
 
 Prey::~Prey(){}

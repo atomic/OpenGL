@@ -8,6 +8,8 @@ int main()
     cout << "Now, lets randomize them. \n";
     Exodus.randomize();
     Exodus.print();
+    Exodus.PredatorPhase();
+    Exodus.print();
 
     return 0;
 }
