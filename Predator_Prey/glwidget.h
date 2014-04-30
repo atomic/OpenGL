@@ -25,6 +25,9 @@ private:
     Colony* Exodus;
     QTimer* timer;
     QPointF ScreenPos;
+    QPointF** glCoord;
+    int i_MAX, j_MAX;
+    void convAllCoordinates();
 
 protected:
     void paintGL();

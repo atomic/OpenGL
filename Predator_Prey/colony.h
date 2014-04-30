@@ -40,6 +40,8 @@ public:
     void preyAdvance                (int i, int j);
     void breedAroundHere            (int i, int j);
 
+    grid* operator []               (int i);
+
     int getMAX_i() const;
     int getMAX_j() const;
 };

@@ -86,7 +86,6 @@ void MyPanelOpenGL::paintGL() {
              glVertex2f(x,y);
             glEnd();
         }
-
     }
     if(dragSAVE) {
         convCoordinates(savePos1_i,savePos1_j);
