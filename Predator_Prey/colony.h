@@ -38,10 +38,10 @@ public:
 
     void predatorAdvance            (int i, int j);
     void preyAdvance                (int i, int j);
-    void breedAroundHere                  (int i, int j);
+    void breedAroundHere            (int i, int j);
 
-    //DEBUG function
-    void print                      ();
+    int getMAX_i() const;
+    int getMAX_j() const;
 };
 
 #endif // COLONY_H

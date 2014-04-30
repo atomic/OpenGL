@@ -3,7 +3,6 @@
 
 #include <stdlib.h> //for random
 #include <time.h> // for random
-#include "iostream"
 using namespace std;
 
 #include <QDebug>

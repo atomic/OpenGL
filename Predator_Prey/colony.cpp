@@ -1,5 +1,9 @@
 #include "colony.h"
 
+
+int Colony::getMAX_i() const{return MAX_i;}
+int Colony::getMAX_j() const{return MAX_j;}
+
 Colony::Colony(int v, int h) : MAX_i(v), MAX_j(h)
 {
     universe = new grid*[v+2];
@@ -17,19 +21,6 @@ void Colony::buildWalls()
     for (int j = 1; j < MAX_j + 1; ++j) {
         universe[0][j].spawnWall();
         universe[MAX_i + 1][j].spawnWall();
-    }
-}
-
-void Colony::print()
-{
-    for (int i = 0; i < MAX_i + 2; ++i) {
-        for (int j = 0; j < MAX_j + 2; ++j) {
-            if(universe[i][j].Status())
-                cout << " " << (*(universe[i][j])).Genotype << " ";
-            else
-                cout << "   ";
-        }
-        cout << endl;
     }
 }
 
