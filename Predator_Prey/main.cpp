@@ -13,7 +13,7 @@ int main()
 
     bool done = false;
     while(!done) {
-        Exodus.PredatorPhase();
+        Exodus.mainPhase();
         Exodus.print();
         cin.get();
     }

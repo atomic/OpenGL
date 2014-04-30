@@ -15,8 +15,6 @@ public:
     virtual bool isStarved() const;
     virtual ~Predator();
 
-    //Debug
-    virtual void print();
 };
 
 #endif // PREDATOR_H

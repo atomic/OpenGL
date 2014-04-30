@@ -29,7 +29,9 @@ public:
      * This scan perimeters will fill the QLists with coordinates
      * that particular creature can go to
      */
-    void scanPerimeters             (const int i, const int j);
+    void scanPerimeters             (const int i, const int j, const int Type = 0);
+    // Type 0 will scan according agressive(only empty grids)
+    // Type 1 will scan according passive(include food)
 
 
     void mainPhase                  ();
@@ -37,7 +39,8 @@ public:
     void PredatorPhase              ();
     void PreyPhase                  ();
 
-    void Advance                    (int i, int j);
+    void predatorAdvance            (int i, int j);
+    void preyAdvance                (int i, int j);
     void breedHere                  (int i, int j);
 
     //DEBUG function

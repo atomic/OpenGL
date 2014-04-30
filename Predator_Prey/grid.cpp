@@ -29,6 +29,8 @@ void grid::RandomBreed()
 
 bool grid::isMoved() const {return( creature->isMoved);}
 
+bool grid::isStarving() const{return(creature->isStarved());}
+
 void grid::PreyBreed()
 {
     if(creature)

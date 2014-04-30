@@ -51,17 +51,18 @@ bool Colony::isCorner(const int i, const int j)
     return false;
 }
 
-void Colony::scanPerimeters(const int i, const int j)
+void Colony::scanPerimeters(const int i, const int j, const int Type)
 {
     availableGrids.clear();
-    availableFoods.clear();
+    if(Type == 0)
+        availableFoods.clear();
 
     for (int V = i-1; V < i + 2; ++V) {
         for (int H = j-1; H < j + 2; ++H) {
             if(H != V) {
                if(universe[V][H].Status() == 0)
                    availableGrids << QPoint(V,H);
-               else if(universe[V][H].Status() == 1)
+               else if( (universe[V][H].Status() == 1) && (Type == 0)) //only for Predator
                    availableFoods << QPoint(V,H);
             }
         }
@@ -87,25 +88,40 @@ void Colony::refreshPhase()
 void Colony::PredatorPhase()
 {
     /*Corners*/
-    refreshPhase();//NOTE: Move this to MainPhase function later
     for (int i = 1; i < MAX_i + 1; ++i) {
         for (int j = 1; j < MAX_j + 1; ++j) {
             if(universe[i][j].Status() == 2) {
                 if( !universe[i][j].isMoved() ) {
-                    scanPerimeters(i,j);
-                    Advance(i,j);
+                    scanPerimeters(i,j,1);
+                    predatorAdvance(i,j);
+                }
+            }
+        }
+    }
+    //check for moved predators that are starving
+    for (int i = 0; i < MAX_i + 1; ++i)
+        for (int j = 0; j < MAX_j + 1; ++j)
+            if(universe[i][j].Status() == 2)
+                if(universe[i][j].isStarving())
+                    universe[i][j].kill();
+}
+
+void Colony::PreyPhase()
+{
+    //NOTE: finish this
+    for (int i = 1; i < MAX_i + 1; ++i) {
+        for (int j = 1; j < MAX_j + 1; ++j) {
+            if(universe[i][j].Status() == 1) {
+                if( !universe[i][j].isMoved() ) {
+                    scanPerimeters(i,j,0); //type 0 for passive
+                    preyAdvance(i,j);
                 }
             }
         }
     }
 }
 
-void Colony::PreyPhase()
-{
-    //NOTE: finish this
-}
-
-void Colony::Advance(int i, int j)
+void Colony::predatorAdvance(int i, int j)
 {
     //BUG: Grid destructor kept getting called, WHY?
     //NOTE: [SOLVED], your << operator is passed by value, instead of reference
@@ -118,8 +134,9 @@ void Colony::Advance(int i, int j)
     else if(!availableGrids.isEmpty())
         choosenCoordinate = availableGrids[rand() % maxAvbGrids];
 
-    qDebug() << "Moving " << i << "," << j << " to " << choosenCoordinate;
-    universe[i][j] >> universe[choosenCoordinate.x()][choosenCoordinate.y()];
+//    qDebug() << "Moving " << i << "," << j << " to " << choosenCoordinate;
+    if(!availableFoods.isEmpty() || !availableGrids.isEmpty()) //has someone to move
+        universe[i][j] >> universe[choosenCoordinate.x()][choosenCoordinate.y()];
 
 //    //breeding time [NOT WORKING]
 //    scanPerimeters(choosenCoordinate.x(),choosenCoordinate.y()); //update available space to breed
@@ -127,6 +144,24 @@ void Colony::Advance(int i, int j)
 //    choosenCoordinate = availableGrids[rand() % maxAvbGrids];
     //NOTE: Have not finished yet here
 
+}
+
+void Colony::preyAdvance(int i, int j)
+{
+    int maxAvbGrids = availableGrids.size();
+    QPoint choosenCoordinate;
+    if(!availableGrids.isEmpty())
+        choosenCoordinate = availableGrids[rand() % maxAvbGrids];
+
+    if(!availableGrids.isEmpty())//place to move?
+        universe[i][j] >> universe[choosenCoordinate.x()][choosenCoordinate.y()];
+
+//    //breeding time [NOT WORKING]
+    scanPerimeters(choosenCoordinate.x(),choosenCoordinate.y(),0);//type 0 for passive
+    maxAvbGrids = availableGrids.size();
+
+//    choosenCoordinate = availableGrids[rand() % maxAvbGrids];
+    //NOTE: Have not finished yet here
 }
 
 void Colony::breedHere(int i, int j)

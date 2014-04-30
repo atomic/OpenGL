@@ -15,9 +15,12 @@ void Predator::breed(Organism *&target)
 
 void Predator::move(Organism *&target)
 {
+    if(target) //if there exists a food there, can it be Wall?
+        starvation = 0;
+    else
+        starvation++;
     delete target;
     breedCount++;
-    starvation++;
     isMoved = true;
     target = this;
 }
@@ -31,10 +34,4 @@ bool Predator::isStarved() const
 {
     return (starvation == 3 ? true : false);
 }
-
-void Predator::print()
-{
-    cout << "Predator(" << breedCount << "," << starvation << ")";
-}
-
 Predator::~Predator(){}

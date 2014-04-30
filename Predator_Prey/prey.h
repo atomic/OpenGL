@@ -12,7 +12,6 @@ public:
     virtual void move(Organism* &target);
     virtual bool breedReady() const;
     virtual bool isStarved() const;
-    void print();
     virtual ~Prey();
 };
 

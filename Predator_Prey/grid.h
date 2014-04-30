@@ -20,6 +20,7 @@ public:
     void RandomBreed            ();
 
     bool isMoved                () const;
+    bool isStarving             () const;
     void kill                   ();
 
     void refresh                (); //reset the isMoved to false

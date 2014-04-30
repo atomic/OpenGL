@@ -17,24 +17,11 @@ void Prey::move(Organism *&target)
 {
     if(target)
         qDebug() << "ERROR : Your prey move to non empty grid";
+    breedCount++;
     isMoved = true;
     target = this;
 }
 
-bool Prey::breedReady() const
-{
-    return (breedCount == 3 ? true : false);
-}
-
-bool Prey::isStarved() const
-{
-    qDebug() << "ERROR : You should never call isStarved on prey";
-    return false;
-}
-
-void Prey::print()
-{
-    cout << "Prey(" << breedCount << ")";
-}
-
+bool Prey::breedReady() const{return (breedCount == 3 ? true : false);}
+bool Prey::isStarved() const{return false;}
 Prey::~Prey(){}
