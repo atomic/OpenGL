@@ -156,12 +156,14 @@ void Colony::preyAdvance(int i, int j)
     if(!availableGrids.isEmpty())//place to move?
         universe[i][j] >> universe[choosenCoordinate.x()][choosenCoordinate.y()];
 
-//    //breeding time [NOT WORKING]
     scanPerimeters(choosenCoordinate.x(),choosenCoordinate.y(),0);//type 0 for passive
-    maxAvbGrids = availableGrids.size();
-
-//    choosenCoordinate = availableGrids[rand() % maxAvbGrids];
-    //NOTE: Have not finished yet here
+    QPoint breedCoordinate;
+    maxAvbGrids = availableGrids.size(); //available breed grids
+    if(!availableGrids.isEmpty())
+        breedCoordinate = availableGrids[rand() % maxAvbGrids];
+    if(!availableGrids.isEmpty())
+        universe[choosenCoordinate.x()][choosenCoordinate.y()]
+                >= universe[breedCoordinate.x()][breedCoordinate.y()];
 }
 
 void Colony::breedHere(int i, int j)
