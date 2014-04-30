@@ -1,15 +1,28 @@
 #include "organism.h"
 
-Organism::Organism() : breedCount(0), Genotype(0)
+Organism::Organism() : breedCount(0), Genotype(0), starvation(0), isMoved(false)
 {
-    DirGene = rand() % 4; //four types of orientation gene
 }
 
-void Organism::advance(){}
-void Organism::breed(Organism* &target) const{}
-void Organism::move(Organism* &target){}
-
-bool Organism::breedReady() const{}
+void Organism::breed(Organism* &) const{}
+void Organism::move(Organism* &){}
+bool Organism::breedReady() const{ return false;}
+bool Organism::isStarved() const{ return false;}
 void Organism::print(){}
-
 Organism::~Organism(){}
+
+
+//HERE ARE THE WALL
+Wall::Wall() : Organism()
+{
+    Genotype = 'W';
+}
+
+void Wall::breed(Organism *&) const {}
+void Wall::move(Organism *&) {}
+bool Wall::breedReady() const { return false;}
+bool Wall::isStarved() const { return false; }
+void Wall::print() {}
+Wall::~Wall() {}
+
+

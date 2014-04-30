@@ -9,6 +9,14 @@ grid::grid(Organism *newCreature) : creature(newCreature)
 {
 }
 
+void grid::spawnWall()
+{
+    if(creature)
+        qDebug() << "ERROR : some creature stuck at wall before wall being build?";
+    else
+        creature = new Wall;
+}
+
 void grid::RandomBreed()
 {
     int breed = rand() % 3;
@@ -18,6 +26,8 @@ void grid::RandomBreed()
         PredatorBreed();
     //if breed == 2, do nothing, the tile will be NULL
 }
+
+bool grid::isMoved() const {return( creature->isMoved);}
 
 void grid::PreyBreed()
 {
@@ -43,6 +53,11 @@ void grid::kill()
     }
 }
 
+void grid::refresh()
+{
+    creature->isMoved = false;
+}
+
 int grid::Status() const {
     /* If not occupied, return 0, if Prey is there return 1,
      *                            if Predator is there return 2.
@@ -53,6 +68,8 @@ int grid::Status() const {
         return 1;
     else if(creature->Genotype == 'X')
         return 2;
+    else if(creature->Genotype == 'W')
+        return 9;
     qDebug() << "ERROR: Status() grid.cpp no Status returned";
     return 0;
 }

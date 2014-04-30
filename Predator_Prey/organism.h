@@ -14,14 +14,27 @@ public:
     Organism();
     int breedCount; //breed if 3 for prey, 8 for predator
     char Genotype;
-    int DirGene;
-    virtual void advance();
-    virtual void breed(Organism* &target) const;
-    virtual void move(Organism* &target);
+    int starvation;
+    bool isMoved;
+    virtual void breed(Organism* &) const;
+    virtual void move(Organism* &);
     virtual bool breedReady() const;
-
+    virtual bool isStarved() const;
     virtual void print();
     virtual ~Organism();
+};
+
+class Wall : public Organism
+{
+
+public:
+    Wall();
+    virtual void breed(Organism* &) const;
+    virtual void move(Organism* &);
+    virtual bool breedReady() const;
+    virtual bool isStarved() const;
+    virtual void print();
+    virtual ~Wall();
 };
 
 #endif // ORGANISM_H

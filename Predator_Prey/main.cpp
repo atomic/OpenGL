@@ -7,8 +7,9 @@ int main()
     Exodus.print();
     cout << "Now, lets randomize them. \n";
     Exodus.randomize();
+    Exodus.buildWalls();
     Exodus.print();
-    cout << "GO PREDATOR ....";
+    cout << "GO PREDATOR ....\n";
 
     bool done = false;
     while(!done) {
