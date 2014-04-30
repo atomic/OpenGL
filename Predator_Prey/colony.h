@@ -16,15 +16,12 @@ private:
     QList<QPoint> availableFoods; //this list are going to be constantly updated
     int MAX_i;
     int MAX_j;
-    int i_dest, j_dest; //helper variable
 
 public:
     Colony                          (int v = 5, int h = 5);
 
     void buildWalls                  ();
     void randomize                  ();
-    bool isCorner                   (const int i, const int j);
-
     /*
      * This scan perimeters will fill the QLists with coordinates
      * that particular creature can go to

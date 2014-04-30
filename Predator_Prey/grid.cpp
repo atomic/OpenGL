@@ -20,11 +20,10 @@ void grid::spawnWall()
 void grid::RandomBreed()
 {
     int breed = rand() % 5;
-    if(breed == 0) // 0 for Prey, 1 for Predator
+    if(breed == 0 || breed == 2 || breed == 3) // 0 for Prey, 1 for Predator
         PreyBreed();
     else if (breed == 1)
         PredatorBreed();
-    //if breed == 2, do nothing, the tile will be NULL
 }
 
 bool grid::isMoved() const {return( creature->isMoved);}

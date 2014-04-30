@@ -42,15 +42,6 @@ void Colony::randomize()
             universe[i][j].RandomBreed();
 }
 
-bool Colony::isCorner(const int i, const int j)
-{
-    if(i == 0 || i == (MAX_i -1) )
-        return true;
-    if(j == 0 || j == (MAX_j -1) )
-        return true;
-    return false;
-}
-
 void Colony::scanPerimeters(const int i, const int j, const int Type)
 {
     availableGrids.clear();
@@ -66,7 +57,6 @@ void Colony::scanPerimeters(const int i, const int j, const int Type)
             }
         }
     }
-    //NOTE : By the end of this function, avb_grids are either filled or empty
 }
 
 void Colony::mainPhase()
@@ -121,8 +111,11 @@ void Colony::PreyPhase()
 
 void Colony::predatorAdvance(int i, int j)
 {
-    //BUG: Grid destructor kept getting called, WHY?
-    //NOTE: [SOLVED], your << operator is passed by value, instead of reference
+    //BUG: [SOLVED]Grid destructor kept getting called, WHY?
+    //ANSWER: [SOLVED], your << operator is passed by value, instead of reference
+
+    //BUG : Somewhere the diagonal creature is always get killed
+
     int maxAvbGrids = availableGrids.size();
     int maxAvbFoods = availableFoods.size();
     QPoint goHere;
@@ -133,8 +126,8 @@ void Colony::predatorAdvance(int i, int j)
 
     if(!availableFoods.isEmpty() || !availableGrids.isEmpty()) {
         universe[i][j] >> universe[goHere.x()][goHere.y()];
-        if(universe[goHere.x()][goHere.y()].isPregnant())
-            breedAroundHere(goHere.x(),goHere.y());
+//        if(universe[goHere.x()][goHere.y()].isPregnant())
+//            breedAroundHere(goHere.x(),goHere.y());
     }
 }
 
@@ -145,8 +138,8 @@ void Colony::preyAdvance(int i, int j)
     if(!availableGrids.isEmpty()) {
         goHere = availableGrids[rand() % maxAvbGrids];
         universe[i][j] >> universe[goHere.x()][goHere.y()];
-        if(universe[goHere.x()][goHere.y()].isPregnant())
-            breedAroundHere(goHere.x(),goHere.y());
+//        if(universe[goHere.x()][goHere.y()].isPregnant())
+//            breedAroundHere(goHere.x(),goHere.y());
     }
 }
 
