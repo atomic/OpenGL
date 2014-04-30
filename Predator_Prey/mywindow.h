@@ -21,19 +21,12 @@ signals:
     void loadSignal();
 
 public slots:
-    void updateCount();
+//    void updateCount();
 
 private:
-    QSlider *radiusSlider;
-    QCheckBox *checkRotate;
-    QCheckBox *checkTranslate;
-    QPushButton *addButton;
-    QLabel *polygonCount;
-    QPushButton *colorButton;
     QPushButton *exitButton;
     QPushButton *runButton;
     QPushButton *stopButton;
-    QPushButton *loadButton;
     glWidget *canvas;
 
 
