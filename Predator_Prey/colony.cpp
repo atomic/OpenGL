@@ -54,15 +54,14 @@ bool Colony::isCorner(const int i, const int j)
 void Colony::scanPerimeters(const int i, const int j, const int Type)
 {
     availableGrids.clear();
-    if(Type == 0)
-        availableFoods.clear();
+    availableFoods.clear();
 
     for (int V = i-1; V < i + 2; ++V) {
         for (int H = j-1; H < j + 2; ++H) {
             if(H != V) {
                if(universe[V][H].Status() == 0)
                    availableGrids << QPoint(V,H);
-               else if( (universe[V][H].Status() == 1) && (Type == 0)) //only for Predator
+               else if( (universe[V][H].Status() == 1) && (Type == 1)) //only for Predator
                    availableFoods << QPoint(V,H);
             }
         }
@@ -99,8 +98,8 @@ void Colony::PredatorPhase()
         }
     }
     //check for moved predators that are starving
-    for (int i = 0; i < MAX_i + 1; ++i)
-        for (int j = 0; j < MAX_j + 1; ++j)
+    for (int i = 1; i < MAX_i + 1; ++i)
+        for (int j = 1; j < MAX_j + 1; ++j)
             if(universe[i][j].Status() == 2)
                 if(universe[i][j].isStarving())
                     universe[i][j].kill();
@@ -108,7 +107,6 @@ void Colony::PredatorPhase()
 
 void Colony::PreyPhase()
 {
-    //NOTE: finish this
     for (int i = 1; i < MAX_i + 1; ++i) {
         for (int j = 1; j < MAX_j + 1; ++j) {
             if(universe[i][j].Status() == 1) {
@@ -125,48 +123,40 @@ void Colony::predatorAdvance(int i, int j)
 {
     //BUG: Grid destructor kept getting called, WHY?
     //NOTE: [SOLVED], your << operator is passed by value, instead of reference
-
     int maxAvbGrids = availableGrids.size();
     int maxAvbFoods = availableFoods.size();
-    QPoint choosenCoordinate;
+    QPoint goHere;
     if(!availableFoods.isEmpty())
-        choosenCoordinate = availableFoods[rand() % maxAvbFoods];
+        goHere = availableFoods[rand() % maxAvbFoods];
     else if(!availableGrids.isEmpty())
-        choosenCoordinate = availableGrids[rand() % maxAvbGrids];
+        goHere = availableGrids[rand() % maxAvbGrids];
 
-//    qDebug() << "Moving " << i << "," << j << " to " << choosenCoordinate;
-    if(!availableFoods.isEmpty() || !availableGrids.isEmpty()) //has someone to move
-        universe[i][j] >> universe[choosenCoordinate.x()][choosenCoordinate.y()];
-
-//    //breeding time [NOT WORKING]
-//    scanPerimeters(choosenCoordinate.x(),choosenCoordinate.y()); //update available space to breed
-//    maxAvbGrids = availableGrids.size();
-//    choosenCoordinate = availableGrids[rand() % maxAvbGrids];
-    //NOTE: Have not finished yet here
-
+    if(!availableFoods.isEmpty() || !availableGrids.isEmpty()) {
+        universe[i][j] >> universe[goHere.x()][goHere.y()];
+        if(universe[goHere.x()][goHere.y()].isPregnant())
+            breedAroundHere(goHere.x(),goHere.y());
+    }
 }
 
 void Colony::preyAdvance(int i, int j)
 {
     int maxAvbGrids = availableGrids.size();
-    QPoint choosenCoordinate;
-    if(!availableGrids.isEmpty())
-        choosenCoordinate = availableGrids[rand() % maxAvbGrids];
-
-    if(!availableGrids.isEmpty())//place to move?
-        universe[i][j] >> universe[choosenCoordinate.x()][choosenCoordinate.y()];
-
-    scanPerimeters(choosenCoordinate.x(),choosenCoordinate.y(),0);//type 0 for passive
-    QPoint breedCoordinate;
-    maxAvbGrids = availableGrids.size(); //available breed grids
-    if(!availableGrids.isEmpty())
-        breedCoordinate = availableGrids[rand() % maxAvbGrids];
-    if(!availableGrids.isEmpty())
-        universe[choosenCoordinate.x()][choosenCoordinate.y()]
-                >= universe[breedCoordinate.x()][breedCoordinate.y()];
+    QPoint goHere;
+    if(!availableGrids.isEmpty()) {
+        goHere = availableGrids[rand() % maxAvbGrids];
+        universe[i][j] >> universe[goHere.x()][goHere.y()];
+        if(universe[goHere.x()][goHere.y()].isPregnant())
+            breedAroundHere(goHere.x(),goHere.y());
+    }
 }
 
-void Colony::breedHere(int i, int j)
+void Colony::breedAroundHere(int i, int j)
 {
-    universe[i][j] >= universe[i_dest][j_dest]; // breeding? yes
+    QPoint breedHere;
+    scanPerimeters(i,j,0);//type 0 for passive
+    int maxAvbGrids = availableGrids.size(); //available breed grids
+    if(!availableGrids.isEmpty())
+        breedHere = availableGrids[rand() % maxAvbGrids];
+    if(!availableGrids.isEmpty())
+        universe[i][j] >= universe[ breedHere.x()][ breedHere.y()];
 }

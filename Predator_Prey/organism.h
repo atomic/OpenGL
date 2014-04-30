@@ -16,7 +16,7 @@ public:
     char Genotype;
     int starvation;
     bool isMoved;
-    virtual void breed(Organism* &) const;
+    virtual void breed(Organism* &);
     virtual void move(Organism* &);
     virtual bool breedReady() const;
     virtual bool isStarved() const;

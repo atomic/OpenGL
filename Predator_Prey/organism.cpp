@@ -4,7 +4,7 @@ Organism::Organism() : breedCount(0), Genotype(0), starvation(0), isMoved(false)
 {
 }
 
-void Organism::breed(Organism* &) const{}
+void Organism::breed(Organism* &) {}
 void Organism::move(Organism* &){}
 bool Organism::breedReady() const{ return false;}
 bool Organism::isStarved() const{ return false;}

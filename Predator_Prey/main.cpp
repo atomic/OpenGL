@@ -3,19 +3,17 @@
 
 int main()
 {
-    Colony Exodus(20,20);
-    Exodus.print();
-    cout << "Now, lets randomize them. \n";
+//    Colony Exodus(27,40); //optimum screen size
+    Colony Exodus(30,40);
     Exodus.randomize();
     Exodus.buildWalls();
     Exodus.print();
-    cout << "GO PREDATOR ....\n";
 
     bool done = false;
     while(!done) {
+        cin.get();
         Exodus.mainPhase();
         Exodus.print();
-        cin.get();
     }
     return 0;
 }

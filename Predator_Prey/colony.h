@@ -12,8 +12,8 @@ class Colony
 {
 private:
     grid** universe;
-    QList<QPoint> availableGrids;
-    QList<QPoint> availableFoods;
+    QList<QPoint> availableGrids; //this list are going to be constantly updated in scanPerimeter()
+    QList<QPoint> availableFoods; //this list are going to be constantly updated
     int MAX_i;
     int MAX_j;
     int i_dest, j_dest; //helper variable
@@ -30,8 +30,8 @@ public:
      * that particular creature can go to
      */
     void scanPerimeters             (const int i, const int j, const int Type = 0);
-    // Type 0 will scan according agressive(only empty grids)
-    // Type 1 will scan according passive(include food)
+    // Type 0 will scan according passive(only empty grids)
+    // Type 1 will scan according aggressive(include food)
 
 
     void mainPhase                  ();
@@ -41,7 +41,7 @@ public:
 
     void predatorAdvance            (int i, int j);
     void preyAdvance                (int i, int j);
-    void breedHere                  (int i, int j);
+    void breedAroundHere                  (int i, int j);
 
     //DEBUG function
     void print                      ();

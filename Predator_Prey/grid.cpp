@@ -19,7 +19,7 @@ void grid::spawnWall()
 
 void grid::RandomBreed()
 {
-    int breed = rand() % 3;
+    int breed = rand() % 5;
     if(breed == 0) // 0 for Prey, 1 for Predator
         PreyBreed();
     else if (breed == 1)
@@ -29,7 +29,9 @@ void grid::RandomBreed()
 
 bool grid::isMoved() const {return( creature->isMoved);}
 
-bool grid::isStarving() const{return(creature->isStarved());}
+bool grid::isStarving() const{return creature->isStarved();}
+
+bool grid::isPregnant() const {return creature->breedReady();}
 
 void grid::PreyBreed()
 {
@@ -75,14 +77,6 @@ int grid::Status() const {
     qDebug() << "ERROR: Status() grid.cpp no Status returned";
     return 0;
 }
-void grid::print()
-{
-    if(creature)
-        creature->print();
-    else
-        cout << "No creature in this cell";
-    cout << endl;
-}
 
 grid& grid::operator >>(grid &to)
 {
@@ -91,10 +85,9 @@ grid& grid::operator >>(grid &to)
     return to;
 }
 
-grid grid::operator >=(grid &to)
+void grid::operator >=(grid &to)
 {
     creature->breed(to.creature);
-    return to;
 }
 
 const Organism &grid::operator *()
