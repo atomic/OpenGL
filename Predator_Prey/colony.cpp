@@ -2,7 +2,6 @@
 
 Colony::Colony(int v, int h) : MAX_i(v), MAX_j(h)
 {
-    srand(time(NULL)); //libraries included in grid.h
     universe = new grid*[v+2];
     for (int i = 0; i < v + 2; ++i)
         universe[i] = new grid[h + 2];
@@ -49,7 +48,7 @@ void Colony::scanPerimeters(const int i, const int j, const int Type)
 
     for (int V = i-1; V < i + 2; ++V) {
         for (int H = j-1; H < j + 2; ++H) {
-            if(H != V) {
+            if( !(V == i && H == j) ) {
                if(universe[V][H].Status() == 0)
                    availableGrids << QPoint(V,H);
                else if( (universe[V][H].Status() == 1) && (Type == 1)) //only for Predator
@@ -126,8 +125,8 @@ void Colony::predatorAdvance(int i, int j)
 
     if(!availableFoods.isEmpty() || !availableGrids.isEmpty()) {
         universe[i][j] >> universe[goHere.x()][goHere.y()];
-//        if(universe[goHere.x()][goHere.y()].isPregnant())
-//            breedAroundHere(goHere.x(),goHere.y());
+        if(universe[goHere.x()][goHere.y()].isPregnant())
+            breedAroundHere(goHere.x(),goHere.y());
     }
 }
 
@@ -138,8 +137,8 @@ void Colony::preyAdvance(int i, int j)
     if(!availableGrids.isEmpty()) {
         goHere = availableGrids[rand() % maxAvbGrids];
         universe[i][j] >> universe[goHere.x()][goHere.y()];
-//        if(universe[goHere.x()][goHere.y()].isPregnant())
-//            breedAroundHere(goHere.x(),goHere.y());
+        if(universe[goHere.x()][goHere.y()].isPregnant())
+            breedAroundHere(goHere.x(),goHere.y());
     }
 }
 
