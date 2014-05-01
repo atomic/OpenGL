@@ -5,6 +5,7 @@ MyWindow::MyWindow()
     exitButton = new QPushButton("exit");
     runButton = new QPushButton("Run");
     stopButton = new QPushButton("Stop");
+    ptSizeSlider = new QSlider;
 
     canvas = new glWidget;
 
@@ -12,6 +13,8 @@ MyWindow::MyWindow()
     buttonLayout->addWidget(exitButton);
     buttonLayout->addWidget(runButton);
     buttonLayout->addWidget(stopButton);
+    buttonLayout->addWidget(ptSizeSlider);
+
 
 
     QVBoxLayout* overall = new QVBoxLayout;
@@ -24,6 +27,8 @@ MyWindow::MyWindow()
             canvas, SLOT(Run()));
     connect(stopButton, SIGNAL(clicked()),
             canvas, SLOT(Stop()));
+    connect(ptSizeSlider, SIGNAL(valueChanged(int)),
+            canvas, SLOT(setPtSize(int));
 
 //    connect(this, SIGNAL(actionSignal()),
 //            this, SLOT(Action()));

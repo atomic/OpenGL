@@ -24,6 +24,7 @@ public slots:
 //    void updateCount();
 
 private:
+    QSlider *ptSizeSlider;
     QPushButton *exitButton;
     QPushButton *runButton;
     QPushButton *stopButton;

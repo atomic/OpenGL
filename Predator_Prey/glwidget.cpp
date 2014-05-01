@@ -1,7 +1,7 @@
 #include "glwidget.h"
 
 glWidget::glWidget(QWidget *parent) :
-    QGLWidget(parent), i_MAX(30), j_MAX(40)
+    QGLWidget(parent), i_MAX(50), j_MAX(50), r(1)
 {
     //Allocating memories to store coordinates that will be converted to glCoordinates
     glCoord = new QPointF*[i_MAX + 2];
@@ -45,11 +45,13 @@ void glWidget::Stop()
     }
 }
 
+void glWidget::setPtSize(int pt){r = pt; updateGL();}
+
 void glWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    glPointSize((4*r/m));
+    glPointSize((2*r/i_MAX)); //not sure here
     glColor3f(0.0f,1.0f,0.5f);
     glClear(GL_COLOR_BUFFER_BIT);
     for(int i = 1 ;i < m+1; i++) {

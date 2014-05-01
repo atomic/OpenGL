@@ -143,3 +143,5 @@ void Colony::breedAroundHere(int i, int j)
     if(!availableGrids.isEmpty())
         universe[i][j] >= universe[ breedHere.x()][ breedHere.y()];
 }
+
+grid *Colony::operator [](int i) {return universe[i];}
