@@ -16,10 +16,12 @@ glWidget::glWidget(QWidget *parent) :
 void glWidget::convAllCoordinates()
 {
     //NOTE: This is unchecked, conversion may be wrong
-    for (int i = 0; i < i_MAX + 2; ++i)
-        for (int j = 0; j < j_MAX + 2; ++j)
-            glCoord[i][j] = QPointF(static_cast<float>(-1.0 + (2.0/(j_MAX+1))*j,
-                                    static_cast<float>(1.0 - (2.0/(i_MAX+1))*i)));
+    for (int i = 0; i < i_MAX + 2; ++i){
+        for (int j = 0; j < j_MAX + 2; ++j){
+            glCoord[i][j].setX(static_cast<float>(-1.0 + (2.0/(j_MAX+1))*j));
+            glCoord[i][j].setY(static_cast<float>(1.0 - (2.0/(i_MAX+1))*i));
+        }
+    }
 }
 
 void glWidget::initializeGL()
@@ -54,15 +56,18 @@ void glWidget::paintGL()
     glPointSize((2*r/i_MAX)); //not sure here
     glColor3f(0.0f,1.0f,0.5f);
     glClear(GL_COLOR_BUFFER_BIT);
-    for(int i = 1 ;i < m+1; i++) {
-        for(int j=  1 ; j < n+1; j++) {
-               convCoordinates(i,j);
-            if(Exodus[i][j])
-                glColor3f(1.9f, 0.0f, 0.0f);
-            else
+    for(int i = 0 ;  i<i_MAX+2  ; i++) {
+        for(int j=  0 ; j < j_MAX+2; j++) {
+            if(Exodus[i][j]->Status() == 1) //prey
+                glColor3f(0.4f, 1.0f, 0.0f);
+            else if(Exodus[i][j]->Status() == 2) //Predator
+                glColor3f(1.0f, 0.0f, 0.0f);
+            else if(Exodus[i][j]->Status() == 0)
                 glColor3f(0.0f, 0.0f,0.0f);
-             glBegin(GL_POINTS);
-             glVertex2f(x,y);
+            else if(Exodus[i][j]->Status() == 9)
+                glColor3f(0.0f, 0.0f,0.0f);
+            glBegin(GL_POINTS);
+                glVertex2f(glCoord[i][j].x(),glCoord[i][j].y());
             glEnd();
         }
     }

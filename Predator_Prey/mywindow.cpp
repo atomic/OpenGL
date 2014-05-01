@@ -16,7 +16,6 @@ MyWindow::MyWindow()
     buttonLayout->addWidget(ptSizeSlider);
 
 
-
     QVBoxLayout* overall = new QVBoxLayout;
     overall->addWidget(canvas);
     overall->addLayout(buttonLayout);
@@ -28,7 +27,7 @@ MyWindow::MyWindow()
     connect(stopButton, SIGNAL(clicked()),
             canvas, SLOT(Stop()));
     connect(ptSizeSlider, SIGNAL(valueChanged(int)),
-            canvas, SLOT(setPtSize(int));
+            canvas, SLOT(setPtSize(int)));
 
 //    connect(this, SIGNAL(actionSignal()),
 //            this, SLOT(Action()));
