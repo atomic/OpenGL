@@ -1,8 +1,11 @@
 #include "glwidget.h"
 
 glWidget::glWidget(QWidget *parent) :
-    QGLWidget(parent), i_MAX(50), j_MAX(50), r(4)
+    QGLWidget(parent), i_MAX(200), j_MAX(200), r(400)
 {
+    setFocusPolicy(Qt::StrongFocus);
+    timer=NULL;
+    isRun=false;
     //Allocating memories to store coordinates that will be converted to glCoordinates
     glCoord = new QPointF*[i_MAX + 2];
     for (int i = 0; i < i_MAX + 2; ++i)
@@ -11,6 +14,7 @@ glWidget::glWidget(QWidget *parent) :
     Exodus = new Colony(i_MAX,j_MAX);
     Exodus->randomize();
     Exodus->buildWalls();
+    setFocus();
 }
 
 void glWidget::convAllCoordinates()
@@ -34,7 +38,7 @@ void glWidget::Run()
     if(!timer){
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()),
-                this, SLOT(next()));
+                this, SLOT(Next()));
         timer->start(25); //in ms
     }
 }
@@ -80,7 +84,7 @@ void glWidget::resizeGL(int width, int height)
     glLoadIdentity();   // Reset the camera
 }
 
-void glWidget::next()
+void glWidget::Next()
 {
     Exodus->mainPhase();
     updateGL(); // this calls paintGL();
@@ -90,7 +94,7 @@ void glWidget::keyPressEvent(QKeyEvent *e)
 {
     switch(e->key()){
     case Qt::Key_Right:
-        next();
+        Next();
         break;
     case Qt::Key_Left:
         Exodus->randomize();
@@ -101,6 +105,14 @@ void glWidget::keyPressEvent(QKeyEvent *e)
     case Qt::Key_Down: //stops when released
         break;
     case Qt::Key_Space:
+          if(!isRun) {
+            Run();
+            isRun = true;
+        }
+        else {
+            Stop();
+            isRun = false;
+        }
         break;
     case Qt::Key_Escape:
         break;

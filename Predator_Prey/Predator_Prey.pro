@@ -2,7 +2,6 @@ QT += core gui opengl
 QT += widgets
 
 TEMPLATE = app
-#CONFIG += console
 
 SOURCES += main.cpp \
     organism.cpp \
