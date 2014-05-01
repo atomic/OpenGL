@@ -1,14 +1,11 @@
 #include "colony.h"
 
 
-int Colony::getMAX_i() const{return MAX_i;}
-int Colony::getMAX_j() const{return MAX_j;}
-
-Colony::Colony(int v, int h) : MAX_i(v), MAX_j(h)
+Colony::Colony()
 {
-    universe = new grid*[v+2];
-    for (int i = 0; i < v + 2; ++i)
-        universe[i] = new grid[h + 2];
+    universe = new grid*[MAX_i+2];
+    for (int i = 0; i < MAX_i + 2; ++i)
+        universe[i] = new grid[MAX_j + 2];
     //all creature are automatically set to NULL
 }
 

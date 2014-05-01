@@ -5,6 +5,7 @@
 #include <time.h> // for random
 using namespace std;
 
+#include "constants.h"
 #include <QDebug>
 
 class Organism

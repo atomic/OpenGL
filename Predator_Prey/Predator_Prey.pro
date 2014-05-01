@@ -19,5 +19,6 @@ HEADERS += \
     colony.h \
     grid.h \
     mywindow.h \
-    glwidget.h
+    glwidget.h \
+    constants.h
 

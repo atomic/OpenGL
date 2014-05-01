@@ -14,11 +14,9 @@ private:
     grid** universe;
     QList<QPoint> availableGrids; //this list are going to be constantly updated in scanPerimeter()
     QList<QPoint> availableFoods; //this list are going to be constantly updated
-    int MAX_i;
-    int MAX_j;
 
 public:
-    Colony                          (int v = 5, int h = 5);
+    Colony                          ();
 
     void buildWalls                  ();
     void randomize                  ();
@@ -42,8 +40,6 @@ public:
 
     int whatsHere                   (int i, int j) const;
 
-    int getMAX_i() const;
-    int getMAX_j() const;
 };
 
 #endif // COLONY_H

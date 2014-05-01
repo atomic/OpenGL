@@ -21,7 +21,7 @@ signals:
     void loadSignal();
 
 public slots:
-   void updateptSizeText(int value){ptSize->setText(QString("%1").arg(value)); }
+   void updateptSizeText(int value){ptSizeDisplay->setText(QString("%1").arg(value)); }
 //    void updateCount();
 
 private:
@@ -31,8 +31,7 @@ private:
     QPushButton *runButton;
     QPushButton *stopButton;
     glWidget *canvas;
-    QLabel *ptSize;
-
+    QLabel *ptSizeDisplay;
 
 };
 #endif // MYWINDOW_H

@@ -6,12 +6,12 @@ MyWindow::MyWindow()
     nextButton = new QPushButton("Next");
     runButton = new QPushButton("Run");
     stopButton = new QPushButton("Stop");
-    ptSize = new QLabel("Pt.");
+    ptSizeDisplay = new QLabel(" Pt. ");
     ptSizeSlider = new QSlider(Qt::Horizontal);
-
-    ptSizeSlider->setMinimum(250);
+    ptSizeSlider->setMinimum(200);
     ptSizeSlider->setMaximum(500);
-    ptSizeSlider->setValue(400);
+    ptSizeSlider->setValue(POINTSIZE);
+
     canvas = new glWidget;
     QHBoxLayout *buttonLayout = new QHBoxLayout;
     buttonLayout->addWidget(exitButton);
@@ -19,7 +19,7 @@ MyWindow::MyWindow()
     buttonLayout->addWidget(runButton);
     buttonLayout->addWidget(stopButton);
     buttonLayout->addWidget(ptSizeSlider);
-    buttonLayout->addWidget(ptSize);
+    buttonLayout->addWidget(ptSizeDisplay);
 
 
     QVBoxLayout* overall = new QVBoxLayout;
@@ -40,5 +40,5 @@ MyWindow::MyWindow()
             this, SLOT(updateptSizeText(int)));
 
     setLayout(overall);
-    canvas->setMinimumSize(640,640);
+    canvas->setMinimumSize(SCREENX,SCREENY);
 }

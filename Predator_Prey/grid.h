@@ -28,7 +28,7 @@ public:
     int Status                  () const; //0 for unoccupied, 1 for prey, 2 for pred
 
     grid  &operator  >>         (grid &to); //MOVE Operator
-    void operator >=(grid &to); //BREED OPERATOR
+    void operator    >=         (grid &to); //BREED OPERATOR
 
     const Organism& operator *  (); // later can be used to pass something
     //  functions like moves and breed are called by Organism

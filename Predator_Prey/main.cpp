@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
     MyWindow window;
     QTimer::singleShot(2500,splash,SLOT(close()));
-    QTimer::singleShot(2500,&window,SLOT(show()));
+    QTimer::singleShot(2800,&window,SLOT(show()));
 //    window.show();
     return app.exec();
 }

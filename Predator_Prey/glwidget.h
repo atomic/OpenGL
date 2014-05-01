@@ -26,9 +26,8 @@ private:
     QTimer* timer;
     QPointF ScreenPos;
     QPointF** glCoord;
-    int i_MAX,j_MAX;
-    int r; //size of the point?
     bool isRun;
+    int ptSize;
     void convAllCoordinates();
 
 protected:
@@ -38,10 +37,10 @@ protected:
 
 public slots:
 
+    void setPtSize(int NewPtSize) { ptSize = NewPtSize; updateGL(); }
     void Next();
     void Run();
     void Stop();
-    void setPtSize(int pt);
 
 
     void keyPressEvent(QKeyEvent *e);
