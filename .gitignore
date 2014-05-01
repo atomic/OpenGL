@@ -1,4 +1,6 @@
 # Qt-es
+#
+*.o
 
 #*.pro
 *.pro.user

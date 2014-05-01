@@ -2,32 +2,23 @@
 using namespace std;
 
 #include  <QApplication>
+#include <QSplashScreen>
 #include "mywindow.h"
 
 int main(int argc, char *argv[])
 {
-//    Colony Exodus(27,40); //optimum screen size
-    srand(time(NULL)); //libraries included in grid.h
-//    Colony Exodus(30,40);
-//    Exodus.randomize();
-//    Exodus.buildWalls();
-//    Exodus.print();
-
-//    bool done = false;
-//    while(!done) {
-//        cin.get();
-//        Exodus.mainPhase();
-//        Exodus.print();
-//    }
-
-
-
-
     QApplication app(argc,argv);
-    MyWindow window;
-    window.show();
+    srand(time(NULL)); //libraries included in grid.h
 
+    QSplashScreen* splash= new QSplashScreen;
+    splash->setPixmap(QPixmap("../Predator_Prey/splash.jpg"));
+    splash->show();
+    splash->showMessage("Loading world . . .", Qt::AlignBottom, Qt::white);
+
+    MyWindow window;
+    QTimer::singleShot(2500,splash,SLOT(close()));
+    QTimer::singleShot(2500,&window,SLOT(show()));
+//    window.show();
     return app.exec();
-    return 0;
 }
 
