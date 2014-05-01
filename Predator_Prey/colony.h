@@ -40,7 +40,7 @@ public:
     void preyAdvance                (int i, int j);
     void breedAroundHere            (int i, int j);
 
-    grid* operator []               (int i);
+    int whatsHere                   (int i, int j) const;
 
     int getMAX_i() const;
     int getMAX_j() const;

@@ -27,7 +27,7 @@ private:
     QPointF ScreenPos;
     QPointF** glCoord;
     int r; //size of the point?
-    int i_MAX, j_MAX;
+    int i_MAX,j_MAX;
     void convAllCoordinates();
 
 protected:

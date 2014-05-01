@@ -144,4 +144,7 @@ void Colony::breedAroundHere(int i, int j)
         universe[i][j] >= universe[ breedHere.x()][ breedHere.y()];
 }
 
-grid *Colony::operator [](int i) {return universe[i];}
+int Colony::whatsHere(int i, int j) const
+{
+    return universe[i][j].Status();
+}

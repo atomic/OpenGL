@@ -1,7 +1,7 @@
 #include "glwidget.h"
 
 glWidget::glWidget(QWidget *parent) :
-    QGLWidget(parent), i_MAX(50), j_MAX(50), r(1)
+    QGLWidget(parent), i_MAX(50), j_MAX(50), r(4)
 {
     //Allocating memories to store coordinates that will be converted to glCoordinates
     glCoord = new QPointF*[i_MAX + 2];
@@ -35,7 +35,7 @@ void glWidget::Run()
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()),
                 this, SLOT(next()));
-        timer->start(20); //in ms
+        timer->start(25); //in ms
     }
 }
 
@@ -57,15 +57,15 @@ void glWidget::paintGL()
     glColor3f(0.0f,1.0f,0.5f);
     glClear(GL_COLOR_BUFFER_BIT);
     for(int i = 0 ;  i<i_MAX+2  ; i++) {
-        for(int j=  0 ; j < j_MAX+2; j++) {
-            if(Exodus[i][j]->Status() == 1) //prey
+        for(int j =  0 ; j < j_MAX+2; j++) {
+            if(Exodus->whatsHere(i,j) == 1) //prey
                 glColor3f(0.4f, 1.0f, 0.0f);
-            else if(Exodus[i][j]->Status() == 2) //Predator
+            else if(Exodus->whatsHere(i,j) == 2) //Predator
                 glColor3f(1.0f, 0.0f, 0.0f);
-            else if(Exodus[i][j]->Status() == 0)
+            else if(Exodus->whatsHere(i,j) == 0)
                 glColor3f(0.0f, 0.0f,0.0f);
-            else if(Exodus[i][j]->Status() == 9)
-                glColor3f(0.0f, 0.0f,0.0f);
+            else if(Exodus->whatsHere(i,j) == 9)
+                glColor3f(0.3f, 0.7f,0.4f);
             glBegin(GL_POINTS);
                 glVertex2f(glCoord[i][j].x(),glCoord[i][j].y());
             glEnd();
@@ -90,8 +90,11 @@ void glWidget::keyPressEvent(QKeyEvent *e)
 {
     switch(e->key()){
     case Qt::Key_Right:
+        next();
         break;
     case Qt::Key_Left:
+        Exodus->randomize();
+        updateGL();
         break;
     case Qt::Key_Up: //run when its pressed
         break;

@@ -19,6 +19,7 @@ void grid::spawnWall()
 
 void grid::RandomBreed()
 {
+    kill();
     int breed = rand() % 5;
     if(breed == 0 || breed == 2 || breed == 3) // 0 for Prey, 1 for Predator
         PreyBreed();

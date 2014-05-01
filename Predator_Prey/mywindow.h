@@ -26,6 +26,7 @@ public slots:
 private:
     QSlider *ptSizeSlider;
     QPushButton *exitButton;
+    QPushButton *nextButton;
     QPushButton *runButton;
     QPushButton *stopButton;
     glWidget *canvas;
