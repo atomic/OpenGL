@@ -3,6 +3,7 @@
 
 #include "prey.h"
 #include "predator.h"
+#include "mutalisk.h"
 
 class grid
 {
@@ -17,6 +18,8 @@ public:
     grid                        (Organism* newCreature);
 
     void spawnWall              ();
+    void spawnMutaliskHead      ();
+    void spawnMutaliskBody      ();
     void RandomBreed            ();
 
     bool isMoved                () const;

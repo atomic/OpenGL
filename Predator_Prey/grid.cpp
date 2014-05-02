@@ -11,10 +11,21 @@ grid::grid(Organism *newCreature) : creature(newCreature)
 
 void grid::spawnWall()
 {
-    if(creature)
-        qDebug() << "ERROR : some creature stuck at wall before wall being build?";
+    if(creature) qDebug() << "ERROR : some creature stuck at wall before wall being build?";
     else
         creature = new Wall;
+}
+
+void grid::spawnMutaliskHead()
+{
+    if(creature) qDebug() << "ERROR: forgot to delete creature before making mutaliskH";
+    else creature = new Mutalisk_H;
+}
+
+void grid::spawnMutaliskBody()
+{
+    if(creature) qDebug() << "ERROR: forgot to delete creature before making mutaliskB";
+    else creature = new Mutalisk_B;
 }
 
 void grid::RandomBreed()
@@ -88,6 +99,7 @@ QPoint grid::getBodyCenter(const int i, const int j)
         default:
             break;
     }
+    return QPoint();
 }
 
 grid& grid::operator >>(grid &to)

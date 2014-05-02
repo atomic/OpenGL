@@ -3,7 +3,6 @@
 #include "grid.h"
 
 #include <QList>
-#include <QPoint>
 
 class Colony
 {
@@ -11,6 +10,7 @@ private:
     grid** universe;
     QList<QPoint> availableGrids; //this list are going to be constantly updated in scanPerimeter()
     QList<QPoint> availableFoods; //this list are going to be constantly updated
+    QPoint aheadPoint;
 
 public:
     Colony                          ();
@@ -27,9 +27,13 @@ public:
 
 
     /* These are the function for Mutalisk */
-    bool scanDirection              (const int i, const int j, const Dir on);
+    void spawnMutaliskBody          (const int i, const int j);// spawn 9x9 grid
+    void spawnMutalisk              (const int i, const int j);// call spawn MutaliskBody
+    bool scanAhead                  (const int i, const int j, const Dir on);
+    Dir findHeadDirection           (const QPoint body, const QPoint head);
+    QPoint whereIsHead              (const QPoint body, const Dir on);
     // This scan is scan in front of direction for NOT WALL
-    bool scanMTKRotateSpace(const int i, const int j, Dir &here);
+    Dir scanMTKRotateSpace          (const int i, const int j);//i,j is the head position
     // This scan available direction for Mutalisk to rotate
 
 
@@ -38,6 +42,7 @@ public:
     void PredatorPhase              ();
     void PreyPhase                  ();
     void MutaliskPhase              ();
+    void MutaliskMarch              (const int i, const int j); //location of its head
 
     void predatorAdvance            (int i, int j);
     void preyAdvance                (int i, int j);

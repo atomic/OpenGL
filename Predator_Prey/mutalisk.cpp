@@ -4,10 +4,10 @@
 Mutalisk_H::Mutalisk_H() : Organism()
 {
     Genotype = MTLK_H;
-    Orientation = Dir(rand() % 4 + 1); //between 1 to
+    orientation = Dir(rand() % 4 + 1); //between 1 to
 }
 
-Mutalisk_H::move(Organism *& target)
+void Mutalisk_H::move(Organism *& target)
 {
     if(target) //if there exists a food there, can it be Wall?
         starvation = 0;
@@ -18,6 +18,9 @@ Mutalisk_H::move(Organism *& target)
     isMoved = true;
     target = this;
 }
+
+Mutalisk_H::~Mutalisk_H(){}
+Mutalisk_B::~Mutalisk_B(){}
 
 
 

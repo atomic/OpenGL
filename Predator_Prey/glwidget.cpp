@@ -14,6 +14,7 @@ glWidget::glWidget(QWidget *parent) :
     Exodus = new Colony();
     Exodus->randomize();
     Exodus->buildWalls();
+    Exodus->spawnMutalisk(25,25);
     setFocus();
 }
 
@@ -39,7 +40,7 @@ void glWidget::Run()
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()),
                 this, SLOT(Next()));
-        timer->start(5); //in ms, faster, better?
+        timer->start(TIMERDELAY); //in ms, faster, better?
     }
 }
 
@@ -62,13 +63,17 @@ void glWidget::paintGL()
     for(int i = 0 ;  i<MAX_i+2  ; i++) {
         for(int j =  0 ; j < MAX_j+2; j++) {
             if(Exodus->whatsHere(i,j) == PREY) //prey
-                glColor3f(0.4f, 1.0f, 0.0f);
+                glColor3f(0.0f, 0.8f, 0.2f);
             else if(Exodus->whatsHere(i,j) == PREDATOR) //Predator
-                glColor3f(1.0f, 0.0f, 0.0f);
+                glColor3f(0.6f, 0.6f, 0.0f);
             else if(Exodus->whatsHere(i,j) == 0)
                 glColor3f(0.0f, 0.0f,0.0f);
             else if(Exodus->whatsHere(i,j) == WALL)
                 glColor3f(0.3f, 0.7f,0.4f);
+            else if(Exodus->whatsHere(i,j) == MTLK_B)
+                glColor3f(1.0f, 0.2f,0.4f);
+            else if(Exodus->whatsHere(i,j) == MTLK_H)
+                glColor3f(1.0f, 0.0f,0.0f);
             glBegin(GL_POINTS);
                 glVertex2f(glCoord[i][j].x(),glCoord[i][j].y());
             glEnd();

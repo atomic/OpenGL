@@ -7,6 +7,7 @@ using namespace std;
 
 #include "constants.h"
 #include <QDebug>
+#include <QPoint>
 
 class Organism
 {
@@ -16,8 +17,8 @@ public:
     int breedCount; //breed if 3 for prey, 8 for predator
     Gene Genotype;
     int starvation;
-    Dir orientation; //only used by mutalisk head
     bool isMoved;
+    Dir orientation; //only used by mutalisk head
     virtual void breed(Organism* &);
     virtual void move(Organism* &);
     virtual bool breedReady() const;

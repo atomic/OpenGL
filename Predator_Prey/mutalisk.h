@@ -6,9 +6,8 @@ class Mutalisk_H : public Organism
 {
 public:
     Mutalisk_H();
-    virtual move(Organism *&target);
-    virtual bool isStarved() const;
-    virtual ~Organism();
+    virtual void move(Organism *&target);
+    virtual ~Mutalisk_H();
     //not use full actually
 };
 
@@ -16,5 +15,6 @@ class Mutalisk_B : public Organism
 {
 public:
     Mutalisk_B();
+    virtual ~Mutalisk_B();
 };
 #endif // MUTALISK_H

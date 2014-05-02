@@ -1,10 +1,14 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-const int MAX_i = 150;
-const int MAX_j = 300;
+//ratio combination : 150, 300 for 225 ptsize
+//ratio combination : 50, 100 for
+const int MAX_i = 50;
+const int MAX_j = 100;
 
-const int POINTSIZE = 225;
+const int POINTSIZE = 200;
+
+const int TIMERDELAY = 25;
 
 const int SCREENX = 800;
 const int SCREENY = 400;
