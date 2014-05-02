@@ -1,6 +1,6 @@
 #include "organism.h"
 
-Organism::Organism() : breedCount(0), Genotype(0), starvation(0), isMoved(false)
+Organism::Organism() : breedCount(0), starvation(0), isMoved(false), orientation(NONE)
 {
 }
 
@@ -15,7 +15,7 @@ Organism::~Organism(){}
 //HERE ARE THE WALL
 Wall::Wall() : Organism()
 {
-    Genotype = 'W';
+    Genotype = WALL;
 }
 
 void Wall::breed(Organism *&) const {}

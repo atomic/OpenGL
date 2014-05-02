@@ -2,7 +2,7 @@
 
 Predator::Predator() : Organism()
 {
-    Genotype = 'X';
+    Genotype = PREDATOR;
 }
 
 void Predator::breed(Organism *&target)

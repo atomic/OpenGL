@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     colony.cpp \
     grid.cpp \
     mywindow.cpp \
-    glwidget.cpp
+    glwidget.cpp \
+    mutalisk.cpp
 
 HEADERS += \
     organism.h \
@@ -20,5 +21,6 @@ HEADERS += \
     grid.h \
     mywindow.h \
     glwidget.h \
-    constants.h
+    constants.h \
+    mutalisk.h
 

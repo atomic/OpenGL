@@ -61,13 +61,13 @@ void glWidget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT);
     for(int i = 0 ;  i<MAX_i+2  ; i++) {
         for(int j =  0 ; j < MAX_j+2; j++) {
-            if(Exodus->whatsHere(i,j) == 1) //prey
+            if(Exodus->whatsHere(i,j) == PREY) //prey
                 glColor3f(0.4f, 1.0f, 0.0f);
-            else if(Exodus->whatsHere(i,j) == 2) //Predator
+            else if(Exodus->whatsHere(i,j) == PREDATOR) //Predator
                 glColor3f(1.0f, 0.0f, 0.0f);
             else if(Exodus->whatsHere(i,j) == 0)
                 glColor3f(0.0f, 0.0f,0.0f);
-            else if(Exodus->whatsHere(i,j) == 9)
+            else if(Exodus->whatsHere(i,j) == WALL)
                 glColor3f(0.3f, 0.7f,0.4f);
             glBegin(GL_POINTS);
                 glVertex2f(glCoord[i][j].x(),glCoord[i][j].y());

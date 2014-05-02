@@ -57,10 +57,7 @@ void grid::kill()
     }
 }
 
-void grid::refresh()
-{
-    creature->isMoved = false;
-}
+void grid::refresh() {creature->isMoved = false;}
 
 int grid::Status() const {
     /* If not occupied, return 0, if Prey is there return 1,
@@ -68,14 +65,29 @@ int grid::Status() const {
      */
     if(!creature)
         return 0;
-    if(creature->Genotype == 'O')
-        return 1;
-    else if(creature->Genotype == 'X')
-        return 2;
-    else if(creature->Genotype == 'W')
-        return 9;
-    qDebug() << "ERROR: Status() grid.cpp no Status returned";
-    return 0;
+    return creature->Genotype;
+}
+
+Dir grid::getOrientaton() const{return creature->orientation;}
+
+QPoint grid::getBodyCenter(const int i, const int j)
+{
+    switch (creature->orientation) {
+        case UP:
+            return QPoint(i, j - 2);
+            break;
+        case DOWN:
+            return QPoint(i, j + 2);
+            break;
+        case LEFT:
+            return QPoint(i - 2, j);
+            break;
+        case RIGHT:
+            return QPoint(i + 2, j);
+            break;
+        default:
+            break;
+    }
 }
 
 grid& grid::operator >>(grid &to)

@@ -25,7 +25,10 @@ public:
     void kill                   ();
 
     void refresh                (); //reset the isMoved to false
-    int Status                  () const; //0 for unoccupied, 1 for prey, 2 for pred
+    int Status() const; //0 for unoccupied, 1 for prey, 2 for pred
+    Dir getOrientaton           () const;
+    QPoint getBodyCenter        (const int i, const int j);
+
 
     grid  &operator  >>         (grid &to); //MOVE Operator
     void operator    >=         (grid &to); //BREED OPERATOR

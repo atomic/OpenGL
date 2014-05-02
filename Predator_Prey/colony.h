@@ -5,9 +5,6 @@
 #include <QList>
 #include <QPoint>
 
-enum Dir { NONE = 0, LEFT = 1, RIGHT = 2,
-                 UP = 3, DOWN = 4}; //testing still
-
 class Colony
 {
 private:
@@ -29,15 +26,24 @@ public:
     // Type 1 will scan according aggressive(include food)
 
 
+    /* These are the function for Mutalisk */
+    bool scanDirection              (const int i, const int j, const Dir on);
+    // This scan is scan in front of direction for NOT WALL
+    bool scanMTKRotateSpace(const int i, const int j, Dir &here);
+    // This scan available direction for Mutalisk to rotate
+
+
     void mainPhase                  ();
     void refreshPhase               ();
     void PredatorPhase              ();
     void PreyPhase                  ();
+    void MutaliskPhase              ();
 
     void predatorAdvance            (int i, int j);
     void preyAdvance                (int i, int j);
     void breedAroundHere            (int i, int j);
 
+    void rotateMutalisk             (const int i, const int j);
     int whatsHere                   (int i, int j) const;
 
 };

@@ -37,13 +37,43 @@ void Colony::scanPerimeters(const int i, const int j, const int Type)
     for (int V = i-1; V < i + 2; ++V) {
         for (int H = j-1; H < j + 2; ++H) {
             if( !(V == i && H == j) ) {
-               if(universe[V][H].Status() == 0)
+               if(universe[V][H].Status() == 0) //if empty
                    availableGrids << QPoint(V,H);
-               else if( (universe[V][H].Status() == 1) && (Type == 1)) //only for Predator
+               else if( (universe[V][H].Status() == PREY) && (Type == 1)) //only for Predator
                    availableFoods << QPoint(V,H);
             }
         }
     }
+}
+
+bool Colony::scanDirection(const int i, const int j, const Dir on)
+{
+    switch (on) {
+    case UP:
+        return (universe[i-1][j].Status() != WALL) ? true : false;
+        break;
+    case DOWN:
+        return (universe[i+1][j].Status() != WALL) ? true : false;
+        break;
+    case LEFT:
+        return (universe[i][j-1].Status() != WALL) ? true : false;
+        break;
+    case RIGHT:
+        return (universe[i][j+1].Status() != WALL) ? true : false;
+        break;
+    default:
+        break;
+    }
+}
+
+bool Colony::scanMTKRotateSpace(const int i, const int j, Dir &here)
+{
+    availableGrids.clear();
+    here = NONE;
+    QPoint center = universe[i][j].getBodyCenter(i,j); //its inefficient, but whatever
+    Dir initialOrientation = universe[i][j].getOrientaton();
+
+
 }
 
 void Colony::mainPhase()
@@ -57,7 +87,9 @@ void Colony::refreshPhase()
 {
     for (int i = 1; i < MAX_i + 1; ++i)
         for (int j = 1; j < MAX_j + 1; ++j)
-            if(universe[i][j].Status() == 1 || universe[i][j].Status() == 2)
+            if(universe[i][j].Status() == PREY
+                    || universe[i][j].Status() == PREDATOR
+                    || universe[i][j].Status() == MTLK_H)
                 universe[i][j].refresh();
 }
 
@@ -66,7 +98,7 @@ void Colony::PredatorPhase()
     /*Corners*/
     for (int i = 1; i < MAX_i + 1; ++i) {
         for (int j = 1; j < MAX_j + 1; ++j) {
-            if(universe[i][j].Status() == 2) {
+            if(universe[i][j].Status() == PREDATOR) {
                 if( !universe[i][j].isMoved() ) {
                     scanPerimeters(i,j,1);
                     predatorAdvance(i,j);
@@ -77,7 +109,7 @@ void Colony::PredatorPhase()
     //check for moved predators that are starving
     for (int i = 1; i < MAX_i + 1; ++i)
         for (int j = 1; j < MAX_j + 1; ++j)
-            if(universe[i][j].Status() == 2)
+            if(universe[i][j].Status() == PREDATOR)
                 if(universe[i][j].isStarving())
                     universe[i][j].kill();
 }
@@ -86,7 +118,7 @@ void Colony::PreyPhase()
 {
     for (int i = 1; i < MAX_i + 1; ++i) {
         for (int j = 1; j < MAX_j + 1; ++j) {
-            if(universe[i][j].Status() == 1) {
+            if(universe[i][j].Status() == PREY) {
                 if( !universe[i][j].isMoved() ) {
                     scanPerimeters(i,j,0); //type 0 for passive
                     preyAdvance(i,j);
@@ -139,6 +171,11 @@ void Colony::breedAroundHere(int i, int j)
         breedHere = availableGrids[rand() % maxAvbGrids];
     if(!availableGrids.isEmpty())
         universe[i][j] >= universe[ breedHere.x()][ breedHere.y()];
+}
+
+void Colony::rotateMutalisk(const int i, const int j)
+{
+
 }
 
 int Colony::whatsHere(int i, int j) const

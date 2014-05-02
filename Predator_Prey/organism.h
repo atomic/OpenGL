@@ -10,11 +10,13 @@ using namespace std;
 
 class Organism
 {
+
 public:
     Organism();
     int breedCount; //breed if 3 for prey, 8 for predator
-    char Genotype;
+    Gene Genotype;
     int starvation;
+    Dir orientation; //only used by mutalisk head
     bool isMoved;
     virtual void breed(Organism* &);
     virtual void move(Organism* &);
