@@ -30,7 +30,6 @@ public:
     void refresh                (); //reset the isMoved to false
     int Status() const; //0 for unoccupied, 1 for prey, 2 for pred
     Dir getOrientaton           () const;
-    QPoint getBodyCenter        (const int i, const int j);
 
 
     grid  &operator  >>         (grid &to); //MOVE Operator

@@ -150,10 +150,31 @@ QPoint Colony::whereIsHead(const QPoint body ,const Dir on)
     return QPoint();
 }
 
+QPoint Colony::getBodyCenter(const int i, const int j)
+{
+    switch (universe[i][j].getOrientaton()) {
+        case UP:
+            return QPoint(i, j - 2);
+            break;
+        case DOWN:
+            return QPoint(i, j + 2);
+            break;
+        case LEFT:
+            return QPoint(i - 2, j);
+            break;
+        case RIGHT:
+            return QPoint(i + 2, j);
+            break;
+        default:
+            break;
+    }
+    return QPoint();//in case no orientation
+}
+
 Dir Colony::scanMTKRotateSpace(const int i, const int j)
 {
     availableGrids.clear();
-    QPoint center = universe[i][j].getBodyCenter(i,j); //its inefficient, but whatever
+    QPoint center = getBodyCenter(i,j); //its inefficient, but whatever
     availableGrids << QPoint(center.x() - 2 ,center.y() );
     availableGrids << QPoint(center.x() + 2 ,center.y() );
     availableGrids << QPoint(center.x() ,center.y() + 2 );
@@ -177,9 +198,9 @@ Dir Colony::scanMTKRotateSpace(const int i, const int j)
 void Colony::mainPhase()
 {
     refreshPhase();
-    MutaliskPhase();
     PredatorPhase();
     PreyPhase();
+    MutaliskPhase();
 }
 
 void Colony::refreshPhase()
@@ -244,22 +265,55 @@ void Colony::MutaliskPhase()
 
 void Colony::MutaliskMarch(const int i, const int j)
 {
-    //go forward, and destroy surrounding
-    universe[i][j] >> universe[aheadPoint.x()][aheadPoint.y()];
-    switch (universe[aheadPoint.x()][aheadPoint.y()].getOrientaton()){
+    //go forward, and destroy surrounding and move body
+    //aheadPoint is update by the scanAhead
+    QPoint tempBodyCoor = getBodyCenter(i,j);
+    Dir tempDir = universe[i][j].getOrientaton();
+    switch (universe[i][j].getOrientaton()){
         case UP:
         case DOWN:
-            universe[aheadPoint.x()][aheadPoint.y() - 1].kill();
-            universe[aheadPoint.x()][aheadPoint.y() + 1].kill();
+            universe[i][j - 1].kill();
+            universe[i][j + 1].kill();
             break;
         case LEFT:
         case RIGHT:
-            universe[aheadPoint.x() - 1][aheadPoint.y()];
-            universe[aheadPoint.x() + 1][aheadPoint.y()];
+            universe[i-1][j].kill();
+            universe[i+1][j].kill();
             break;
         default:
             break;
     }
+    universe[i][j] >> universe[aheadPoint.x()][aheadPoint.y()];
+    MutaliskBodyMarch(tempBodyCoor,tempDir);
+}
+
+void Colony::MutaliskBodyMarch(const QPoint &bodyCoor, const Dir &on)
+{
+    switch (on) {
+    case UP:
+        for (int i = bodyCoor.x() - 1; i < bodyCoor.x() + 2; ++i)
+            for (int j = bodyCoor.y() - 1; j < bodyCoor.y() + 2; ++j)
+                universe[i][j] >> universe[i-1][j];
+        break;
+    case DOWN:
+        for (int i = bodyCoor.x() + 1; i > bodyCoor.x() - 2; --i)
+            for (int j = bodyCoor.y() - 1; j < bodyCoor.y() + 2; ++j)
+                universe[i][j] >> universe[i+1][j];
+        break;
+    case LEFT:
+        for (int j = bodyCoor.y() - 1; j < bodyCoor.y() + 2; ++j)
+            for (int i = bodyCoor.x() - 1; i < bodyCoor.x() + 2; ++i)
+                universe[i][j] >> universe[i][j-1];
+        break;
+    case RIGHT:
+        for (int j = bodyCoor.y() + 1; j > bodyCoor.y() - 2; --j)
+            for (int i = bodyCoor.x() - 1; i < bodyCoor.x() + 2; ++i)
+                universe[i][j] >> universe[i][j+1];
+        break;
+    default:
+        break;
+    }
+
 }
 
 void Colony::predatorAdvance(int i, int j)

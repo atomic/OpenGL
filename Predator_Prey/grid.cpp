@@ -81,27 +81,6 @@ int grid::Status() const {
 
 Dir grid::getOrientaton() const{return creature->orientation;}
 
-QPoint grid::getBodyCenter(const int i, const int j)
-{
-    switch (creature->orientation) {
-        case UP:
-            return QPoint(i, j - 2);
-            break;
-        case DOWN:
-            return QPoint(i, j + 2);
-            break;
-        case LEFT:
-            return QPoint(i - 2, j);
-            break;
-        case RIGHT:
-            return QPoint(i + 2, j);
-            break;
-        default:
-            break;
-    }
-    return QPoint();
-}
-
 grid& grid::operator >>(grid &to)
 {
     creature->move(to.creature); //this handle memory allocation

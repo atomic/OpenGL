@@ -15,6 +15,7 @@ class Mutalisk_B : public Organism
 {
 public:
     Mutalisk_B();
+    virtual void move(Organism *&target);
     virtual ~Mutalisk_B();
 };
 #endif // MUTALISK_H

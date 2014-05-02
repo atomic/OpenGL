@@ -10,21 +10,24 @@ Mutalisk_H::Mutalisk_H() : Organism()
 void Mutalisk_H::move(Organism *& target)
 {
     if(target) //if there exists a food there, can it be Wall?
-        starvation = 0;
-    else
-        starvation++;
-    delete target;
-    breedCount++; //mutalisk gonna breed? probably not
+        delete target;
+    isMoved = true;
+    target = this;
+}
+Mutalisk_H::~Mutalisk_H(){}
+
+/* MUTALISK B Part */
+
+Mutalisk_B::Mutalisk_B() : Organism(){Genotype = MTLK_B;}
+
+void Mutalisk_B::move(Organism *&target)
+{
+    if(target)
+        delete target;
     isMoved = true;
     target = this;
 }
 
-Mutalisk_H::~Mutalisk_H(){}
+
+
 Mutalisk_B::~Mutalisk_B(){}
-
-
-
-Mutalisk_B::Mutalisk_B() : Organism()
-{
-    Genotype = MTLK_B;
-}

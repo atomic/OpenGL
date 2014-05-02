@@ -32,6 +32,7 @@ public:
     bool scanAhead                  (const int i, const int j, const Dir on);
     Dir findHeadDirection           (const QPoint body, const QPoint head);
     QPoint whereIsHead              (const QPoint body, const Dir on);
+    QPoint getBodyCenter            (const int i, const int j);
     // This scan is scan in front of direction for NOT WALL
     Dir scanMTKRotateSpace          (const int i, const int j);//i,j is the head position
     // This scan available direction for Mutalisk to rotate
@@ -43,6 +44,7 @@ public:
     void PreyPhase                  ();
     void MutaliskPhase              ();
     void MutaliskMarch              (const int i, const int j); //location of its head
+    void MutaliskBodyMarch          (const QPoint &bodyCoor, const Dir &on); //location of body
 
     void predatorAdvance            (int i, int j);
     void preyAdvance                (int i, int j);
