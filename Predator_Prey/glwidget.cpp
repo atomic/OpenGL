@@ -15,7 +15,7 @@ glWidget::glWidget(QWidget *parent) :
     Exodus->randomize();
     Exodus->buildWalls();
 
-
+    setUpColorsLevel();
     setFocus();
 }
 
@@ -32,15 +32,15 @@ void glWidget::convAllCoordinates()
 
 void glWidget::setUpColorsLevel()
 {
+    MTLK_H_colors << RGBcolors(9.0f, 0.0f,0.0f);//HEAD_LV_0 -- red
     MTLK_H_colors << RGBcolors(1.0f, 0.0f,0.0f);//HEAD_LV_1 -- red
     MTLK_H_colors << RGBcolors(1.0f, 0.6f,0.0f);//HEAD_LV_2 -- orang
     MTLK_H_colors << RGBcolors(1.0f, 1.0f,0.0f);//HEAD_LV_3 -- gold
 
+    MTLK_B_colors << RGBcolors(0.6f, 0.2f,0.6);//BODY_LV_0 -- purple
     MTLK_B_colors << RGBcolors(0.6f, 0.2f,0.6);//BODY_LV_1 -- purple
     MTLK_B_colors << RGBcolors(0.4f, 0.6f, 1.0f);//BODY_LV_2 -- sea blue
     MTLK_B_colors << RGBcolors(0.4f, 1.0f,1.0f);//BODY_LV_3 -- light Blue
-    qDebug() << MTLK_H_colors;
-    qDebug() << MTLK_B_colors;
 }
 
 void glWidget::initializeGL()
@@ -87,13 +87,18 @@ void glWidget::paintGL()
                 glColor3f(0.3f, 0.7f,0.4f);
                 break;
             case MTLK_H:
-                glColor3f(1.0f, 0.0f,0.0f);
+//                glColor3f(1.0f, 0.0f,0.0f);
+                level_temp = Exodus->getLevel(i,j);
+                glColor3f(MTLK_H_colors[level_temp][0],
+                          MTLK_H_colors[level_temp][1],
+                          MTLK_H_colors[level_temp][2]);
                 break;
             case MTLK_B:
-                level_temp = Exodus->getLevel(i,j);
-                glColor3f(MTLK_B_colors[level_temp][0],
-                          MTLK_B_colors[level_temp][1],
-                          MTLK_B_colors[level_temp][2]);
+                //BUG: Body can never level up, is there a way to tell the body to level up,
+                //when Head is leveling up?
+                glColor3f(MTLK_B_colors[1][0],
+                          MTLK_B_colors[1][1],
+                          MTLK_B_colors[1][2]);
                 break;
             default:
                 glColor3f(0.0f, 0.0f,0.0f); //if empty
@@ -142,7 +147,6 @@ void glWidget::keyPressEvent(QKeyEvent *e)
             Stop();
             isRun = false;
         }
-          Exodus->spawnRandomMutalisk();
         break;
     case Qt::Key_M:
         Exodus->spawnRandomMutalisk();
