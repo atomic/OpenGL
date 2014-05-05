@@ -38,7 +38,7 @@ public:
     void rotateMutalisk             (const int i, const int j);
     // NOTE: no need to scan, there will always be a space to rotate
     void MutaliskMarch              (const int i, const int j); //location of its head
-    void MutaliskBodyMarch          (const QPoint &bodyCoor, const Dir &on); //location of body
+    void MutaliskBodyMarch          (const QPoint &bodyCoor, const Dir &on ,const int headLV); //location of body
     bool scanAhead                  (const int i, const int j, const Dir on);
     bool scanDeploymentArea         (const int i, const int j); //scan 5x5 grid for deployment
     // This will scan 4x4 area for no mutalisk around, will crash if i,j DNE

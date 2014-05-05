@@ -310,31 +310,45 @@ void Colony::MutaliskMarch(const int i, const int j)
             break;
     }
     universe[i][j] >> universe[aheadPoint.x()][aheadPoint.y()];
-    MutaliskBodyMarch(tempBodyCoor,tempDir);
+    //after Head kill and evolve, set all of its body level to the same level
+    //the head has
+    MutaliskBodyMarch(tempBodyCoor,tempDir,universe[aheadPoint.x()][aheadPoint.y()].getLevel());
 }
 
-void Colony::MutaliskBodyMarch(const QPoint &bodyCoor, const Dir &on)
+void Colony::MutaliskBodyMarch(const QPoint &bodyCoor, const Dir &on, const int headLV)
 {
     switch (on) {
     case UP:
-        for (int i = bodyCoor.x() - 1; i < bodyCoor.x() + 2; ++i)
-            for (int j = bodyCoor.y() - 1; j < bodyCoor.y() + 2; ++j)
+        for (int i = bodyCoor.x() - 1; i < bodyCoor.x() + 2; ++i) {
+            for (int j = bodyCoor.y() - 1; j < bodyCoor.y() + 2; ++j) {
+                universe[i][j].setLevel(headLV);
                 universe[i][j] >> universe[i-1][j];
+            }
+        }
         break;
     case DOWN:
-        for (int i = bodyCoor.x() + 1; i > bodyCoor.x() - 2; --i)
-            for (int j = bodyCoor.y() - 1; j < bodyCoor.y() + 2; ++j)
+        for (int i = bodyCoor.x() + 1; i > bodyCoor.x() - 2; --i) {
+            for (int j = bodyCoor.y() - 1; j < bodyCoor.y() + 2; ++j) {
+                universe[i][j].setLevel(headLV);
                 universe[i][j] >> universe[i+1][j];
+            }
+        }
         break;
     case LEFT:
-        for (int j = bodyCoor.y() - 1; j < bodyCoor.y() + 2; ++j)
-            for (int i = bodyCoor.x() - 1; i < bodyCoor.x() + 2; ++i)
+        for (int j = bodyCoor.y() - 1; j < bodyCoor.y() + 2; ++j) {
+            for (int i = bodyCoor.x() - 1; i < bodyCoor.x() + 2; ++i) {
+                universe[i][j].setLevel(headLV);
                 universe[i][j] >> universe[i][j-1];
+            }
+        }
         break;
     case RIGHT:
-        for (int j = bodyCoor.y() + 1; j > bodyCoor.y() - 2; --j)
-            for (int i = bodyCoor.x() - 1; i < bodyCoor.x() + 2; ++i)
+        for (int j = bodyCoor.y() + 1; j > bodyCoor.y() - 2; --j) {
+            for (int i = bodyCoor.x() - 1; i < bodyCoor.x() + 2; ++i) {
+                universe[i][j].setLevel(headLV);
                 universe[i][j] >> universe[i][j+1];
+            }
+        }
         break;
     default:
         break;

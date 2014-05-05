@@ -30,6 +30,7 @@ public:
 
     void refresh                (); //reset the isMoved to false
     int Status() const; //0 for unoccupied, 1 for prey, 2 for pred
+    void setLevel                (const int newLV) {creature->geneLevel = newLV;}
     int getLevel                () const {return creature->geneLevel;}
     Dir getOrientaton           () const;
     void setOrientaton           (Dir newDir);

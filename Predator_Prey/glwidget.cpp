@@ -96,9 +96,10 @@ void glWidget::paintGL()
             case MTLK_B:
                 //BUG: Body can never level up, is there a way to tell the body to level up,
                 //when Head is leveling up?
-                glColor3f(MTLK_B_colors[1][0],
-                          MTLK_B_colors[1][1],
-                          MTLK_B_colors[1][2]);
+                level_temp = Exodus->getLevel(i,j);
+                glColor3f(MTLK_B_colors[level_temp][0],
+                          MTLK_B_colors[level_temp][1],
+                          MTLK_B_colors[level_temp][2]);
                 break;
             default:
                 glColor3f(0.0f, 0.0f,0.0f); //if empty
