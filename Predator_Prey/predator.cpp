@@ -12,13 +12,15 @@ void Predator::breed(Organism *&target)
         qDebug() << "ERROR: cannot breed occupied space";
     target = new Predator;
     evolutionPoint++;
-    if(geneLevel > 10)
+    if(evolutionPoint > geneLevel*10)
         evolve(); //no idea yet
     breedCount = 0;
 }
 
 void Predator::evolve()
 {
+    evolutionPoint -= geneLevel*10;
+    geneLevel++;
 }
 
 void Predator::move(Organism *&target)

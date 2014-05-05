@@ -14,6 +14,8 @@ glWidget::glWidget(QWidget *parent) :
     Exodus = new Colony();
     Exodus->randomize();
     Exodus->buildWalls();
+
+
     setFocus();
 }
 
@@ -26,6 +28,19 @@ void glWidget::convAllCoordinates()
             glCoord[i][j].setY(static_cast<float>(1.0 - (2.0/(MAX_i+1))*i));
         }
     }
+}
+
+void glWidget::setUpColorsLevel()
+{
+    MTLK_H_colors << RGBcolors(1.0f, 0.0f,0.0f);//HEAD_LV_1 -- red
+    MTLK_H_colors << RGBcolors(1.0f, 0.6f,0.0f);//HEAD_LV_2 -- orang
+    MTLK_H_colors << RGBcolors(1.0f, 1.0f,0.0f);//HEAD_LV_3 -- gold
+
+    MTLK_B_colors << RGBcolors(0.6f, 0.2f,0.6);//BODY_LV_1 -- purple
+    MTLK_B_colors << RGBcolors(0.4f, 0.6f, 1.0f);//BODY_LV_2 -- sea blue
+    MTLK_B_colors << RGBcolors(0.4f, 1.0f,1.0f);//BODY_LV_3 -- light Blue
+    qDebug() << MTLK_H_colors;
+    qDebug() << MTLK_B_colors;
 }
 
 void glWidget::initializeGL()
@@ -61,18 +76,29 @@ void glWidget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT);
     for(int i = 0 ;  i<MAX_i+2  ; i++) {
         for(int j =  0 ; j < MAX_j+2; j++) {
-            if(Exodus->whatsHere(i,j) == PREY) //prey
+            switch (Exodus->whatsHere(i,j)) {
+            case PREY:
                 glColor3f(0.0f, 0.8f, 0.2f);
-            else if(Exodus->whatsHere(i,j) == PREDATOR) //Predator
+                break;
+            case PREDATOR:
                 glColor3f(0.6f, 0.6f, 0.0f);
-            else if(Exodus->whatsHere(i,j) == 0)
-                glColor3f(0.0f, 0.0f,0.0f);
-            else if(Exodus->whatsHere(i,j) == WALL)
+                break;
+            case WALL:
                 glColor3f(0.3f, 0.7f,0.4f);
-            else if(Exodus->whatsHere(i,j) == MTLK_B)
-                glColor3f(0.6f, 0.2f,0.6f);
-            else if(Exodus->whatsHere(i,j) == MTLK_H)
+                break;
+            case MTLK_H:
                 glColor3f(1.0f, 0.0f,0.0f);
+                break;
+            case MTLK_B:
+                level_temp = Exodus->getLevel(i,j);
+                glColor3f(MTLK_B_colors[level_temp][0],
+                          MTLK_B_colors[level_temp][1],
+                          MTLK_B_colors[level_temp][2]);
+                break;
+            default:
+                glColor3f(0.0f, 0.0f,0.0f); //if empty
+                break;
+            }
             glBegin(GL_POINTS);
                 glVertex2f(glCoord[i][j].x(),glCoord[i][j].y());
             glEnd();

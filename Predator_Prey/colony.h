@@ -58,6 +58,7 @@ public:
     void breedAroundHere            (int i, int j);
 
     int whatsHere                   (int i, int j) const;
+    int getLevel                    (int i, int j) const { return universe[i][j].getLevel(); }
 
 };
 

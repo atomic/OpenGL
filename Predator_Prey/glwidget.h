@@ -15,6 +15,19 @@
 //written classs
 #include "colony.h"
 
+
+class RGBcolors : public QVector<float>
+{
+public:
+    RGBcolors(const float r = 0.0f, const float g = 0.0f, const float b = 0.0f)
+    {
+        this->push_back(r);
+        this->push_back(g);
+        this->push_back(b);
+    }
+};
+
+
 class glWidget : public QGLWidget
 {
     Q_OBJECT
@@ -27,11 +40,15 @@ private:
     QTimer* timer;
     QPointF ScreenPos;
     QPointF** glCoord;
+    QList<RGBcolors> MTLK_H_colors;
+    QList<RGBcolors> MTLK_B_colors;
     bool isRun;
     int ptSize;
     int i_temp;
     int j_temp;
+    int level_temp;
     void convAllCoordinates();
+    void setUpColorsLevel();
 
 protected:
     void paintGL();

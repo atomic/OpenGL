@@ -16,10 +16,8 @@ void Mutalisk_H::move(Organism *& target)
         delete target;
         starvation -= (rand() % 3); //eat up to 2, but actually, it kills 3 in a row
         evolutionPoint++;
-        if(evolutionPoint > 10) {
+        if(evolutionPoint > geneLevel*15)
             evolve();
-            evolutionPoint -= 10;
-        }
     }
     else
         starvation++;
@@ -29,7 +27,10 @@ void Mutalisk_H::move(Organism *& target)
 
 void Mutalisk_H::evolve()
 {
-    starveLevel++;
+    evolutionPoint -= geneLevel*15;
+    if(geneLevel < 3)
+        geneLevel++;
+    starveLevel++; //become more OP after eating a lot
 }
 bool Mutalisk_H::isStarved() const {  return ( starvation > starveLevel ? true : false); }
 

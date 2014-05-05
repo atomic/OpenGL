@@ -1,6 +1,6 @@
 #include "organism.h"
 
-Organism::Organism() : breedCount(0), starvation(0), isMoved(false), orientation(NONE), evolutionPoint(0), geneLevel(0)
+Organism::Organism() : breedCount(0), starvation(0), isMoved(false), orientation(NONE), evolutionPoint(0), geneLevel(1)
 {
 }
 
