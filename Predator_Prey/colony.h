@@ -11,6 +11,7 @@ private:
     QList<QPoint> availableGrids; //this list are going to be constantly updated in scanPerimeter()
     QList<QPoint> availableFoods; //this list are going to be constantly updated
     QPoint aheadPoint;
+    int randomTemp;
 
 public:
     Colony                          ();
@@ -28,14 +29,22 @@ public:
 
     /* These are the function for Mutalisk */
     void spawnMutaliskBody          (const int i, const int j);// spawn 9x9 grid
-    void spawnMutalisk              (const int i, const int j);// call spawn MutaliskBody
+    void spawnMutalisk              (const int i, const int j, Dir Ori = NONE);// call spawn MutaliskBody
+    void spawnRandomMutalisk        ();
+
+    void killMutalisk               (const int i, const int j);
+    void killMutaliskBody           (const QPoint body);//get rid of 9x9 grid
+
+    void rotateMutalisk             (const int i, const int j);
+    // NOTE: no need to scan, there will always be a space to rotate
+    void MutaliskMarch              (const int i, const int j); //location of its head
+    void MutaliskBodyMarch          (const QPoint &bodyCoor, const Dir &on); //location of body
     bool scanAhead                  (const int i, const int j, const Dir on);
+    bool scanDeploymentArea         (const int i, const int j); //scan 5x5 grid for deployment
+    // This will scan 4x4 area for no mutalisk around, will crash if i,j DNE
     Dir findHeadDirection           (const QPoint body, const QPoint head);
     QPoint whereIsHead              (const QPoint body, const Dir on);
     QPoint getBodyCenter            (const int i, const int j);
-    // This scan is scan in front of direction for NOT WALL
-    Dir scanMTKRotateSpace          (const int i, const int j);//i,j is the head position
-    // This scan available direction for Mutalisk to rotate
 
 
     void mainPhase                  ();
@@ -43,14 +52,11 @@ public:
     void PredatorPhase              ();
     void PreyPhase                  ();
     void MutaliskPhase              ();
-    void MutaliskMarch              (const int i, const int j); //location of its head
-    void MutaliskBodyMarch          (const QPoint &bodyCoor, const Dir &on); //location of body
 
     void predatorAdvance            (int i, int j);
     void preyAdvance                (int i, int j);
     void breedAroundHere            (int i, int j);
 
-    void rotateMutalisk             (const int i, const int j);
     int whatsHere                   (int i, int j) const;
 
 };

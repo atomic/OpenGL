@@ -19,11 +19,15 @@ public:
     int starvation;
     bool isMoved;
     Dir orientation; //only used by mutalisk head
+    int evolutionPoint;
+    int geneLevel;
+    int starveLevel;
     virtual void breed(Organism* &);
     virtual void move(Organism* &);
+    virtual void evolve();
     virtual bool breedReady() const;
     virtual bool isStarved() const;
-    virtual void print();
+
     virtual ~Organism();
 };
 
@@ -36,7 +40,6 @@ public:
     virtual void move(Organism* &);
     virtual bool breedReady() const;
     virtual bool isStarved() const;
-    virtual void print();
     virtual ~Wall();
 };
 

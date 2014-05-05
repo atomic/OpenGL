@@ -18,11 +18,12 @@ public:
     grid                        (Organism* newCreature);
 
     void spawnWall              ();
-    void spawnMutaliskHead      ();
+    void spawnMutaliskHead      (Dir Ori = NONE);
     void spawnMutaliskBody      ();
     void RandomBreed            ();
 
     bool isMoved                () const;
+    bool isEdible               () const;
     bool isStarving             () const;
     bool isPregnant             () const;
     void kill                   ();
@@ -30,6 +31,7 @@ public:
     void refresh                (); //reset the isMoved to false
     int Status() const; //0 for unoccupied, 1 for prey, 2 for pred
     Dir getOrientaton           () const;
+    void setOrientaton           (Dir newDir);
 
 
     grid  &operator  >>         (grid &to); //MOVE Operator

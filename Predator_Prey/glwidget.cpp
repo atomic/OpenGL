@@ -1,7 +1,7 @@
 #include "glwidget.h"
 
 glWidget::glWidget(QWidget *parent) :
-    QGLWidget(parent), ptSize(POINTSIZE)
+    QGLWidget(parent), ptSize(POINTSIZE), i_temp(25), j_temp(25)
 {
     setFocusPolicy(Qt::StrongFocus);
     timer=NULL;
@@ -14,7 +14,6 @@ glWidget::glWidget(QWidget *parent) :
     Exodus = new Colony();
     Exodus->randomize();
     Exodus->buildWalls();
-    Exodus->spawnMutalisk(25,25);
     setFocus();
 }
 
@@ -71,7 +70,7 @@ void glWidget::paintGL()
             else if(Exodus->whatsHere(i,j) == WALL)
                 glColor3f(0.3f, 0.7f,0.4f);
             else if(Exodus->whatsHere(i,j) == MTLK_B)
-                glColor3f(1.0f, 0.2f,0.4f);
+                glColor3f(0.6f, 0.2f,0.6f);
             else if(Exodus->whatsHere(i,j) == MTLK_H)
                 glColor3f(1.0f, 0.0f,0.0f);
             glBegin(GL_POINTS);
@@ -117,6 +116,10 @@ void glWidget::keyPressEvent(QKeyEvent *e)
             Stop();
             isRun = false;
         }
+          Exodus->spawnRandomMutalisk();
+        break;
+    case Qt::Key_M:
+        Exodus->spawnRandomMutalisk();
         break;
     case Qt::Key_Escape:
         break;
@@ -130,8 +133,4 @@ void glWidget::keyPressEvent(QKeyEvent *e)
 void glWidget::mousePressEvent(QMouseEvent *e)
 {
     ScreenPos = e->windowPos();
-}
-
-void glWidget::mouseReleaseEvent(QMouseEvent *e)
-{
 }

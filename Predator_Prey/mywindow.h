@@ -6,6 +6,7 @@
 #include <QHBoxLayout>
 #include <QCheckBox>
 #include <QLabel>
+#include <QSpinBox>
 
 #include "glwidget.h"
 
@@ -30,6 +31,9 @@ private:
     QPushButton *nextButton;
     QPushButton *runButton;
     QPushButton *stopButton;
+    QPushButton *spawnMTKButton;
+    QSpinBox *iPosButton;
+    QSpinBox *jPosButton;
     glWidget *canvas;
     QLabel *ptSizeDisplay;
 

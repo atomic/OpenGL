@@ -10,6 +10,8 @@ public:
     /*
      * Before calling these virtual, target has to be already defined */
     virtual void breed(Organism* &target);
+    virtual void evolve();
+
     virtual void move(Organism* &target);
     virtual bool breedReady() const;
     virtual bool isStarved() const;

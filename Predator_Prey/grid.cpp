@@ -11,20 +11,23 @@ grid::grid(Organism *newCreature) : creature(newCreature)
 
 void grid::spawnWall()
 {
-    if(creature) qDebug() << "ERROR : some creature stuck at wall before wall being build?";
+    if(creature)
+        delete creature;
     else
         creature = new Wall;
 }
 
-void grid::spawnMutaliskHead()
+void grid::spawnMutaliskHead(Dir Ori)
 {
-    if(creature) qDebug() << "ERROR: forgot to delete creature before making mutaliskH";
-    else creature = new Mutalisk_H;
+    if(creature)
+        delete creature;
+    else creature = new Mutalisk_H(Ori);
 }
 
 void grid::spawnMutaliskBody()
 {
-    if(creature) qDebug() << "ERROR: forgot to delete creature before making mutaliskB";
+    if(creature)
+        delete creature;
     else creature = new Mutalisk_B;
 }
 
@@ -39,6 +42,14 @@ void grid::RandomBreed()
 }
 
 bool grid::isMoved() const {return( creature->isMoved);}
+
+bool grid::isEdible() const
+{
+    return (Status() != MTLK_B &&
+            Status() != MTLK_H &&
+            Status() != WALL) ? true : false;
+
+}
 
 bool grid::isStarving() const{return creature->isStarved();}
 
@@ -79,7 +90,8 @@ int grid::Status() const {
     return creature->Genotype;
 }
 
-Dir grid::getOrientaton() const{return creature->orientation;}
+Dir  grid::getOrientaton() const{return creature->orientation;}
+void grid::setOrientaton(Dir newDir) {creature->orientation = newDir;}
 
 grid& grid::operator >>(grid &to)
 {

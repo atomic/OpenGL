@@ -5,9 +5,11 @@
 class Mutalisk_H : public Organism
 {
 public:
-    Mutalisk_H();
+    Mutalisk_H(Dir Ori = NONE);
     virtual void move(Organism *&target);
+    virtual void evolve();
     virtual ~Mutalisk_H();
+    virtual bool isStarved() const;
     //not use full actually
 };
 

@@ -58,10 +58,17 @@ void Colony::spawnMutaliskBody(const int i, const int j)
     }
 }
 
-void Colony::spawnMutalisk(const int i, const int j)
+void Colony::killMutaliskBody(const QPoint body)
+{
+    for (int v = body.x()-1; v < body.x()+2; ++v)
+        for (int h = body.y()-1; h < body.y()+2; ++h)
+            universe[v][h].kill();
+}
+
+void Colony::spawnMutalisk(const int i, const int j, Dir Ori)
 {
     universe[i][j].kill();
-    universe[i][j].spawnMutaliskHead();
+    universe[i][j].spawnMutaliskHead(Ori);
     switch (universe[i][j].getOrientaton()) {
     case UP:
         spawnMutaliskBody(i+2,j);
@@ -80,6 +87,26 @@ void Colony::spawnMutalisk(const int i, const int j)
     }
 }
 
+void Colony::spawnRandomMutalisk()
+{
+    bool done = false;
+    for (int i = 5; i < MAX_i - 6 && !done; ++i) {
+        for (int j = 5; j < MAX_j - 6 && !done; ++j) {
+            if(scanDeploymentArea(i,j) && !done)  {
+                spawnMutalisk(i-2,j,UP);
+                done = true;
+            }
+        }
+    }
+}
+
+void Colony::killMutalisk(const int i, const int j)
+{
+    //first look for direction, and get the Body coordinate
+    killMutaliskBody(getBodyCenter(i,j));
+    universe[i][j].kill();
+}
+
 bool Colony::scanAhead(const int i, const int j, const Dir on)
 {
     // Use aheadPoint here, because you are going to need the
@@ -88,27 +115,36 @@ bool Colony::scanAhead(const int i, const int j, const Dir on)
     case UP:
         aheadPoint.setX(i-1);
         aheadPoint.setY(j);
-        return (universe[i-1][j].Status() != WALL) ? true : false;
+        return (universe[i][j-1].isEdible() && universe[i][j+1].isEdible() && universe[i-1][j].isEdible());
         break;
     case DOWN:
         aheadPoint.setX(i+1);
         aheadPoint.setY(j);
-        return (universe[i+1][j].Status() != WALL) ? true : false;
+        return (universe[i][j-1].isEdible() && universe[i][j+1].isEdible() && universe[i+1][j].isEdible());
         break;
     case LEFT:
         aheadPoint.setX(i);
         aheadPoint.setY(j-1);
-        return (universe[i][j-1].Status() != WALL) ? true : false;
+        return (universe[i-1][j].isEdible() && universe[i+1][j].isEdible() && universe[i][j-1].isEdible());
         break;
     case RIGHT:
         aheadPoint.setX(i);
         aheadPoint.setY(j+1);
-        return (universe[i][j+1].Status() != WALL) ? true : false;
+        return (universe[i-1][j].isEdible() && universe[i+1][j].isEdible() && universe[i][j+1].isEdible());
         break;
     default:
         break;
     }
     return false;//not necessary if 'on' exists
+}
+
+bool Colony::scanDeploymentArea(const int i, const int j)
+{
+    for (int v = i-2; v < i + 3; ++v)
+        for (int h = j-2; h < j + 3; ++h)
+            if(!universe[v][h].isEdible())
+                return false;
+    return true;
 }
 
 Dir Colony::findHeadDirection(const QPoint body, const QPoint head)
@@ -173,30 +209,6 @@ QPoint Colony::getBodyCenter(const int i, const int j)
     return QPoint();//in case no orientation
 }
 
-Dir Colony::scanMTKRotateSpace(const int i, const int j)
-{
-    availableGrids.clear();
-    QPoint center = getBodyCenter(i,j); //its inefficient, but whatever
-    availableGrids << QPoint(center.x() - 2 ,center.y() );
-    availableGrids << QPoint(center.x() + 2 ,center.y() );
-    availableGrids << QPoint(center.x() ,center.y() + 2 );
-    availableGrids << QPoint(center.x() ,center.y() - 2);
-    for (int comb = 0; comb < availableGrids.size(); ++comb)
-        if(availableGrids[comb].x() == i && availableGrids[comb].y())
-            availableGrids.removeAt(comb);
-    for (int comb = 0; comb < availableGrids.size(); ++comb) {
-        if(universe[availableGrids[comb].x()][availableGrids[comb].y()].Status() == WALL
-         ||universe[availableGrids[comb].x()][availableGrids[comb].y()].Status() == MTLK_B
-         ||universe[availableGrids[comb].x()][availableGrids[comb].y()].Status() == MTLK_H) {
-            availableGrids.removeAt(comb);
-            comb = 0;
-        }
-    }
-    //no check for if availableGrid == 0, there has to be some space to rotate
-    int choosenIndex = rand() % availableGrids.size();
-    return findHeadDirection(center,availableGrids[choosenIndex]);
-}
-
 void Colony::mainPhase()
 {
     refreshPhase();
@@ -256,13 +268,25 @@ void Colony::MutaliskPhase()
         for (int j = 1; j < MAX_j + 1; ++j) {
             if(universe[i][j].Status() == MTLK_H) {
                 if( !universe[i][j].isMoved() ) {
-                    if(scanAhead(i,j,universe[i][j].getOrientaton()))
-                        MutaliskMarch(i,j);
+                    randomTemp = rand() % 15;
+                    if(randomTemp == 1)
+                        rotateMutalisk(i,j);
+                    else {
+                        if(scanAhead(i,j,universe[i][j].getOrientaton()))
+                            MutaliskMarch(i,j);
+                        else
+                            rotateMutalisk(i,j);
+                    }
                 }
             }
         }
     }
-
+    //Check starvation
+    for (int i = 1; i < MAX_i + 1; ++i)
+        for (int j = 1; j < MAX_j + 1; ++j)
+            if(universe[i][j].Status() == MTLK_H)
+                if(universe[i][j].isStarving())
+                    killMutalisk(i,j);
 }
 
 void Colony::MutaliskMarch(const int i, const int j)
@@ -366,9 +390,34 @@ void Colony::breedAroundHere(int i, int j)
 
 void Colony::rotateMutalisk(const int i, const int j)
 {
-    Dir rotateDirection = scanMTKRotateSpace(i,j);
-    QPoint newHead = whereIsHead(QPoint(i,j),rotateDirection);
-    universe[i][j] >> universe[newHead.x() ][ newHead.y()];
+    availableGrids.clear();
+    QPoint center = getBodyCenter(i,j); //its inefficient, but whatever
+    availableGrids << QPoint(center.x() - 2 ,center.y() );
+    availableGrids << QPoint(center.x() + 2 ,center.y() );
+    availableGrids << QPoint(center.x() ,center.y() + 2 );
+    availableGrids << QPoint(center.x() ,center.y() - 2);
+    for (int comb = 0; comb < availableGrids.size(); ++comb)
+        if(availableGrids[comb].x() == i && availableGrids[comb].y())
+            availableGrids.removeAt(comb);
+    for (int comb = 0; comb < availableGrids.size(); ++comb) {
+//        if(! universe[availableGrids[comb].x()][availableGrids[comb].y()].isEdible())
+        if(universe[availableGrids[comb].x()][availableGrids[comb].y()].Status() == WALL
+         ||universe[availableGrids[comb].x()][availableGrids[comb].y()].Status() == MTLK_B
+         ||universe[availableGrids[comb].x()][availableGrids[comb].y()].Status() == MTLK_H) {
+            availableGrids.removeAt(comb);
+            comb = 0;
+        }
+    }
+    //no check for if availableGrid == 0, there has to be some space to rotate
+    int choosenIndex = rand() % availableGrids.size();
+
+    //At this point, the point for head to rotate to is already choosen
+    //So, we just need to give new direction for the head to move
+    Dir newHeadDirection = findHeadDirection(center,availableGrids[choosenIndex]);
+    //Now, lets set the head direction to newHeadDirection
+    universe[i][j].setOrientaton(newHeadDirection);
+    universe[i][j] >> universe[availableGrids[choosenIndex].x() ][ availableGrids[choosenIndex].y()];
+
 }
 
 int Colony::whatsHere(int i, int j) const

@@ -6,6 +6,16 @@ MyWindow::MyWindow()
     nextButton = new QPushButton("Next");
     runButton = new QPushButton("Run");
     stopButton = new QPushButton("Stop");
+    spawnMTKButton = new QPushButton("Spawn Mutalisk");
+
+    iPosButton = new QSpinBox();
+    jPosButton = new QSpinBox();
+    iPosButton->setValue(25);
+    jPosButton->setValue(25);
+    iPosButton->setMinimum(10);
+    jPosButton->setMinimum(10);
+    iPosButton->setMaximum(35);
+    jPosButton->setMaximum(35);
     ptSizeDisplay = new QLabel(" Pt. ");
     ptSizeSlider = new QSlider(Qt::Horizontal);
     ptSizeSlider->setMinimum(200);
@@ -18,6 +28,9 @@ MyWindow::MyWindow()
     buttonLayout->addWidget(nextButton);
     buttonLayout->addWidget(runButton);
     buttonLayout->addWidget(stopButton);
+    buttonLayout->addWidget(spawnMTKButton);
+    buttonLayout->addWidget(iPosButton);
+    buttonLayout->addWidget(jPosButton);
     buttonLayout->addWidget(ptSizeSlider);
     buttonLayout->addWidget(ptSizeDisplay);
 
@@ -34,6 +47,13 @@ MyWindow::MyWindow()
             canvas, SLOT(Run()));
     connect(stopButton, SIGNAL(clicked()),
             canvas, SLOT(Stop()));
+
+    connect(iPosButton, SIGNAL(valueChanged(int)),
+            canvas, SLOT(set_i_Pos(int)));
+    connect(jPosButton, SIGNAL(valueChanged(int)),
+            canvas, SLOT(set_j_Pos(int)));
+    connect(spawnMTKButton, SIGNAL(clicked()),
+            canvas, SLOT(spawnRandomMutalisk()));
     connect(ptSizeSlider, SIGNAL(valueChanged(int)),
             canvas, SLOT(setPtSize(int)));
     connect(ptSizeSlider, SIGNAL(valueChanged(int)),

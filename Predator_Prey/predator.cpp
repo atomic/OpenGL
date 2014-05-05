@@ -3,6 +3,7 @@
 Predator::Predator() : Organism()
 {
     Genotype = PREDATOR;
+    starveLevel = 3;
 }
 
 void Predator::breed(Organism *&target)
@@ -10,7 +11,14 @@ void Predator::breed(Organism *&target)
     if(target)
         qDebug() << "ERROR: cannot breed occupied space";
     target = new Predator;
+    evolutionPoint++;
+    if(geneLevel > 10)
+        evolve(); //no idea yet
     breedCount = 0;
+}
+
+void Predator::evolve()
+{
 }
 
 void Predator::move(Organism *&target)
@@ -32,6 +40,6 @@ bool Predator::breedReady() const
 
 bool Predator::isStarved() const
 {
-    return (starvation == 3 ? true : false);
+    return (starvation == starveLevel ? true : false);
 }
 Predator::~Predator(){}
