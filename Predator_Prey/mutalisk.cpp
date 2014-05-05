@@ -16,10 +16,12 @@ void Mutalisk_H::move(Organism *& target)
 }
 Mutalisk_H::~Mutalisk_H(){}
 
+
+
+
+
 /* MUTALISK B Part */
-
 Mutalisk_B::Mutalisk_B() : Organism(){Genotype = MTLK_B;}
-
 void Mutalisk_B::move(Organism *&target)
 {
     if(target)

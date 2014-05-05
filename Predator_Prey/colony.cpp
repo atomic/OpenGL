@@ -27,6 +27,7 @@ void Colony::randomize()
     for (int i = 1; i < MAX_i + 1; ++i)
         for (int j = 1; j < MAX_j + 1; ++j)
             universe[i][j].RandomBreed();
+    spawnMutalisk(25,25);
 }
 
 void Colony::scanPerimeters(const int i, const int j, const int Type)
@@ -154,18 +155,19 @@ QPoint Colony::getBodyCenter(const int i, const int j)
 {
     switch (universe[i][j].getOrientaton()) {
         case UP:
-            return QPoint(i, j - 2);
-            break;
-        case DOWN:
-            return QPoint(i, j + 2);
-            break;
-        case LEFT:
-            return QPoint(i - 2, j);
-            break;
-        case RIGHT:
             return QPoint(i + 2, j);
             break;
+        case DOWN:
+            return QPoint(i - 2, j);
+            break;
+        case LEFT:
+            return QPoint(i, j + 2);
+            break;
+        case RIGHT:
+            return QPoint(i, j - 2);
+            break;
         default:
+            qDebug() << "Wrong Head Passed to Body";
             break;
     }
     return QPoint();//in case no orientation
