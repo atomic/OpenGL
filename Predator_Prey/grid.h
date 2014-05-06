@@ -17,9 +17,20 @@ public:
     grid                        ();
     grid                        (Organism* newCreature);
 
+    bool MTLKhatchery;
+    void MTLKHatchEvo           ();
+    void MTLKHatchEgg           ();
+    //used to mark if its ready for hatch
+    //if grid is empty and hatch is true, spawn MTLK_E_O
+
+
+
+    //spawn will delete previous creatures by force, use with Caution
     void spawnWall              ();
     void spawnMutaliskHead      (Dir Ori = NONE);
     void spawnMutaliskBody      ();
+    void spawnMutaliskEgg_O     ();
+    void spawnMutaliskEgg_S     ();
     void RandomBreed            ();
 
     bool isMoved                () const;
@@ -29,7 +40,7 @@ public:
     void kill                   ();
 
     void refresh                (); //reset the isMoved to false
-    int Status() const; //0 for unoccupied, 1 for prey, 2 for pred
+    Gene getGene                 () const; //0 for unoccupied, 1 for prey, 2 for pred
     void setLevel                (const int newLV) {creature->geneLevel = newLV;}
     int getLevel                () const {return creature->geneLevel;}
     Dir getOrientaton           () const;

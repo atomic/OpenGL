@@ -30,6 +30,7 @@ public:
     /* These are the function for Mutalisk */
     void spawnMutaliskBody          (const int i, const int j);// spawn 9x9 grid
     void spawnMutalisk              (const int i, const int j, Dir Ori = NONE);// call spawn MutaliskBody
+    void spawnMTLKShell             (const int i, const int j);
     void spawnRandomMutalisk        ();
 
     void killMutalisk               (const int i, const int j);
@@ -40,8 +41,8 @@ public:
     void MutaliskMarch              (const int i, const int j); //location of its head
     void MutaliskBodyMarch          (const QPoint &bodyCoor, const Dir &on ,const int headLV); //location of body
     bool scanAhead                  (const int i, const int j, const Dir on);
-    bool scanDeploymentArea         (const int i, const int j); //scan 5x5 grid for deployment
-    // This will scan 4x4 area for no mutalisk around, will crash if i,j DNE
+    bool scanDeploymentArea         (const int i, const int j, const int size = 5); //scan 5x5 grid for deployment
+    // This will scan sizexsize area for no mutalisk around, will crash if i,j DNE
     Dir findHeadDirection           (const QPoint body, const QPoint head);
     QPoint whereIsHead              (const QPoint body, const Dir on);
     QPoint getBodyCenter            (const int i, const int j);
@@ -52,6 +53,7 @@ public:
     void PredatorPhase              ();
     void PreyPhase                  ();
     void MutaliskPhase              ();
+    void MutaliskHatchPhase         ();
 
     void predatorAdvance            (int i, int j);
     void preyAdvance                (int i, int j);

@@ -40,6 +40,8 @@ private:
     QTimer* timer;
     QPointF ScreenPos;
     QPointF** glCoord;
+    QList<RGBcolors> Predator_colors;
+    QList<RGBcolors> MTLK_E_colors;
     QList<RGBcolors> MTLK_H_colors;
     QList<RGBcolors> MTLK_B_colors;
     bool isRun;

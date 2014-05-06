@@ -16,6 +16,7 @@ void Mutalisk_H::move(Organism *& target)
         delete target;
         starvation -= (rand() % 3); //eat up to 2, but actually, it kills 3 in a row
         evolutionPoint++;
+        breedCount++;
         if(evolutionPoint > geneLevel*100)
             evolve();
     }
@@ -32,6 +33,12 @@ void Mutalisk_H::evolve()
         geneLevel++;
     starveLevel++; //become more OP after eating a lot
 }
+
+bool Mutalisk_H::breedReady() const
+{
+    return (breedCount > 100 ? true : false);
+}
+
 bool Mutalisk_H::isStarved() const {  return ( starvation > starveLevel ? true : false); }
 
 Mutalisk_H::~Mutalisk_H(){}
@@ -49,7 +56,33 @@ void Mutalisk_B::move(Organism *&target)
     isMoved = true;
     target = this;
 }
-
-
-
 Mutalisk_B::~Mutalisk_B(){}
+
+
+
+
+
+Mutalisk_Egg_O::Mutalisk_Egg_O() : Organism() {
+    isMoved = true;
+    Genotype = MTLK_E_O;
+}
+void Mutalisk_Egg_O::evolve(){
+    geneLevel++;
+    isMoved = true;
+}
+
+bool Mutalisk_Egg_O::breedReady() const
+{
+    return (geneLevel > 25 ? true : false);
+}
+Mutalisk_Egg_O::~Mutalisk_Egg_O(){}
+
+Mutalisk_Egg_S::Mutalisk_Egg_S() : Organism() {
+    isMoved = true;
+    Genotype = MTLK_E_S;
+}
+void Mutalisk_Egg_S::evolve(){
+    geneLevel++;
+    isMoved = true;
+}
+Mutalisk_Egg_S::~Mutalisk_Egg_S(){}

@@ -32,15 +32,24 @@ void glWidget::convAllCoordinates()
 
 void glWidget::setUpColorsLevel()
 {
+    MTLK_E_colors << RGBcolors(1.0f, 0.2f,0.2f);//MTLK_E_O
+    MTLK_E_colors << RGBcolors(0.8f, 0.4f,0.6f);//MTLK_E_S
+
     MTLK_H_colors << RGBcolors(9.0f, 0.0f,0.0f);//HEAD_LV_0 -- red
-    MTLK_H_colors << RGBcolors(1.0f, 0.0f,0.0f);//HEAD_LV_1 -- red
-    MTLK_H_colors << RGBcolors(1.0f, 0.6f,0.0f);//HEAD_LV_2 -- orang
-    MTLK_H_colors << RGBcolors(1.0f, 1.0f,0.0f);//HEAD_LV_3 -- gold
+    MTLK_H_colors << RGBcolors(1.0f, 1.0f,0.0f);//HEAD_LV_1 -- gold
+    MTLK_H_colors << RGBcolors(1.0f, 0.8f,0.0f);//HEAD_LV_2 -- orang
+    MTLK_H_colors << RGBcolors(1.0f, 0.4f,0.2f);//HEAD_LV_3 -- red
 
     MTLK_B_colors << RGBcolors(0.6f, 0.2f,0.6);//BODY_LV_0 -- purple
-    MTLK_B_colors << RGBcolors(0.6f, 0.2f,0.6);//BODY_LV_1 -- purple
+    MTLK_B_colors << RGBcolors(0.4f, 1.0f,1.0f);//BODY_LV_1 -- light Blue
     MTLK_B_colors << RGBcolors(0.4f, 0.6f, 1.0f);//BODY_LV_2 -- sea blue
-    MTLK_B_colors << RGBcolors(0.4f, 1.0f,1.0f);//BODY_LV_3 -- light Blue
+    MTLK_B_colors << RGBcolors(0.0f, 0.2f,1.0);//BODY_LV_3 -- purple
+
+    Predator_colors << RGBcolors(1.0f, 0.0f, 0.0f); // Predator Lv_0 Bright Red
+    Predator_colors << RGBcolors(1.0f, 0.0f, 0.0f); // Predator Lv_1 Bright Red
+    Predator_colors << RGBcolors(1.0f, 0.0f, 0.0f); // Predator Lv_2 Bright Red
+    Predator_colors << RGBcolors(1.0f, 0.0f, 0.0f); // Predator Lv_3 Bright Red
+
 }
 
 void glWidget::initializeGL()
@@ -94,12 +103,20 @@ void glWidget::paintGL()
                           MTLK_H_colors[level_temp][2]);
                 break;
             case MTLK_B:
-                //BUG: Body can never level up, is there a way to tell the body to level up,
-                //when Head is leveling up?
                 level_temp = Exodus->getLevel(i,j);
                 glColor3f(MTLK_B_colors[level_temp][0],
                           MTLK_B_colors[level_temp][1],
                           MTLK_B_colors[level_temp][2]);
+                break;
+            case MTLK_E_O:
+                glColor3f(MTLK_E_colors[0][0],
+                          MTLK_E_colors[0][1],
+                          MTLK_E_colors[0][2]);
+                break;
+            case MTLK_E_S:
+                glColor3f(MTLK_E_colors[1][0],
+                          MTLK_E_colors[1][1],
+                          MTLK_E_colors[1][2]);
                 break;
             default:
                 glColor3f(0.0f, 0.0f,0.0f); //if empty
@@ -151,6 +168,7 @@ void glWidget::keyPressEvent(QKeyEvent *e)
         break;
     case Qt::Key_M:
         Exodus->spawnRandomMutalisk();
+        updateGL();
         break;
     case Qt::Key_Escape:
         break;

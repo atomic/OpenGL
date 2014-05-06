@@ -1,7 +1,7 @@
 #include "grid.h"
 
 
-grid::grid(): creature(NULL)
+grid::grid(): creature(NULL) , MTLKhatchery(false)
 {
 }
 
@@ -9,26 +9,47 @@ grid::grid(Organism *newCreature) : creature(newCreature)
 {
 }
 
+void grid::MTLKHatchEvo(){creature->evolve();}
+
+void grid::MTLKHatchEgg()
+{
+    MTLKhatchery = true;
+    creature->breedCount = 0;
+}
+
 void grid::spawnWall()
 {
     if(creature)
         delete creature;
-    else
-        creature = new Wall;
+    creature = new Wall;
 }
 
 void grid::spawnMutaliskHead(Dir Ori)
 {
     if(creature)
         delete creature;
-    else creature = new Mutalisk_H(Ori);
+    creature = new Mutalisk_H(Ori);
 }
 
 void grid::spawnMutaliskBody()
 {
     if(creature)
         delete creature;
-    else creature = new Mutalisk_B;
+    creature = new Mutalisk_B;
+}
+
+void grid::spawnMutaliskEgg_O()
+{
+    if(creature)
+        delete creature;
+    creature = new Mutalisk_Egg_O;
+}
+
+void grid::spawnMutaliskEgg_S()
+{
+    if(creature)
+        delete creature;
+    creature = new Mutalisk_Egg_S;
 }
 
 void grid::RandomBreed()
@@ -45,9 +66,11 @@ bool grid::isMoved() const {return( creature->isMoved);}
 
 bool grid::isEdible() const
 {
-    return (Status() != MTLK_B &&
-            Status() != MTLK_H &&
-            Status() != WALL) ? true : false;
+    return (getGene() != MTLK_B &&
+            getGene() != MTLK_H &&
+            getGene() != MTLK_E_O &&
+            getGene() != MTLK_E_S &&
+            getGene() != WALL) ? true : false;
 
 }
 
@@ -81,12 +104,12 @@ void grid::kill()
 
 void grid::refresh() {creature->isMoved = false;}
 
-int grid::Status() const {
+Gene grid::getGene() const {
     /* If not occupied, return 0, if Prey is there return 1,
      *                            if Predator is there return 2.
      */
     if(!creature)
-        return 0;
+        return EMPTY;
     return creature->Genotype;
 }
 

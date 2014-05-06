@@ -38,9 +38,9 @@ void Colony::scanPerimeters(const int i, const int j, const int Type)
     for (int V = i-1; V < i + 2; ++V) {
         for (int H = j-1; H < j + 2; ++H) {
             if( !(V == i && H == j) ) {
-               if(universe[V][H].Status() == 0) //if empty
+               if(universe[V][H].getGene() == EMPTY) //if empty
                    availableGrids << QPoint(V,H);
-               else if( (universe[V][H].Status() == PREY) && (Type == 1)) //only for Predator
+               else if( (universe[V][H].getGene() == PREY) && (Type == 1)) //only for Predator
                    availableFoods << QPoint(V,H);
             }
         }
@@ -87,11 +87,19 @@ void Colony::spawnMutalisk(const int i, const int j, Dir Ori)
     }
 }
 
+void Colony::spawnMTLKShell(const int i, const int j)
+{
+    for (int v = i -1 ; v < i + 2; ++v)
+        for (int h = j - 1; h < j + 2; ++h)
+            if(!(v == i && h == j))
+                universe[v][h].spawnMutaliskEgg_S();
+}
+
 void Colony::spawnRandomMutalisk()
 {
     bool done = false;
-    for (int i = 5; i < MAX_i - 6 && !done; ++i) {
-        for (int j = 5; j < MAX_j - 6 && !done; ++j) {
+    for (int i = MAX_i/2 - 5; i < MAX_i - 6 && !done; ++i) {
+        for (int j = MAX_j/2 - 5; j < MAX_j - 6 && !done; ++j) {
             if(scanDeploymentArea(i,j) && !done)  {
                 spawnMutalisk(i-2,j,UP);
                 done = true;
@@ -138,11 +146,11 @@ bool Colony::scanAhead(const int i, const int j, const Dir on)
     return false;//not necessary if 'on' exists
 }
 
-bool Colony::scanDeploymentArea(const int i, const int j)
+bool Colony::scanDeploymentArea(const int i, const int j, const int size)
 {
-    for (int v = i-2; v < i + 3; ++v)
-        for (int h = j-2; h < j + 3; ++h)
-            if(!universe[v][h].isEdible())
+    for (int v = i - size/2; v < i + size/2 + 1; ++v)
+        for (int h = j - size/2; h < j + size/2 + 1; ++h)
+            if( !(v == i && h == j) && !universe[v][h].isEdible() )
                 return false;
     return true;
 }
@@ -215,15 +223,16 @@ void Colony::mainPhase()
     PredatorPhase();
     PreyPhase();
     MutaliskPhase();
+    MutaliskHatchPhase();
 }
 
 void Colony::refreshPhase()
 {
     for (int i = 1; i < MAX_i + 1; ++i)
         for (int j = 1; j < MAX_j + 1; ++j)
-            if(universe[i][j].Status() == PREY
-                    || universe[i][j].Status() == PREDATOR
-                    || universe[i][j].Status() == MTLK_H)
+            if(universe[i][j].getGene() == PREY
+                    || universe[i][j].getGene() == PREDATOR
+                    || universe[i][j].getGene() == MTLK_H)
                 universe[i][j].refresh();
 }
 
@@ -232,7 +241,7 @@ void Colony::PredatorPhase()
     /*Corners*/
     for (int i = 1; i < MAX_i + 1; ++i) {
         for (int j = 1; j < MAX_j + 1; ++j) {
-            if(universe[i][j].Status() == PREDATOR) {
+            if(universe[i][j].getGene() == PREDATOR) {
                 if( !universe[i][j].isMoved() ) {
                     scanPerimeters(i,j,1);
                     predatorAdvance(i,j);
@@ -243,7 +252,7 @@ void Colony::PredatorPhase()
     //check for moved predators that are starving
     for (int i = 1; i < MAX_i + 1; ++i)
         for (int j = 1; j < MAX_j + 1; ++j)
-            if(universe[i][j].Status() == PREDATOR)
+            if(universe[i][j].getGene() == PREDATOR)
                 if(universe[i][j].isStarving())
                     universe[i][j].kill();
 }
@@ -252,7 +261,7 @@ void Colony::PreyPhase()
 {
     for (int i = 1; i < MAX_i + 1; ++i) {
         for (int j = 1; j < MAX_j + 1; ++j) {
-            if(universe[i][j].Status() == PREY) {
+            if(universe[i][j].getGene() == PREY) {
                 if( !universe[i][j].isMoved() ) {
                     scanPerimeters(i,j,0); //type 0 for passive
                     preyAdvance(i,j);
@@ -266,8 +275,10 @@ void Colony::MutaliskPhase()
 {
     for (int i = 1; i < MAX_i + 1; ++i) {
         for (int j = 1; j < MAX_j + 1; ++j) {
-            if(universe[i][j].Status() == MTLK_H) {
+            if(universe[i][j].getGene() == MTLK_H) {
                 if( !universe[i][j].isMoved() ) {
+                    if(universe[i][j].isPregnant() && !universe[i][j].MTLKhatchery)
+                        universe[i][j].MTLKHatchEgg();
                     randomTemp = rand() % 15;
                     if(randomTemp == 1)
                         rotateMutalisk(i,j);
@@ -284,9 +295,30 @@ void Colony::MutaliskPhase()
     //Check starvation
     for (int i = 1; i < MAX_i + 1; ++i)
         for (int j = 1; j < MAX_j + 1; ++j)
-            if(universe[i][j].Status() == MTLK_H)
+            if(universe[i][j].getGene() == MTLK_H)
                 if(universe[i][j].isStarving())
                     killMutalisk(i,j);
+}
+
+void Colony::MutaliskHatchPhase()
+{
+    for (int i = 1; i < MAX_i + 1; ++i) {
+        for (int j = 1; j < MAX_j + 1; ++j) {
+            switch (universe[i][j].getGene()) {
+            case EMPTY:
+                if(universe[i][j].MTLKhatchery)
+                    universe[i][j].spawnMutaliskEgg_O();
+                break;
+            case MTLK_E_O:
+                universe[i][j].MTLKHatchEvo(); //Egg cant move so, this is the move
+                if(universe[i][j].isPregnant() && scanDeploymentArea(i,j,3)) //scan 3x3
+                    spawnMTLKShell(i,j);
+            default:
+                break;
+            }
+            //TODO: Still need to finish the final spawn
+        }
+    }
 }
 
 void Colony::MutaliskMarch(const int i, const int j)
@@ -414,15 +446,13 @@ void Colony::rotateMutalisk(const int i, const int j)
         if(availableGrids[comb].x() == i && availableGrids[comb].y())
             availableGrids.removeAt(comb);
     for (int comb = 0; comb < availableGrids.size(); ++comb) {
-//        if(! universe[availableGrids[comb].x()][availableGrids[comb].y()].isEdible())
-        if(universe[availableGrids[comb].x()][availableGrids[comb].y()].Status() == WALL
-         ||universe[availableGrids[comb].x()][availableGrids[comb].y()].Status() == MTLK_B
-         ||universe[availableGrids[comb].x()][availableGrids[comb].y()].Status() == MTLK_H) {
+        if(! universe[availableGrids[comb].x()][availableGrids[comb].y()].isEdible()) {
             availableGrids.removeAt(comb);
             comb = 0;
         }
     }
     //no check for if availableGrid == 0, there has to be some space to rotate
+    //TODO: I was wrong, there might be a case where Mutalisk can't rotate at all
     int choosenIndex = rand() % availableGrids.size();
 
     //At this point, the point for head to rotate to is already choosen
@@ -436,5 +466,5 @@ void Colony::rotateMutalisk(const int i, const int j)
 
 int Colony::whatsHere(int i, int j) const
 {
-    return universe[i][j].Status();
+    return universe[i][j].getGene();
 }
