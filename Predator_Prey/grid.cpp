@@ -10,7 +10,7 @@ grid::grid(Organism *newCreature) : creature(newCreature)
 }
 
 void grid::MTLKHatchEvo(){creature->evolve();}
-
+bool grid::MTLKEggMature(){return (creature->geneLevel > 125 ? true : false);}
 void grid::MTLKHatchEgg()
 {
     MTLKhatchery = true;

@@ -50,12 +50,9 @@ void Colony::scanPerimeters(const int i, const int j, const int Type)
 void Colony::spawnMutaliskBody(const int i, const int j)
 {
     //before using this, make sure your i,j is not close to WALL
-    for (int o_i = i-1; o_i < i+2; ++o_i) {
-        for (int o_j = j-1; o_j < j+2; ++o_j) {
-            universe[o_i][o_j].kill();
+    for (int o_i = i-1; o_i < i+2; ++o_i)
+        for (int o_j = j-1; o_j < j+2; ++o_j)
             universe[o_i][o_j].spawnMutaliskBody();
-        }
-    }
 }
 
 void Colony::killMutaliskBody(const QPoint body)
@@ -67,7 +64,6 @@ void Colony::killMutaliskBody(const QPoint body)
 
 void Colony::spawnMutalisk(const int i, const int j, Dir Ori)
 {
-    universe[i][j].kill();
     universe[i][j].spawnMutaliskHead(Ori);
     switch (universe[i][j].getOrientaton()) {
     case UP:
@@ -313,6 +309,12 @@ void Colony::MutaliskHatchPhase()
                 universe[i][j].MTLKHatchEvo(); //Egg cant move so, this is the move
                 if(universe[i][j].isPregnant() && scanDeploymentArea(i,j,3)) //scan 3x3
                     spawnMTLKShell(i,j);
+                else if (universe[i][j].MTLKEggMature() ) {
+                    if(universe[i-2][j].isEdible()) {
+                        spawnMutalisk(i-2,j,UP);
+                        universe[i][j].MTLKhatchery = false;
+                    }
+                }
             default:
                 break;
             }

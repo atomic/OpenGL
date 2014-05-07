@@ -43,10 +43,6 @@ bool Mutalisk_H::isStarved() const {  return ( starvation > starveLevel ? true :
 
 Mutalisk_H::~Mutalisk_H(){}
 
-
-
-
-
 /* MUTALISK B Part */
 Mutalisk_B::Mutalisk_B() : Organism(){Genotype = MTLK_B;}
 void Mutalisk_B::move(Organism *&target)
@@ -58,9 +54,7 @@ void Mutalisk_B::move(Organism *&target)
 }
 Mutalisk_B::~Mutalisk_B(){}
 
-
-
-
+/* MUTALISK Egg Part */
 
 Mutalisk_Egg_O::Mutalisk_Egg_O() : Organism() {
     isMoved = true;
@@ -77,6 +71,7 @@ bool Mutalisk_Egg_O::breedReady() const
 }
 Mutalisk_Egg_O::~Mutalisk_Egg_O(){}
 
+/* MUTALISK Egg Shell Part */
 Mutalisk_Egg_S::Mutalisk_Egg_S() : Organism() {
     isMoved = true;
     Genotype = MTLK_E_S;
@@ -84,5 +79,10 @@ Mutalisk_Egg_S::Mutalisk_Egg_S() : Organism() {
 void Mutalisk_Egg_S::evolve(){
     geneLevel++;
     isMoved = true;
+}
+
+bool Mutalisk_Egg_S::breedReady() const
+{
+    return (geneLevel > 50 ? true : false);
 }
 Mutalisk_Egg_S::~Mutalisk_Egg_S(){}

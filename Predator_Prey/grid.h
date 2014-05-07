@@ -19,6 +19,7 @@ public:
 
     bool MTLKhatchery;
     void MTLKHatchEvo           ();
+    bool MTLKEggMature          ();
     void MTLKHatchEgg           ();
     //used to mark if its ready for hatch
     //if grid is empty and hatch is true, spawn MTLK_E_O

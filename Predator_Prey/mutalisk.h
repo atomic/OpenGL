@@ -36,6 +36,7 @@ class Mutalisk_Egg_S : public Organism //shell
 public:
     Mutalisk_Egg_S();
     virtual void evolve();
+    virtual bool breedReady() const; //not actually breed, but expand
     virtual ~Mutalisk_Egg_S();
 };
 #endif // MUTALISK_H
