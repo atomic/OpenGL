@@ -38,6 +38,7 @@ public:
 
     void rotateMutalisk             (const int i, const int j);
     // NOTE: no need to scan, there will always be a space to rotate
+    //       Not true, there are cases where you have no space to move
     void MutaliskMarch              (const int i, const int j); //location of its head
     void MutaliskBodyMarch          (const QPoint &bodyCoor, const Dir &on ,const int headLV); //location of body
     bool scanAhead                  (const int i, const int j, const Dir on);

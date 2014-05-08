@@ -55,11 +55,11 @@ void grid::spawnMutaliskEgg_S()
 void grid::RandomBreed()
 {
     kill();
-    int breed = rand() % 5;
-    if(breed == 0 || breed == 2 || breed == 3) // 0 for Prey, 1 for Predator
-        PreyBreed();
-    else if (breed == 1)
+    int breed = rand() % 35;
+    if (breed == 1)
         PredatorBreed();
+    else
+        PreyBreed();
 }
 
 bool grid::isMoved() const {return( creature->isMoved);}

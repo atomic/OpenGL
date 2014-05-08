@@ -453,17 +453,15 @@ void Colony::rotateMutalisk(const int i, const int j)
             comb = 0;
         }
     }
-    //no check for if availableGrid == 0, there has to be some space to rotate
-    //TODO: I was wrong, there might be a case where Mutalisk can't rotate at all
-    int choosenIndex = rand() % availableGrids.size();
-
-    //At this point, the point for head to rotate to is already choosen
-    //So, we just need to give new direction for the head to move
-    Dir newHeadDirection = findHeadDirection(center,availableGrids[choosenIndex]);
-    //Now, lets set the head direction to newHeadDirection
-    universe[i][j].setOrientaton(newHeadDirection);
-    universe[i][j] >> universe[availableGrids[choosenIndex].x() ][ availableGrids[choosenIndex].y()];
-
+    if(!availableGrids.empty()) {
+        int choosenIndex = rand() % availableGrids.size();
+        //At this point, the point for head to rotate to is already choosen
+        //So, we just need to give new direction for the head to move
+        Dir newHeadDirection = findHeadDirection(center,availableGrids[choosenIndex]);
+        //Now, lets set the head direction to newHeadDirection
+        universe[i][j].setOrientaton(newHeadDirection);
+        universe[i][j] >> universe[availableGrids[choosenIndex].x() ][ availableGrids[choosenIndex].y()];
+    }
 }
 
 int Colony::whatsHere(int i, int j) const

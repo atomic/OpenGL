@@ -96,7 +96,6 @@ void glWidget::paintGL()
                 glColor3f(0.3f, 0.7f,0.4f);
                 break;
             case MTLK_H:
-//                glColor3f(1.0f, 0.0f,0.0f);
                 level_temp = Exodus->getLevel(i,j);
                 glColor3f(MTLK_H_colors[level_temp][0],
                           MTLK_H_colors[level_temp][1],
