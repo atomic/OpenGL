@@ -1,5 +1,6 @@
 # Qt-es
 #
+*.exe
 *.o
 
 #*.pro
